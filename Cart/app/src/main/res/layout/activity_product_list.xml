@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProductListActivity">
 
+
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,9 +21,32 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:titleTextColor="@android:color/white">
-        </android.support.v7.widget.Toolbar>
+            app:titleTextColor="@android:color/white"></android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@android:">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search on app "
+                android:textAlignment="center" />
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>
