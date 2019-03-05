@@ -17,7 +17,7 @@ import ua.com.novasolutio.cart.presenters.ProductListPresenter;
 public class ProductListPaymentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private ProductListPresenter mPresenter;
-    private Fragment mProductList, mCart;
+    private Fragment mProductListFragment, mCartFragment;
     private BottomNavigationView mNavigationView;
 
     @Override
@@ -26,8 +26,11 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
 
         init();
+
+        attachFragments(savedInstanceState);
     }
 
+    /* Ініціалізація елементів Активності*/
     private void init() {
         mToolbar = findViewById(R.id.toolbar_product_list_activity);
         setSupportActionBar(mToolbar);
@@ -45,10 +48,28 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         /* Ініціація презентера*/
         mPresenter = new ProductListPresenter();
 
-        /*Ініціація фрагментів*/
-        mProductList = new ProductListFragment();
+
+
+
+    }
+
+    /* Закріплення фрагментів до активності */
+    private void attachFragments(Bundle savedInstanceState) {
+        if (savedInstanceState == null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container_products_activity, new ProductListFragment())
+                    .commit();
+        }
 
     }
 
 
+    @Override
+    protected void onDestroy() {
+        mNavigationView.setItemIconTintList(null);
+        setSupportActionBar(null);
+
+        super.onDestroy();
+    }
 }
