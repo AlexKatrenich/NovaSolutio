@@ -2,18 +2,23 @@ package ua.com.novasolutio.cart.activities;
 
 
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.fragments.ProductListFragment;
 import ua.com.novasolutio.cart.presenters.ProductListPresenter;
 
 /* Activity для відображення користувачу списку товарів, які можна додати до корзини покупок,
  * також в цій активності можна додавати нові товари*/
-public class ProductListActivity extends AppCompatActivity {
+public class ProductListPaymentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private ProductListPresenter mPresenter;
+    private Fragment mProductList, mCart;
+    private BottomNavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +38,15 @@ public class ProductListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(
                         R.string.product_list_activity_caption));
 
+        /*Ініціація нижнього меню навігації між фрагментами*/
+        mNavigationView = findViewById(R.id.bnv_list_products_activity);
+        mNavigationView.setItemIconTintList(ContextCompat.getColorStateList(this, R.color.app_navigation_view_colors));
+
+        /* Ініціація презентера*/
         mPresenter = new ProductListPresenter();
 
-        ((TextView) findViewById(R.id.tv_search_on_list_products)).setText(" SEARCH ON APP ");
-        ((TextView) findViewById(R.id.tv_total_caption_product_list_activity)).setText(" TOTAL:");
-        ((TextView) findViewById(R.id.tv_total_price_product_list_activity)).setText("200,00 UAH");
-
+        /*Ініціація фрагментів*/
+        mProductList = new ProductListFragment();
 
     }
 

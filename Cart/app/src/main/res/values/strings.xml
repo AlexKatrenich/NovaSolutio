@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Cart</string>
     <string name="product_list_activity_caption">Cart</string>
+    <string name="product_list_fragment_total_caption">TOTAL:</string>
 </resources>
