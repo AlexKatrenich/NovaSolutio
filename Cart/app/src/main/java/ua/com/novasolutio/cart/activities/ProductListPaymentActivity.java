@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.fragments.CartFragment;
 import ua.com.novasolutio.cart.fragments.ProductListFragment;
 import ua.com.novasolutio.cart.presenters.ProductListPresenter;
 
@@ -51,9 +52,19 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item_list :
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container_products_activity, new ProductListFragment())
+                                .addToBackStack(null)
+                                .commit();
                         return true;
 
                     case R.id.item_cart :
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container_products_activity, new CartFragment())
+                                .addToBackStack(null)
+                                .commit();
                         return true;
                 }
                 return false;
