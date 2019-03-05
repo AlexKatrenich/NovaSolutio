@@ -12,6 +12,7 @@ public class Product {
     private int mRate;
 
     public Product() {
+
     }
 
     public Product(int mID, String mCaption, int mPrice, int mRate) {
