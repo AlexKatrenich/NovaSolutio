@@ -2,11 +2,13 @@ package ua.com.novasolutio.cart.activities;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.fragments.ProductListFragment;
@@ -43,13 +45,23 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
         /*Ініціація нижнього меню навігації між фрагментами*/
         mNavigationView = findViewById(R.id.bnv_list_products_activity);
-        mNavigationView.setItemIconTintList(ContextCompat.getColorStateList(this, R.color.app_navigation_view_colors));
+
+        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.item_list :
+                        return true;
+
+                    case R.id.item_cart :
+                        return true;
+                }
+                return false;
+            }
+        });
 
         /* Ініціація презентера*/
         mPresenter = new ProductListPresenter();
-
-
-
 
     }
 

@@ -41,6 +41,10 @@
         android:id="@+id/bnv_list_products_activity"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        app:itemBackground="@android:color/transparent"
+        app:itemTextColor="@color/app_navigation_view_colors"
+        app:itemIconTint="@color/app_navigation_view_colors"
+        app:menu="@menu/bottom_navigation_view_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

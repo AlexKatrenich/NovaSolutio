@@ -10,4 +10,5 @@
         android:id="@+id/item_cart"
         android:icon="@drawable/ic_cart_bottom_navigation_view"
         android:title="@string/bottom_navigation_menu_cart_caption" />
+
 </menu>
