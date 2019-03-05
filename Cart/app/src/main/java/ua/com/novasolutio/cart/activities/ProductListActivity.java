@@ -4,6 +4,7 @@ package ua.com.novasolutio.cart.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.ProductListPresenter;
@@ -33,6 +34,11 @@ public class ProductListActivity extends AppCompatActivity {
                         R.string.product_list_activity_caption));
 
         mPresenter = new ProductListPresenter();
+
+        ((TextView) findViewById(R.id.tv_search_on_list_products)).setText(" SEARCH ON APP ");
+        ((TextView) findViewById(R.id.tv_total_caption_product_list_activity)).setText(" TOTAL:");
+        ((TextView) findViewById(R.id.tv_total_price_product_list_activity)).setText("200,00 UAH");
+
 
     }
 

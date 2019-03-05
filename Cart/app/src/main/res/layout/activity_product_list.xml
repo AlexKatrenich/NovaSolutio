@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_product_list_activity"
@@ -22,7 +23,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:titleTextColor="@android:color/white"/>
+            app:titleTextColor="@android:color/white"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -77,24 +79,22 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/tv_total_caption_product_list_activity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="viewStart"
-                    android:textStyle="bold|italic"
-                    tools:text="   TOTAL:"
                     android:layout_weight="1"
-                    android:theme="@style/BoldTextViewStyle"/>
+                    android:textAlignment="viewStart"
+                    android:theme="@style/BoldTextViewStyle"
+                    tools:text="   TOTAL:" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tv_total_price_product_list_activity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
-                    android:textStyle="bold"
-                    tools:text="200,00 UAH  "
                     android:layout_weight="1"
-                    android:theme="@style/BoldTextViewStyle"/>
+                    android:textAlignment="textEnd"
+                    android:theme="@style/BoldTextViewStyle"
+                    tools:text="200,00 UAH  " />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
