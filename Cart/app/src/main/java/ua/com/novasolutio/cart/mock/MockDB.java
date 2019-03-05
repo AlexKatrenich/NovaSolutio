@@ -44,7 +44,6 @@ public class MockDB {
         productMap.put(32, new Product(32, "Nuts", 12, 1));
         productMap.put(33, new Product(33, "Oreo", 3, 1));
 
-
         return productMap;
     }
 

@@ -4,8 +4,6 @@ package ua.com.novasolutio.cart.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -20,7 +18,6 @@ import ua.com.novasolutio.cart.presenters.ProductListPresenter;
 public class ProductListPaymentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private ProductListPresenter mPresenter;
-    private Fragment mProductListFragment, mCartFragment;
     private BottomNavigationView mNavigationView;
 
     @Override

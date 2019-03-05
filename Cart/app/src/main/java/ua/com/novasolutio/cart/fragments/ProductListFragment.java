@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.TextView;
 
 import ua.com.novasolutio.cart.R;
@@ -15,6 +19,8 @@ import ua.com.novasolutio.cart.presenters.ProductListPresenter;
 /* Фрагмент для відображення списку товарів */
 public class ProductListFragment extends Fragment {
     private ProductListPresenter mPresenter;
+    private TextView tvTotalBalance;
+    private RecyclerView rvProductList;
 
 
     @Nullable
@@ -31,9 +37,19 @@ public class ProductListFragment extends Fragment {
     }
 
     private void init(View v) {
+
+
         /*test data*/
         ((TextView) v.findViewById(R.id.tv_search_on_list_products)).setText(" SEARCH ON APP ");
         ((TextView) v.findViewById(R.id.tv_total_price_product_list_fragment)).setText("200,00 UAH");
+
+        rvProductList = v.findViewById(R.id.rv_product_list_fragment);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(v.getContext());
+        rvProductList.setLayoutManager(layoutManager);
+
+        // Тут потрібно задати адаптер відображення даних в списку
+
     }
 
 

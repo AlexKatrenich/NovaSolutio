@@ -14,4 +14,10 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="ProductListItemTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">16sp</item>
+
+    </style>
+
 </resources>
