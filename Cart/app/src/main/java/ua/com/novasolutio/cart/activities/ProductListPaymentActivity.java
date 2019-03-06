@@ -11,13 +11,12 @@ import android.view.MenuItem;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.fragments.CartFragment;
 import ua.com.novasolutio.cart.fragments.ProductListFragment;
-import ua.com.novasolutio.cart.presenters.ProductListPresenter;
+import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
 
 /* Activity для відображення користувачу списку товарів, які можна додати до корзини покупок,
  * також в цій активності можна додавати нові товари*/
 public class ProductListPaymentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
-    private ProductListPresenter mPresenter;
     private BottomNavigationView mNavigationView;
 
     @Override
@@ -67,9 +66,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        /* Ініціація презентера*/
-        mPresenter = new ProductListPresenter();
 
     }
 

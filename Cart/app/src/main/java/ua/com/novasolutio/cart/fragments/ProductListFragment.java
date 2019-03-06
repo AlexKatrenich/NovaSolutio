@@ -6,19 +6,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.TextView;
 
 import ua.com.novasolutio.cart.R;
-import ua.com.novasolutio.cart.presenters.ProductListPresenter;
+import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
 
 /* Фрагмент для відображення списку товарів */
 public class ProductListFragment extends Fragment {
-    private ProductListPresenter mPresenter;
+    private ProductListFragmentPresenter mPresenter;
     private TextView tvTotalBalance;
     private RecyclerView rvProductList;
 
@@ -38,6 +36,8 @@ public class ProductListFragment extends Fragment {
 
     private void init(View v) {
 
+        /* Ініціалізація презентера для роботи з фрагментом*/
+        mPresenter = new ProductListFragmentPresenter();
 
         /*test data*/
         ((TextView) v.findViewById(R.id.tv_search_on_list_products)).setText(" SEARCH ON APP ");
@@ -49,8 +49,19 @@ public class ProductListFragment extends Fragment {
         rvProductList.setLayoutManager(layoutManager);
 
         // Тут потрібно задати адаптер відображення даних в списку
+//        ProductsListRecyclerAdapter adapter = new ProductsListRecyclerAdapter()
 
+        mPresenter.attachView(this);
     }
 
-
+    @Override
+    public void onDestroy() {
+        /* Видалення посилань на невикористовувані об'єкти при знищенні фрагменту*/
+        if (mPresenter != null) mPresenter.detachView();
+        if(rvProductList != null){
+            rvProductList.setLayoutManager(null);
+            rvProductList.setAdapter(null);
+        }
+        super.onDestroy();
+    }
 }

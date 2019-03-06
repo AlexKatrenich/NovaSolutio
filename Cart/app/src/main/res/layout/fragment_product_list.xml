@@ -70,8 +70,8 @@
                     android:id="@+id/tv_total_price_product_list_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="textEnd"
+                    android:layout_weight="2"
+                    android:textAlignment="textStart"
                     android:theme="@style/BoldTextViewStyle"
                     tools:text="200,00 UAH  " />
             </LinearLayout>

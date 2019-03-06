@@ -1,21 +1,21 @@
 package ua.com.novasolutio.cart.presenters;
 
 import ua.com.novasolutio.cart.activities.ProductListPaymentActivity;
+import ua.com.novasolutio.cart.fragments.ProductListFragment;
 
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
-
-public class ProductListPresenter {
-    private ProductListPaymentActivity mView;
+public class ProductListFragmentPresenter {
+    private ProductListFragment mView;
 //    private final ProductListModel mModel;
 
 
-    public ProductListPresenter() {
+    public ProductListFragmentPresenter() {
 
     }
 
-    public void attachView(ProductListPaymentActivity productListPaymentActivity){
-        mView = productListPaymentActivity;
+    public void attachView(ProductListFragment productListFragment){
+        mView = productListFragment;
     }
 
     public void detachView(){

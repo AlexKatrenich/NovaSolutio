@@ -15,9 +15,8 @@
     </style>
 
     <style name="ProductListItemTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textColor">@color/listTextPrimaryColor</item>
         <item name="android:textSize">16sp</item>
-
     </style>
 
 </resources>
