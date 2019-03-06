@@ -36,6 +36,10 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     protected void updateView() {
-
+        if (model.size() == 0){
+            view().showEmpty();
+        } else {
+            view().showProducts(model);
+        }
     }
 }

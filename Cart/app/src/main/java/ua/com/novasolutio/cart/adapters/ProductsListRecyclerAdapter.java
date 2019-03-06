@@ -58,7 +58,7 @@ public class ProductsListRecyclerAdapter extends RecyclerView.Adapter<ProductsLi
         }
     }
 
-    /**/
+    /* */
     public void clearAndAddAll(List<Product> products) {
 
     }

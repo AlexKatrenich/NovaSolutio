@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ViewAnimator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.novasolutio.cart.R;
@@ -71,6 +73,11 @@ public class ProductListFragment extends Fragment implements ProductsView {
         super.onDestroy();
     }
 
+    // викликається метод showProducts з пустим списком елементів
+    @Override
+    public void showEmpty() {
+        showProducts(new ArrayList<Product>());
+    }
 
     @Override
     public void showProducts(List<Product> products) {

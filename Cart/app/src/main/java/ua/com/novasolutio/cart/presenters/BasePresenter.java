@@ -8,7 +8,7 @@ public abstract class BasePresenter<M, V>{
     protected M model;
     private WeakReference<V> view;
 
-    /**/
+    /* отримання та фіксація посилання на модель(об'єкт, список об'єктів), яку повинна відображати View*/
     public void setModel(M model) {
         resetState();
         this.model = model;
@@ -21,7 +21,7 @@ public abstract class BasePresenter<M, V>{
 
     }
 
-    /* метод для отримання полсилання на View, перевірка актуальності View/Model та перевідображення даних на екрані*/
+    /* метод для фіксації полсилання(WeakReference) на View, перевірка актуальності View/Model та перевідображення даних на екрані*/
     public void bindView(@NonNull V view){
         this.view = new WeakReference<>(view);
         if(setupDone()){
@@ -48,7 +48,7 @@ public abstract class BasePresenter<M, V>{
         return view() != null && model != null ;
     }
 
-
+    /* бізнес-логіка в презентері, наприклад виклик методів для "пере-відображення" списку об'єктів на View*/
     protected abstract void updateView();
 
 }
