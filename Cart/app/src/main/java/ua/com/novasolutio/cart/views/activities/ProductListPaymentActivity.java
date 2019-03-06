@@ -1,4 +1,4 @@
-package ua.com.novasolutio.cart.activities;
+package ua.com.novasolutio.cart.views.activities;
 
 
 import android.os.Bundle;
@@ -9,9 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import ua.com.novasolutio.cart.R;
-import ua.com.novasolutio.cart.fragments.CartFragment;
-import ua.com.novasolutio.cart.fragments.ProductListFragment;
-import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
+import ua.com.novasolutio.cart.views.fragments.CartFragment;
+import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 /* Activity для відображення користувачу списку товарів, які можна додати до корзини покупок,
  * також в цій активності можна додавати нові товари*/

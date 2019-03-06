@@ -1,4 +1,4 @@
-package ua.com.novasolutio.cart.fragments;
+package ua.com.novasolutio.cart.views.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,14 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.adapters.ProductsListRecyclerAdapter;
+import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
+import ua.com.novasolutio.cart.views.ProductsView;
 
 /* Фрагмент для відображення списку товарів */
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment implements ProductsView {
     private ProductListFragmentPresenter mPresenter;
     private TextView tvTotalBalance;
     private RecyclerView rvProductList;
+    private ProductsListRecyclerAdapter mAdapter;
 
 
     @Nullable
@@ -49,7 +55,7 @@ public class ProductListFragment extends Fragment {
         rvProductList.setLayoutManager(layoutManager);
 
         // Тут потрібно задати адаптер відображення даних в списку
-//        ProductsListRecyclerAdapter adapter = new ProductsListRecyclerAdapter()
+
 
         mPresenter.attachView(this);
     }
@@ -63,5 +69,11 @@ public class ProductListFragment extends Fragment {
             rvProductList.setAdapter(null);
         }
         super.onDestroy();
+    }
+
+
+    @Override
+    public void showProducts(List<Product> products) {
+        mAdapter.clearAndAddAll(products);
     }
 }

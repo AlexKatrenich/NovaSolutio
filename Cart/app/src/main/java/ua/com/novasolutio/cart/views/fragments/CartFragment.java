@@ -1,4 +1,4 @@
-package ua.com.novasolutio.cart.fragments;
+package ua.com.novasolutio.cart.views.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

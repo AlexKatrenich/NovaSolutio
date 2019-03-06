@@ -1,11 +1,14 @@
 package ua.com.novasolutio.cart.presenters;
 
-import ua.com.novasolutio.cart.activities.ProductListPaymentActivity;
-import ua.com.novasolutio.cart.fragments.ProductListFragment;
+import java.util.List;
+
+import ua.com.novasolutio.cart.data.Product;
+import ua.com.novasolutio.cart.views.ProductsView;
+import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
-public class ProductListFragmentPresenter {
+public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsView>{
     private ProductListFragment mView;
 //    private final ProductListModel mModel;
 
@@ -31,6 +34,8 @@ public class ProductListFragmentPresenter {
     }
 
 
+    @Override
+    protected void updateView() {
 
-
+    }
 }

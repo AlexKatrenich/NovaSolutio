@@ -57,4 +57,9 @@ public class ProductsListRecyclerAdapter extends RecyclerView.Adapter<ProductsLi
             mProductPrice.setText(product.getmPrice());
         }
     }
+
+    /**/
+    public void clearAndAddAll(List<Product> products) {
+
+    }
 }
