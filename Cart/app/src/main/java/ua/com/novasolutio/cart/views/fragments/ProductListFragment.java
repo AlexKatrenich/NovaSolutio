@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.ViewAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +18,10 @@ import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.adapters.ProductsListRecyclerAdapter;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
-import ua.com.novasolutio.cart.views.ProductsView;
+import ua.com.novasolutio.cart.views.ProductsListView;
 
 /* Фрагмент для відображення списку товарів */
-public class ProductListFragment extends Fragment implements ProductsView {
+public class ProductListFragment extends Fragment implements ProductsListView {
     private ProductListFragmentPresenter mPresenter;
     private TextView tvTotalBalance;
     private RecyclerView rvProductList;
@@ -83,4 +82,5 @@ public class ProductListFragment extends Fragment implements ProductsView {
     public void showProducts(List<Product> products) {
         mAdapter.clearAndAddAll(products);
     }
+
 }
