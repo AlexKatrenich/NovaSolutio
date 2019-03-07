@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,14 @@ import java.util.List;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.adapters.ProductsListRecyclerAdapter;
 import ua.com.novasolutio.cart.data.Product;
+import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
 import ua.com.novasolutio.cart.views.ProductsListView;
 
+
 /* Фрагмент для відображення списку товарів */
 public class ProductListFragment extends Fragment implements ProductsListView {
+    private static final String TAG = "ProductListFragment";
     private ProductListFragmentPresenter mPresenter;
     private TextView tvTotalBalance;
     private RecyclerView rvProductList;
@@ -38,13 +42,18 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        init(view);
+        init(view, savedInstanceState);
     }
 
-    private void init(View v) {
+    private void init(View v, Bundle savedInstanceState) {
 
         /* Ініціалізація презентера для роботи з фрагментом*/
-        mPresenter = new ProductListFragmentPresenter();
+        if (savedInstanceState == null){
+            mPresenter = new ProductListFragmentPresenter();
+        } else {
+            mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+        }
+
 
         /*test data*/
         ((TextView) v.findViewById(R.id.tv_search_on_list_products)).setText(" SEARCH ON APP ");
@@ -52,12 +61,30 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         rvProductList = v.findViewById(R.id.rv_product_list_fragment);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(v.getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(v.getContext(), LinearLayoutManager.VERTICAL, false);
         rvProductList.setLayoutManager(layoutManager);
 
         // Тут потрібно задати адаптер відображення даних в списку
+        mAdapter = new ProductsListRecyclerAdapter();
+        rvProductList.setAdapter(mAdapter);
+
+        Log.i(TAG, "init done");
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.bindView(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mPresenter.unbindView();
     }
 
     @Override
@@ -68,6 +95,13 @@ public class ProductListFragment extends Fragment implements ProductsListView {
             rvProductList.setAdapter(null);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        PresenterManager.getInstance().savePresenter(mPresenter, outState);
     }
 
     // викликається метод showProducts з пустим списком елементів

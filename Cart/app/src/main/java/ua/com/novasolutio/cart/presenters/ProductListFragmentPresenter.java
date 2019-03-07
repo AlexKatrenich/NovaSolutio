@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.ArrayMap;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +14,8 @@ import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
@@ -26,8 +29,10 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     protected void updateView() {
         if (model.size() == 0){
             view().showEmpty();
+            Log.i(TAG, "updateView: view().showEmpty();");
         } else {
             view().showProducts(model);
+            Log.i(TAG, "updateView: view().showProducts(model)");
         }
     }
 
