@@ -58,13 +58,11 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         // Тут потрібно задати адаптер відображення даних в списку
 
 
-        mPresenter.attachView(this);
     }
 
     @Override
     public void onDestroy() {
         /* Видалення посилань на невикористовувані об'єкти при знищенні фрагменту*/
-        if (mPresenter != null) mPresenter.detachView();
         if(rvProductList != null){
             rvProductList.setLayoutManager(null);
             rvProductList.setAdapter(null);
@@ -81,6 +79,11 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     @Override
     public void showProducts(List<Product> products) {
         mAdapter.clearAndAddAll(products);
+    }
+
+    @Override
+    public void showLoading() {
+
     }
 
 }
