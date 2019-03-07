@@ -30,5 +30,10 @@ public abstract class MvpRecyclerAdapter <M, P extends BasePresenter, VH extends
         holder.unbindPresenter();
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        holder.bindPresenter(getPresenter(getItem(position)));
+    }
+
     protected abstract M getItem(int position);
 }
