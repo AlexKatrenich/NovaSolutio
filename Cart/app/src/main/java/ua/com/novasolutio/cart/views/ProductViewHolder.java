@@ -1,6 +1,7 @@
 package ua.com.novasolutio.cart.views;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import ua.com.novasolutio.cart.presenters.ProductPresenter;
 
 /* Клас для управління заповнення даними View елементу списка ProductsRecyclerView */
 public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implements ProductView{
+    public static final String TAG = "ProductViewHolder";
     private final TextView productCaption;
     private final TextView productPrice;
     private final ImageView contextMenu;
@@ -43,13 +45,21 @@ public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implement
 
     @Override
     public void setCounterProduct(int count) {
-        productCount.setText(String.valueOf(count));
+        if (count == 0){
+            productCount.setText("");
+            productCount.setVisibility(TextView.INVISIBLE);
+        } else {
+            productCount.setText(String.valueOf(count));
+            productCount.setVisibility(TextView.VISIBLE);
+        }
+
     }
 
     /* метод форматує візуальне представлення ціни для View*/
     private String formatPriceForView(int price) {
-        StringBuffer priceString = new StringBuffer(price);
-
+        StringBuffer priceString = new StringBuffer(String.valueOf(price));
+        Log.i(TAG, "formatPriceForView: price: " + priceString.toString());
+        Log.i(TAG, "formatPriceForView: length: " + String.valueOf(priceString.length()));
         switch (priceString.length()){
             case 0 :
                 priceString.append("0,00");
@@ -63,6 +73,10 @@ public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implement
             default:
                 priceString.insert(priceString.length() - 2, ',');
         }
+
+        // додавання назви грошових одиниць до відображення ціни на екрані
+        String currency = (String) productPrice.getResources().getText(R.string.name_currency);
+        priceString.append(' ').append(currency).append(' ');
 
         return priceString.toString();
     }

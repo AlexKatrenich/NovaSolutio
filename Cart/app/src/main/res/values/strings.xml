@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Cart</string>
+    
     <string name="product_list_activity_caption">Cart</string>
     <string name="product_list_fragment_total_caption">TOTAL:</string>
+    
     <string name="bottom_navigation_menu_list_caption">List</string>
     <string name="bottom_navigation_menu_cart_caption">Cart</string>
+    
     <string name="context_menu_recycler_view_item">Context menu</string>
+
+    <!--Вказую валюту для відображення на екрані разом з грошовими одиницями-->
+    <string name="name_currency">UAH</string>
 
 </resources>

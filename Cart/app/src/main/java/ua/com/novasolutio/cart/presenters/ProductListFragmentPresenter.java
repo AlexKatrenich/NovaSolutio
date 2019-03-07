@@ -42,7 +42,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
         if(model == null && !isLoadingData){
-            view().showLoading();
             loadData();
         }
     }
@@ -59,7 +58,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     private class LoadDataTask extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... voids) {
-            SystemClock.sleep(2000); //емуляція завантаження з БД даних
+            SystemClock.sleep(1000); //емуляція завантаження з БД
             return null;
         }
 

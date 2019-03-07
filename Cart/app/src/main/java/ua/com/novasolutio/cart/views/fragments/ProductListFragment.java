@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,8 +117,9 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     }
 
     @Override
-    public void showLoading() {
-
+    public void showMessage(String message) {
+        if (message != null && !message.equals("")) {
+            Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+        }
     }
-
 }
