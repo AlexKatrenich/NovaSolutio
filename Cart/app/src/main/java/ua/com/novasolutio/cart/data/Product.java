@@ -6,10 +6,12 @@ import java.util.Objects;
 /* Клас, що описує дані про сутність продукт */
 
 public class Product {
-    private int mID;
-    private String mCaption;
-    private int mPrice;
-    private int mRate;
+    private int mID; // ІД об'єкту в БД
+    private String mCaption; // Назва продукту
+    private int mPrice; // Ціна продукту, зберігається в копійках, наприклад 2000 = 20,00 грн.
+    private int mRate; // Популярність вибору продукту, чим частіше його додають в корзину - тим вище значення змінної.
+
+    private int mCount; // кількість одиниць продукту вибраного на View, НЕ зберігати в БД!
 
     public Product() {
 
@@ -27,42 +29,50 @@ public class Product {
         this.mCaption = mCaption;
     }
 
-    public int getmID() {
+    public int getID() {
         return mID;
     }
 
-    public void setmID(int mID) {
+    public void setID(int mID) {
         this.mID = mID;
     }
 
-    public String getmCaption() {
+    public String getCaption() {
         return mCaption;
     }
 
-    public void setmCaption(String mCaption) {
+    public void setCaption(String mCaption) {
         this.mCaption = mCaption;
     }
 
-    public int getmPrice() {
+    public int getPrice() {
         return mPrice;
     }
 
-    public void setmPrice(int mPrice) {
+    public void setPrice(int mPrice) {
         this.mPrice = mPrice;
     }
 
-    public int getmRate() {
+    public int getRate() {
         return mRate;
     }
 
-    public void setmRate(int mRate) {
+    public void setRate(int mRate) {
         this.mRate = mRate;
+    }
+
+    public int getCount() {
+        return mCount;
+    }
+
+    public void setCount(int mCount) {
+        this.mCount = mCount;
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Product)
-            return this.getmID() == ((Product) obj).getmID();
+            return this.getID() == ((Product) obj).getID();
 
         return false;
     }

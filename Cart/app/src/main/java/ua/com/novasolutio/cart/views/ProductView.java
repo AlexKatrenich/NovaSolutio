@@ -7,4 +7,5 @@ public interface ProductView {
     void setProductPrice(int price);
 
     void setCounterProduct(int count);
+
 }
