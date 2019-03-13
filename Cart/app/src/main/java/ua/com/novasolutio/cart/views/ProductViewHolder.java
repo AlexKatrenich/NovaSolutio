@@ -1,12 +1,13 @@
 package ua.com.novasolutio.cart.views;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import javax.annotation.Nullable;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.ProductPresenter;
@@ -18,6 +19,7 @@ public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implement
     private final TextView productPrice;
     private final ImageView contextMenu;
     private final TextView productCount;
+
 //    @Nullable private OnProductRightSwipeListener rSwipeListener;
 //    @Nullable private OnProductLeftSwipeListener lSwipeListener;
 
@@ -27,6 +29,13 @@ public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implement
         productPrice = (TextView) itemView.findViewById(R.id.tv_product_price_product_list);
         contextMenu = (ImageView) itemView.findViewById(R.id.iv_context_menu_product_list);
         productCount = (TextView) itemView.findViewById(R.id.tv_count_selected_products_on_list);
+
+        contextMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onContextMenuClicked();
+            }
+        });
 
         // TODO потрібно задати слухачі для свайпів по віджету та натиснення на кнопку контекстного меню
 
@@ -80,7 +89,5 @@ public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implement
 
         return priceString.toString();
     }
-
-
 
 }
