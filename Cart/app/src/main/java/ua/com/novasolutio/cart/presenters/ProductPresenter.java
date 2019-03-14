@@ -2,6 +2,7 @@ package ua.com.novasolutio.cart.presenters;
 
 
 import android.util.Log;
+import android.view.View;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.views.ProductView;
@@ -37,11 +38,11 @@ public class ProductPresenter extends BasePresenter<Product, ProductView>{
         }
     }
 
-    public void onContextMenuClicked() {
+    public void onContextMenuClicked(View v) {
         //TODO реалізація відображення контектсного меню в recyclerView
         Log.i(TAG, "onContextMenuClicked: ");
         ProductViewHolder viewHolder = (ProductViewHolder) view();
-
+        viewHolder.showPopupMenu(v);
     }
 
 }
