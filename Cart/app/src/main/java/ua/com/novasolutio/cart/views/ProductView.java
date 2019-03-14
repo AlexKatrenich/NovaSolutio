@@ -8,4 +8,5 @@ public interface ProductView {
 
     void setCounterProduct(int count);
 
+
 }

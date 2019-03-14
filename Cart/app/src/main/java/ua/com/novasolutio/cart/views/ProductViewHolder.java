@@ -30,15 +30,14 @@ public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implement
         contextMenu = (ImageView) itemView.findViewById(R.id.iv_context_menu_product_list);
         productCount = (TextView) itemView.findViewById(R.id.tv_count_selected_products_on_list);
 
+        // TODO потрібно задати слухачі для свайпів по віджету та натиснення на кнопку контекстного меню
+
         contextMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.onContextMenuClicked();
             }
         });
-
-        // TODO потрібно задати слухачі для свайпів по віджету та натиснення на кнопку контекстного меню
-
     }
 
     @Override

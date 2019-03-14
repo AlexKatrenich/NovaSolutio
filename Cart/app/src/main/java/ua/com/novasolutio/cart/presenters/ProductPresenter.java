@@ -5,6 +5,7 @@ import android.util.Log;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.views.ProductView;
+import ua.com.novasolutio.cart.views.ProductViewHolder;
 
 
 public class ProductPresenter extends BasePresenter<Product, ProductView>{
@@ -39,6 +40,7 @@ public class ProductPresenter extends BasePresenter<Product, ProductView>{
     public void onContextMenuClicked() {
         //TODO реалізація відображення контектсного меню в recyclerView
         Log.i(TAG, "onContextMenuClicked: ");
+        ProductViewHolder viewHolder = (ProductViewHolder) view();
 
     }
 
