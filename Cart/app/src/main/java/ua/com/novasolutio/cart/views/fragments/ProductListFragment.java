@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -121,5 +123,10 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         if (message != null && !message.equals("")) {
             Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.bottom_navigation_view_menu, menu);
     }
 }

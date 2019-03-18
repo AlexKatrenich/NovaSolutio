@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/settings_item_menu"
+        android:icon="@drawable/ic_settings_item_menu"
+        android:title="item" />
+    <item
+        android:id="@+id/add_new_product_item_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_new_product_item_menu"
+        android:title="Item"
+        android:visible="true" />
+    <item
+        android:id="@+id/sorting_item_menu"
+        android:title="Item" />
+</menu>
