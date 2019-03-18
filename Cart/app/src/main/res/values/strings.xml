@@ -15,5 +15,9 @@
     <string name="item_product_change_context_menu">Change</string>
     <string name="item_product_delete_context_menu">Delete</string>
 
+    <!--Заголовки меню-->
+    <string name="item_add_product_activity_menu">Add</string>
+    <string name="item_settings_product_activity_menu">Settings</string>
+    <string name="item_sorting_product_activity_menu">Sorting</string>
 
 </resources>

@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.InflateException;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import ua.com.novasolutio.cart.R;
@@ -15,6 +18,7 @@ import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 /* Activity для відображення користувачу списку товарів, які можна додати до корзини покупок,
  * також в цій активності можна додавати нові товари*/
 public class ProductListPaymentActivity extends AppCompatActivity {
+    private static final String TAG = "ProdListPaymentActivity";
     private Toolbar mToolbar;
     private BottomNavigationView mNavigationView;
 
@@ -87,4 +91,17 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
         super.onDestroy();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        try {
+            getMenuInflater().inflate(R.menu.product_list_activity_main_menu, menu);
+        } catch (InflateException e){
+            Log.e(TAG, "onCreateOptionsMenu: " + e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
 }
