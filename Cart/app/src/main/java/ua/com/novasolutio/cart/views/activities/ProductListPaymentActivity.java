@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.views.fragments.CartFragment;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
@@ -104,4 +103,21 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.settings_item_menu :
+                Log.i(TAG, "onOptionsItemSelected: Settings");
+                return true;
+            case R.id.sorting_item_menu :
+                Log.i(TAG, "onOptionsItemSelected: Sorting");
+                return true;
+            case R.id.add_new_product_item_menu :
+                Log.i(TAG, "onOptionsItemSelected: Add new product");
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
