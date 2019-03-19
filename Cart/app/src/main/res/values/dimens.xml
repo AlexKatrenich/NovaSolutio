@@ -6,6 +6,6 @@
     <dimen name="card_view_elevation_dimen">4dp</dimen>
     <dimen name="card_view_max_elevation_dimen">7dp</dimen>
     <dimen name="card_view_content_padding">5dp</dimen>
-    <dimen name="list_elements_margin_dimen">3dp</dimen>
+    <dimen name="list_elements_margin_dimen">6dp</dimen>
 
 </resources>

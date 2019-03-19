@@ -22,6 +22,11 @@ public class AddChangeProductActivity extends AppCompatActivity {
 
 
     private void init() {
+        mToolbar = findViewById(R.id.toolbar_add_change_product_activity);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     }
 
