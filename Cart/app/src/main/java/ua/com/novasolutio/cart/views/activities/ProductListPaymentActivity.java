@@ -128,9 +128,8 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 Log.i(TAG, "onOptionsItemSelected: Sorting");
                 return true;
             case R.id.add_new_product_item_menu :
-                /*Зробити цю штуку в презентері*/
-                Intent intent = new Intent(this, AddChangeProductActivity.class);
-                startActivity(intent);
+                /*Презентер оброблює подію згідно логіки додатку*/
+                mPresenter.addNewProductMenuClicked();
                 Log.i(TAG, "onOptionsItemSelected: Add new product");
                 return true;
         }
