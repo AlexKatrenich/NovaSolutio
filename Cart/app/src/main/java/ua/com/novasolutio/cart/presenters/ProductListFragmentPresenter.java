@@ -64,7 +64,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            ArrayMap<Integer, Product> map = MockDB.getProductListForDB(); // завантаження мапи об'єктів із заглушки
+            MockDB mDb = MockDB.getInstance();
+            ArrayMap<Integer, Product> map = mDb.getProductMap(); // завантаження мапи об'єктів із заглушки
             setModel(new ArrayList<Product>(map.values())); // передача списку об'єктів Product в модель(передача посилання на список)
             isLoadingData = false; // зняття флажка про завантаження даних
         }

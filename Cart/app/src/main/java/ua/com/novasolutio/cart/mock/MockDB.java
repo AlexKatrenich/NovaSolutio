@@ -6,10 +6,16 @@ import ua.com.novasolutio.cart.data.Product;
 
 /*Клас для підміни отримання даних від БД*/
 public class MockDB {
+    ArrayMap<Integer, Product> productMap;
+    public static MockDB instance;
 
-    public static ArrayMap<Integer, Product> getProductListForDB(){
-        ArrayMap<Integer, Product> productMap = new ArrayMap<>();
 
+    private MockDB(){
+        productMap = new ArrayMap<>();
+        setProductListForDB();
+    }
+
+    private void setProductListForDB(){
         productMap.put(1, new Product(1, "Coffee", 20, 1));
         productMap.put(2, new Product(2, "Bread", 30000, 1));
         productMap.put(3, new Product(3, "Tea", 40000, 1));
@@ -43,8 +49,26 @@ public class MockDB {
         productMap.put(31, new Product(31, "Liquid soap", 1300, 1));
         productMap.put(32, new Product(32, "Nuts", 1200, 1));
         productMap.put(33, new Product(33, "Oreo", 300, 1));
+    }
 
+    public ArrayMap<Integer, Product> getProductMap(){
         return productMap;
     }
+
+    public void addProduct(Product product){
+        productMap.put(product.getID(), product);
+    }
+
+    public Product getProductById(Integer id){
+        return productMap.get(id);
+    }
+
+    public static MockDB getInstance() {
+        if(instance == null){
+            instance = new MockDB();
+        }
+        return instance;
+    }
+
 
 }
