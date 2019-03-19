@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
-import ua.com.novasolutio.cart.views.fragments.CartFragment;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 /* Activity для відображення користувачу списку товарів, які можна додати до корзини покупок,
@@ -33,7 +32,14 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
         init(savedInstanceState);
 
+        // відображення першого фрагменту при відкритті екрану
         bindFragment(new ProductListFragment());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.bindView(this);
     }
 
     /* Ініціалізація елементів Активності*/
@@ -82,10 +88,14 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container_products_activity, fragment)
-                    .addToBackStack(null)
                     .commit();
     }
 
+    @Override
+    protected void onStop() {
+        mPresenter.unbindView();
+        super.onStop();
+    }
 
     @Override
     protected void onDestroy() {
