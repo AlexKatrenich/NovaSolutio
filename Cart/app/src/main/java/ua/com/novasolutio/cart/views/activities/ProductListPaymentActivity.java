@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,7 +33,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
         init(savedInstanceState);
 
-        attachFragment(savedInstanceState);
+        bindFragment(new ProductListFragment());
     }
 
     /* Ініціалізація елементів Активності*/
@@ -61,19 +62,13 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item_list :
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container_products_activity, new ProductListFragment())
-                                .addToBackStack(null)
-                                .commit();
+                        // передача презентеру обробки натистення на елемент ItemList
+                        mPresenter.onProductListFragmentClicked();
                         return true;
 
                     case R.id.item_cart :
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container_products_activity, new CartFragment())
-                                .addToBackStack(null)
-                                .commit();
+                        // передача презентеру обробки натистення на елемент ItemCart
+                        mPresenter.onCartFragmentClicked();
                         return true;
                 }
                 return false;
@@ -82,15 +77,13 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
     }
 
-    /* Закріплення фрагментів до активності */
-    private void attachFragment(Bundle savedInstanceState) {
-        if (savedInstanceState == null){
+    /* Закріплення та відображення фрагментів в активності */
+    public void bindFragment(Fragment fragment) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container_products_activity, new ProductListFragment())
+                    .replace(R.id.fragment_container_products_activity, fragment)
+                    .addToBackStack(null)
                     .commit();
-        }
-
     }
 
 
