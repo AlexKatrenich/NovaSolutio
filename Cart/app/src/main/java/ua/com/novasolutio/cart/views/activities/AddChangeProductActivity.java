@@ -34,7 +34,6 @@ public class AddChangeProductActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
     }
 
 }

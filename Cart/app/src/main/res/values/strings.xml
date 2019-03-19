@@ -3,7 +3,8 @@
     
     <string name="product_list_activity_caption">Cart</string>
     <string name="product_list_fragment_total_caption">TOTAL:</string>
-    
+
+    <!--Заголовки нижньої панелі навігації на екрані списку продуктів-->
     <string name="bottom_navigation_menu_list_caption">List</string>
     <string name="bottom_navigation_menu_cart_caption">Cart</string>
     
@@ -19,5 +20,9 @@
     <string name="item_add_product_activity_menu">Add</string>
     <string name="item_settings_product_activity_menu">Settings</string>
     <string name="item_sorting_product_activity_menu">Sorting</string>
+
+    <!--Поля екрану додавання/редагування товару-->
+    <string name="product_name_hint_add_activity">Product name</string>
+    <string name="product_price_hint_add_activity">Price</string>
 
 </resources>
