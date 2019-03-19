@@ -10,15 +10,10 @@ public abstract class BasePresenter<M, V>{
 
     /* отримання та фіксація посилання на модель(об'єкт, список об'єктів), яку повинна відображати View*/
     public void setModel(M model) {
-        resetState();
         this.model = model;
         if (setupDone()){
             updateView();
         }
-    }
-
-    protected void resetState() {
-
     }
 
     /* метод для фіксації полсилання(WeakReference) на View, перевірка актуальності View/Model та перевідображення даних на екрані*/

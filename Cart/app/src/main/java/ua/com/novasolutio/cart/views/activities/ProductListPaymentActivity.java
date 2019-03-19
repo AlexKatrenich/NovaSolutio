@@ -1,6 +1,7 @@
 package ua.com.novasolutio.cart.views.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +12,8 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.presenters.PresenterManager;
+import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
 import ua.com.novasolutio.cart.views.fragments.CartFragment;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
@@ -20,19 +23,27 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     private static final String TAG = "ProdListPaymentActivity";
     private Toolbar mToolbar;
     private BottomNavigationView mNavigationView;
+    private ProductListPaymentActivityPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
-        init();
+        init(savedInstanceState);
 
-        attachFragments(savedInstanceState);
+        attachFragment(savedInstanceState);
     }
 
     /* Ініціалізація елементів Активності*/
-    private void init() {
+    private void init(Bundle savedInstanceState) {
+
+        if(savedInstanceState == null){
+            mPresenter = new ProductListPaymentActivityPresenter();
+        } else {
+            mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+        }
+
         mToolbar = findViewById(R.id.toolbar_product_list_activity);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -72,7 +83,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     }
 
     /* Закріплення фрагментів до активності */
-    private void attachFragments(Bundle savedInstanceState) {
+    private void attachFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null){
             getSupportFragmentManager()
                     .beginTransaction()
@@ -114,10 +125,19 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 Log.i(TAG, "onOptionsItemSelected: Sorting");
                 return true;
             case R.id.add_new_product_item_menu :
+                /*Зробити цю штуку в презентері*/
+                Intent intent = new Intent(this, AddChangeProductActivity.class);
+                startActivity(intent);
                 Log.i(TAG, "onOptionsItemSelected: Add new product");
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        PresenterManager.getInstance().savePresenter(mPresenter, outState);
     }
 }

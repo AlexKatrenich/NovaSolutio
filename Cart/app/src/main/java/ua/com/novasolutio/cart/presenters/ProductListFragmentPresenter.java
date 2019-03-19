@@ -7,13 +7,11 @@ import android.util.ArrayMap;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
-import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 import static android.support.constraint.Constraints.TAG;
 
