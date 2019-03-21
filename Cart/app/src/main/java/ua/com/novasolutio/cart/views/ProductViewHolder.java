@@ -1,25 +1,20 @@
 package ua.com.novasolutio.cart.views;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import javax.annotation.Nullable;
 
 import ua.com.novasolutio.cart.R;
-import ua.com.novasolutio.cart.presenters.ProductPresenter;
+import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
 
 /* Клас для управління заповнення даними View елементу списка ProductsRecyclerView */
-public class ProductViewHolder extends MvpViewHolder<ProductPresenter> implements ProductView {
+public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView {
     public static final String TAG = "ProductViewHolder";
     private final TextView productCaption;
     private final TextView productPrice;

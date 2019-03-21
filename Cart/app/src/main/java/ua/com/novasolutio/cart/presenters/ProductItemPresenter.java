@@ -9,8 +9,8 @@ import ua.com.novasolutio.cart.views.ProductView;
 import ua.com.novasolutio.cart.views.ProductViewHolder;
 
 
-public class ProductPresenter extends BasePresenter<Product, ProductView>{
-    public static final String TAG = "ProductPresenter";
+public class ProductItemPresenter extends BasePresenter<Product, ProductView>{
+    public static final String TAG = "ProductItemPresenter";
 
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 99;

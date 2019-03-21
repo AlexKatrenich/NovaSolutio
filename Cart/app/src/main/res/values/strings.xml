@@ -20,9 +20,12 @@
     <string name="item_add_product_activity_menu">Add</string>
     <string name="item_settings_product_activity_menu">Settings</string>
     <string name="item_sorting_product_activity_menu">Sorting</string>
+    <string name="item_save_add_change_product">Save</string>
 
     <!--Поля екрану додавання/редагування товару-->
     <string name="product_name_hint_add_activity">Product name</string>
     <string name="product_price_hint_add_activity">Price</string>
+
+    <!---->
 
 </resources>
