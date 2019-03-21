@@ -6,10 +6,10 @@ import java.util.Objects;
 /* Клас, що описує дані про сутність продукт */
 
 public class Product {
-    private int mID; // ІД об'єкту в БД
+    private int mID = -1; // ІД об'єкту в БД
     private String mCaption; // Назва продукту
     private int mPrice; // Ціна продукту, зберігається в копійках, наприклад 2000 = 20,00 грн.
-    private int mRate; // Популярність вибору продукту, чим частіше його додають в корзину - тим вище значення змінної.
+    private int mRate = 1; // Популярність вибору продукту, чим частіше його додають в корзину - тим вище значення змінної.
 
     private int mCount; // кількість одиниць продукту вибраного на View, НЕ зберігати в БД!
 
@@ -80,5 +80,15 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(mID, mCaption);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "mID=" + mID +
+                ", mCaption='" + mCaption + '\'' +
+                ", mPrice=" + mPrice +
+                ", mRate=" + mRate +
+                '}';
     }
 }

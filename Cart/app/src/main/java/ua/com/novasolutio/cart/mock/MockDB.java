@@ -1,13 +1,14 @@
 package ua.com.novasolutio.cart.mock;
 
 import android.util.ArrayMap;
+import android.util.Log;
 
 import ua.com.novasolutio.cart.data.Product;
 
 /*Клас для підміни отримання даних від БД*/
 public class MockDB {
     ArrayMap<Integer, Product> productMap;
-    public static MockDB instance;
+    private static MockDB instance;
 
 
     private MockDB(){
@@ -55,7 +56,7 @@ public class MockDB {
         return productMap;
     }
 
-    public void addProduct(Product product){
+    public void setProduct(Product product){
         productMap.put(product.getID(), product);
     }
 

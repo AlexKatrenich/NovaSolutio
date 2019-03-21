@@ -1,5 +1,6 @@
 package ua.com.novasolutio.cart.views.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     private Toolbar mToolbar;
     private AddChangeProductActivityPresenter mPresenter;
     private AppCompatEditText mProductCaption, mProductPrice;
+    public static final String INTENT_CODE = "INTENT_CODE_FOR_GETTING_MODEL";
 
 
     @Override
@@ -39,13 +41,16 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         } else {
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
+
         // ініціалізація тулбара
         mToolbar = findViewById(R.id.toolbar_add_change_product_activity);
         setSupportActionBar(mToolbar);
+
         //встановлення кнопки "Back та відмова від Титульної назви екрану"
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         // встановлення слухача по натисненню на конпку тулбара "back"
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +60,33 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         });
 
         mProductCaption = findViewById(R.id.tiet_product_caption);
+        // обробка тексту при зміні фокусу з View та передача результату в презентер
+        mProductCaption.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.i(TAG, "onFocusChange: CAPTION - " + mProductCaption.getText());
+                    mPresenter.changeProductCaption(String.valueOf(mProductCaption.getText()));
+                }
+            }
+        });
         mProductPrice = findViewById(R.id.tiet_product_price);
+        // обробка тексту при зміні фокусу з View та передача результату в презентер
+        mProductPrice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus) {
+                    double formattedPrice = Double.valueOf(mProductPrice.getText().toString());
+                    int price = (int) (formattedPrice*100);
+                    mPresenter.changeProductPrice(price);
+                }
+            }
+        });
+
+        // зчитування Intent та передача даних в презентер для відповідного завантаження даних
+        Intent intent = getIntent();
+        int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE, -1);
+        mPresenter.loadModel(productId);
     }
 
     @Override
@@ -84,7 +115,10 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
 
             case R.id.item_save_add_change_product:
                 Log.i(TAG, "onOptionsItemSelected: SAVE CHANGES ON PRODUCT");
-
+                // зміна фокусу по всим EditText для передачі даних в Presenter
+                mProductPrice.clearFocus();
+                mProductCaption.clearFocus();
+                mPresenter.OnSaveButtonClicked();
                 return true;
 
         }
