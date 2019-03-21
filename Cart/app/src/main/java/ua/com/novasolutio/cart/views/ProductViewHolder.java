@@ -47,12 +47,11 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
     }
 
     @Override
-    public void setProductPrice(int price) {
-        String formattedPrice = formatPriceForView(price);
+    public void setProductPrice(String formattedPrice) {
         productPrice.setText(formattedPrice);
     }
 
-    @Override
+
     public void setCounterProduct(int count) {
         if (count == 0){
             productCount.setText("");
@@ -62,30 +61,6 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
             productCount.setVisibility(TextView.VISIBLE);
         }
 
-    }
-
-    /* метод форматує візуальне представлення ціни для View*/
-    private String formatPriceForView(int price) {
-        StringBuffer priceString = new StringBuffer(String.valueOf(price));
-        switch (priceString.length()){
-            case 0 :
-                priceString.append("0,00");
-                break;
-            case 1:
-                priceString.insert(0, "0,0");
-                break;
-            case 2:
-                priceString.insert(0, "0,");
-                break;
-            default:
-                priceString.insert(priceString.length() - 2, ',');
-        }
-
-        // додавання назви грошових одиниць до відображення ціни на екрані
-        String currency = (String) productPrice.getResources().getText(R.string.name_currency);
-        priceString.append(' ').append(currency).append(' ');
-
-        return priceString.toString();
     }
 
     public void showPopupMenu(View v) {

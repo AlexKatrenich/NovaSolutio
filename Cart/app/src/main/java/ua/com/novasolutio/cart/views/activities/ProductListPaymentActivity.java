@@ -1,7 +1,6 @@
 package ua.com.novasolutio.cart.views.activities;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -127,7 +126,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             case R.id.sorting_item_menu :
                 Log.i(TAG, "onOptionsItemSelected: Sorting");
                 return true;
-            case R.id.add_new_product_item_menu :
+            case R.id.item_add_new_product_menu:
                 /*Презентер оброблює подію згідно логіки додатку*/
                 mPresenter.addNewProductMenuClicked();
                 Log.i(TAG, "onOptionsItemSelected: Add new product");

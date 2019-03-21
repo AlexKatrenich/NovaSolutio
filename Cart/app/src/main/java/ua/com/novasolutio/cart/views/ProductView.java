@@ -4,8 +4,6 @@ package ua.com.novasolutio.cart.views;
 public interface ProductView {
     void setProductCaption(String caption);
 
-    void setProductPrice(int price);
-
-    void setCounterProduct(int count);
+    void setProductPrice(String price);
 
 }

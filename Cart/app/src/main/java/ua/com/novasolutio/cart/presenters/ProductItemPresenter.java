@@ -4,12 +4,13 @@ package ua.com.novasolutio.cart.presenters;
 import android.util.Log;
 import android.view.View;
 
+import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.views.ProductView;
 import ua.com.novasolutio.cart.views.ProductViewHolder;
 
 
-public class ProductItemPresenter extends BasePresenter<Product, ProductView>{
+public class ProductItemPresenter extends BasePresenter<Product, ProductViewHolder>{
     public static final String TAG = "ProductItemPresenter";
 
     private static final int MIN_VALUE = 0;
@@ -20,8 +21,9 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductView>{
     protected void updateView() {
         view().setProductCaption(model.getCaption());
         int price = model.getPrice();
-        view().setProductPrice(price);
-        view().setCounterProduct(model.getCount());
+        String formatedPrice = formatPriceForView(price);
+        view().setProductPrice(formatedPrice);
+        ((ProductViewHolder)view()).setCounterProduct(model.getCount());
     }
 
     public void onLeftSwipeMinusProduct(){
@@ -39,10 +41,32 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductView>{
     }
 
     public void onContextMenuClicked(View v) {
-        //TODO реалізація відображення контектсного меню в recyclerView
         Log.i(TAG, "onContextMenuClicked: ");
-        ProductViewHolder viewHolder = (ProductViewHolder) view();
-        viewHolder.showPopupMenu(v);
+        view().showPopupMenu(v);
     }
 
+    /* метод форматує візуальне представлення ціни для View*/
+    public String formatPriceForView(int price) {
+        StringBuffer priceString = new StringBuffer(String.valueOf(price));
+        switch (priceString.length()){
+            case 0 :
+                priceString.append("0,00");
+                break;
+            case 1:
+                priceString.insert(0, "0,0");
+                break;
+            case 2:
+                priceString.insert(0, "0,");
+                break;
+            default:
+                priceString.insert(priceString.length() - 2, ',');
+        }
+
+        // додавання назви грошових одиниць до відображення ціни на екрані
+        //TODO додати можливість задавати валюту через екран, зберігати через SharedPreference.
+        String currency = "UAH";
+        priceString.append(' ').append(currency).append(' ');
+
+        return priceString.toString();
+    }
 }
