@@ -42,7 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/product_name_hint_add_activity"
-            android:maxLines="@android:integer/config_shortAnimTime"/>
+            android:maxLines="1"
+            android:inputType="text" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -61,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/product_price_hint_add_activity"
-            android:maxLines="@android:integer/config_shortAnimTime"/>
+            android:maxLines="1"
+            android:inputType="numberDecimal"/>
 
     </android.support.design.widget.TextInputLayout>
 

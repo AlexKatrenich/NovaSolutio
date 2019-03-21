@@ -66,7 +66,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        try{
+        try {
             getMenuInflater().inflate(R.menu.product_add_change_activity_menu, menu);
             Log.i(TAG, "onCreateOptionsMenu: Menu created");
         } catch (InflateException e){
@@ -84,6 +84,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
 
             case R.id.item_save_add_change_product:
                 Log.i(TAG, "onOptionsItemSelected: SAVE CHANGES ON PRODUCT");
+
                 return true;
 
         }
@@ -114,11 +115,11 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
 
     @Override
     public void setProductCaption(String caption) {
-
+        mProductCaption.setText(caption);
     }
 
     @Override
     public void setProductPrice(String price) {
-
+        mProductPrice.setText(price);
     }
 }

@@ -38,6 +38,31 @@ public abstract class BasePresenter<M, V>{
         }
     }
 
+    /* метод форматує візуальне представлення ціни для View*/
+    public String formatPriceOnText(int price) {
+        StringBuffer priceString = new StringBuffer(String.valueOf(price));
+        switch (priceString.length()){
+            case 0 :
+                priceString.append("0,00");
+                break;
+            case 1:
+                priceString.insert(0, "0,0");
+                break;
+            case 2:
+                priceString.insert(0, "0,");
+                break;
+            default:
+                priceString.insert(priceString.length() - 2, ',');
+        }
+
+        // додавання назви грошових одиниць до відображення ціни на екрані
+        //TODO додати можливість задавати валюту через екран, зберігати через SharedPreference.
+        String currency = "UAH";
+        priceString.append(' ').append(currency).append(' ');
+
+        return priceString.toString();
+    }
+
     /* метод для перевірки актуальності посилань на View(Екран) та модель*/
     protected boolean setupDone() {
         return view() != null && model != null ;
