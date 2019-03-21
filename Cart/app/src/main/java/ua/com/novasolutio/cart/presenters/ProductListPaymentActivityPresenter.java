@@ -28,4 +28,5 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         Intent intent = new Intent(view().getBaseContext(), AddChangeProductActivity.class);
         view().startActivity(intent);
     }
+
 }
