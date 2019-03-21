@@ -73,14 +73,13 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         Log.i(TAG, "init done");
 
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         mPresenter.bindView(this);
+        Log.i(TAG, "onResume: mPresenter = null - " + String.valueOf(mPresenter == null));
     }
 
     @Override

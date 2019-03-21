@@ -15,7 +15,7 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
 
     }
 
-    /* метод реагує на */
+
     public void onProductListFragmentClicked() {
         view().bindFragment(new ProductListFragment());
     }

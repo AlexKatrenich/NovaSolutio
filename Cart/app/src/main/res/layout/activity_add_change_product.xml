@@ -37,11 +37,13 @@
         app:layout_constraintTop_toBottomOf="@+id/add_change_product_activity_bar_layout"
         android:layout_margin="@dimen/layout_forms_margin">
 
-        <android.support.design.widget.TextInputEditText
+        <android.support.v7.widget.AppCompatEditText
             android:id="@+id/tiet_product_caption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/product_name_hint_add_activity" />
+            android:hint="@string/product_name_hint_add_activity"
+            android:maxLines="@android:integer/config_shortAnimTime"/>
+
     </android.support.design.widget.TextInputLayout>
 
 
@@ -54,11 +56,13 @@
         app:layout_constraintTop_toBottomOf="@+id/til_product_caption_add_activity"
         android:layout_margin="@dimen/layout_forms_margin">
 
-        <android.support.design.widget.TextInputEditText
+        <android.support.v7.widget.AppCompatEditText
             android:id="@+id/tiet_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/product_price_hint_add_activity" />
+            android:hint="@string/product_price_hint_add_activity"
+            android:maxLines="@android:integer/config_shortAnimTime"/>
+
     </android.support.design.widget.TextInputLayout>
 
 
