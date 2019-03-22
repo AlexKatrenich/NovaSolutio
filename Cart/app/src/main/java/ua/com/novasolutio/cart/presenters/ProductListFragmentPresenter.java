@@ -12,6 +12,7 @@ import java.util.List;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
+import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -48,11 +49,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         new LoadDataTask().execute();
     }
 
-    @Override
-    public void productListWasChanged() {
-        loadData();
-    }
-
     /** метод для зберігання та відображення на екрані інформації про додавання додаткової кількості продуктів одного виду
     * наприклад користувач декілька разів натискає на додавання кави, на екрані відображається 1,2 .... N кількість чашок кави в списку продуктів*/
 //    public void onAddProductClicked()
@@ -71,6 +67,28 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
             setModel(new ArrayList<Product>(map.values())); // передача списку об'єктів Product в модель(передача посилання на список)
             isLoadingData = false; // зняття флажка про завантаження даних
         }
+    }
+
+
+
+    @Override
+    public void productListWasChanged() {
+        loadData();
+    }
+
+    @Override
+    public void onDbProductAdd(Product product) {
+        ((ProductListFragment) view()).showProductAdd(product);
+    }
+
+    @Override
+    public void onDbProductRemove() {
+
+    }
+
+    @Override
+    public void onDbProductChange() {
+
     }
 
 }

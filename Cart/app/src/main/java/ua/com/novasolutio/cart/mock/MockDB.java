@@ -55,8 +55,6 @@ public class MockDB {
         productMap.put(31, new Product(31, "Liquid soap", 1300, 1));
         productMap.put(32, new Product(32, "Nuts", 1200, 1));
         productMap.put(33, new Product(33, "Oreo", 300, 1));
-
-        observeProductListWasChanged();
     }
 
     public ArrayMap<Integer, Product> getProductMap(){
@@ -64,8 +62,8 @@ public class MockDB {
     }
 
     public void setProduct(Product product){
+        Log.i(TAG, "setProduct: " + product);
         productMap.put(product.getID(), product);
-        observeOnDbProductAdd();
     }
 
 
@@ -83,7 +81,7 @@ public class MockDB {
 
     public interface OnDataChangedListener{
         void productListWasChanged();
-        void onDbProductAdd();
+        void onDbProductAdd(Product product);
         void onDbProductRemove();
         void onDbProductChange();
     }
@@ -96,28 +94,28 @@ public class MockDB {
         dataChangedListeners.remove(listener);
     }
 
-    private void observeProductListWasChanged(){
+    public void observeProductListWasChanged(){
         Log.i(TAG, "observeProductListWasChanged: UPDATE");
         for (OnDataChangedListener listener : dataChangedListeners) {
             if(listener != null) listener.productListWasChanged();
         }
     }
 
-    private void observeOnDbProductAdd() {
-        Log.i(TAG, "observeOnDbProductAdd: UPDATE PRODUCT");
+    public void observeOnDbProductAdd(Product product) {
+        Log.i(TAG, "observeOnDbProductAdd: ADD PRODUCT");
         for (OnDataChangedListener listener : dataChangedListeners) {
-            if(listener != null) listener.onDbProductAdd();
+            if(listener != null) listener.onDbProductAdd(product);
         }
     }
 
-    private void observeOnDbProductRemove(){
+    public void observeOnDbProductRemove(){
         Log.i(TAG, "observeOnDbProductRemove: PRODUCT REMOVE");
         for (OnDataChangedListener listener : dataChangedListeners) {
             if(listener != null) listener.onDbProductRemove();
         }
     }
 
-    private void observeOnDbProductChange(){
+    public void observeOnDbProductChange(){
         Log.i(TAG, "observeOnDbProductChange: PRODUCT CHANGE");
         for (OnDataChangedListener listener : dataChangedListeners) {
             if(listener != null) listener.onDbProductChange();

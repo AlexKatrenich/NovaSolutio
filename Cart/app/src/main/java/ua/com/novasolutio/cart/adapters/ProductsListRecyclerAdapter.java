@@ -2,6 +2,7 @@ package ua.com.novasolutio.cart.adapters;
 
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,6 +14,8 @@ import ua.com.novasolutio.cart.views.ProductViewHolder;
 /* Адаптер для управління відображення даних в RecyclerView фрагмента ProductListFragment*/
 public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product, ProductItemPresenter, ProductViewHolder>{
 
+    private static final String TAG = "ProdListRecyclerAdapter";
+
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -22,6 +25,7 @@ public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product,
     @NonNull
     @Override
     protected Object getModelId(Product model) {
+        Log.i(TAG, "getModelId: ");
         return model.getID();
     }
 

@@ -96,10 +96,10 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
         }
     }
 
-    private class WriteDataTask extends AsyncTask<Product, Void, Void> {
+    private class WriteDataTask extends AsyncTask<Product, Void, Product> {
 
         @Override
-        protected Void doInBackground(Product... products) {
+        protected Product doInBackground(Product... products) {
             SystemClock.sleep(1000); // емуляція запису в БД
             Product product = products[0];
             MockDB mDB = MockDB.getInstance();
@@ -111,9 +111,16 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
             mDB.setProduct(product);
             Log.i(TAG, "doInBackground: Product: " + product);
 
-            return null;
+            return product;
         }
 
+        @Override
+        protected void onPostExecute(Product product) {
+
+            Log.i(TAG, "onPostExecute: " + product);
+            MockDB.getInstance().observeOnDbProductAdd(product);
+            super.onPostExecute(product);
+        }
     }
 
 }
