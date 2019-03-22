@@ -14,15 +14,13 @@ import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
-import static android.support.constraint.Constraints.TAG;
-
-
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
 public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView> implements MockDB.OnDataChangedListener/*<Model, View>*/{
     /** флажок для відображення завантаження даних
      * @value true - виконується процес завантаження даних, в паралельному потоці
      * @value false - процес завантаження даних не виконується */
     private boolean isLoadingData = false;
+    public static final String TAG = "ProdListFragPresenter";
 
     @Override
     protected void updateView() {
@@ -53,18 +51,21 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     * наприклад користувач декілька разів натискає на додавання кави, на екрані відображається 1,2 .... N кількість чашок кави в списку продуктів*/
 //    public void onAddProductClicked()
 
-    private class LoadDataTask extends AsyncTask<Void, Void, Void>{
+    private class LoadDataTask extends AsyncTask<Void, Void, ArrayList>{
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected ArrayList doInBackground(Void... voids) {
             SystemClock.sleep(1000); //емуляція завантаження з БД
-            return null;
+            MockDB mDb = MockDB.getInstance();
+            ArrayMap<Integer, Product> map = mDb.getProductMap();
+            return new ArrayList<Product>(map.values());
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            MockDB mDb = MockDB.getInstance();
-            ArrayMap<Integer, Product> map = mDb.getProductMap(); // завантаження мапи об'єктів із заглушки
-            setModel(new ArrayList<Product>(map.values())); // передача списку об'єктів Product в модель(передача посилання на список)
+        protected void onPostExecute(ArrayList list) {
+             // завантаження мапи об'єктів із заглушки
+            setModel(list); // передача списку об'єктів Product в модель(передача посилання на список)
+            updateView();
+            Log.i(TAG, "onPostExecute: DATA LOAD, VIEW UPDATE" + list);
             isLoadingData = false; // зняття флажка про завантаження даних
         }
     }
@@ -83,6 +84,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public void onDbProductRemove(Product product) {
+        model.remove(product);
         ((ProductListFragment)view()).showProductRemove(product);
     }
 

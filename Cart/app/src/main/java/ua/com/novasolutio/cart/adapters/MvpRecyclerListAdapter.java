@@ -103,6 +103,7 @@ public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH ext
         Log.i(TAG, "removeItem: " + product);
         int position = getItemPosition(product);
         models.remove(product);
+        presenters.remove(getModelId(product));
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
     }

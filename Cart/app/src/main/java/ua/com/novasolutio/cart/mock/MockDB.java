@@ -67,8 +67,8 @@ public class MockDB {
     }
 
     public void deleteProductById(Integer id){
-        productMap.remove(id);
-        Log.i(TAG, "deleteProductById: Product deleted, ID " + id);
+        Product i = productMap.remove(id);
+        Log.i(TAG, "deleteProductById: Product deleted " + i);
     }
 
     public Product getProductById(Integer id){
@@ -113,7 +113,7 @@ public class MockDB {
     }
 
     public void observeOnDbProductRemove(Product product){
-        Log.i(TAG, "observeOnDbProductRemove: PRODUCT POSITION: " + product);
+        Log.i(TAG, "observeOnDbProductRemove: PRODUCT REMOVE " + product);
         for (OnDataChangedListener listener : dataChangedListeners) {
             if(listener != null) listener.onDbProductRemove(product);
         }

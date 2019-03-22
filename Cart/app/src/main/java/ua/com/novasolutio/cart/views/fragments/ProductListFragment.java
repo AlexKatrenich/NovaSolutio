@@ -79,20 +79,21 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
     @Override
     public void onResume() {
-        super.onResume();
+        Log.i(TAG, "onResume: ");
         mPresenter.bindView(this);
-        Log.i(TAG, "onResume: mPresenter = null - " + String.valueOf(mPresenter == null));
+        super.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
+        Log.i(TAG, "onPause: ");
         mPresenter.unbindView();
     }
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy: ");
         /* Видалення посилань на невикористовувані об'єкти при знищенні фрагменту*/
         if(rvProductList != null){
             rvProductList.setLayoutManager(null);
@@ -105,8 +106,8 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.i(TAG, "onSaveInstanceState: ");
         super.onSaveInstanceState(outState);
-
         PresenterManager.getInstance().savePresenter(mPresenter, outState);
     }
 
