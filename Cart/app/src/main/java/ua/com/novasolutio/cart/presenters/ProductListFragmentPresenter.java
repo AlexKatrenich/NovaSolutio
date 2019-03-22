@@ -49,7 +49,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     }
 
     @Override
-    public void dataWasChanged() {
+    public void productListWasChanged() {
         loadData();
     }
 
