@@ -15,7 +15,6 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     public static final String TAG = "AddChProdActivPresent";
     private boolean isLoadingData = false;
 
-
     @Override
     protected void updateView() {
         if(model != null){
@@ -82,7 +81,6 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     }
 
     private class LoadDataTask extends AsyncTask<Integer, Void, Product> {
-
         @Override
         protected Product doInBackground(Integer... integers) {
             SystemClock.sleep(1000); //емуляція завантаження з БД
@@ -99,6 +97,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     }
 
     private class WriteDataTask extends AsyncTask<Product, Void, Void> {
+
         @Override
         protected Void doInBackground(Product... products) {
             SystemClock.sleep(1000); // емуляція запису в БД
@@ -114,5 +113,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
 
             return null;
         }
+
     }
+
 }

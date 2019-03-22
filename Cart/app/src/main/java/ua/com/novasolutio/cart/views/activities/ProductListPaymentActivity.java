@@ -12,6 +12,7 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
@@ -141,4 +142,5 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         PresenterManager.getInstance().savePresenter(mPresenter, outState);
     }
+
 }

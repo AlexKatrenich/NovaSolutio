@@ -71,8 +71,9 @@ public class Product {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Product)
-            return this.getID() == ((Product) obj).getID();
+        if(obj instanceof Product){
+            return ((Product) obj).getCaption().equals(this.getCaption()) && ((Product) obj).getPrice() == this.getPrice();
+        }
 
         return false;
     }

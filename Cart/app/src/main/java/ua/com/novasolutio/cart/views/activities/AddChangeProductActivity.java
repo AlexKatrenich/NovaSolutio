@@ -87,6 +87,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         Intent intent = getIntent();
         int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE, -1);
         mPresenter.loadModel(productId);
+
     }
 
     @Override

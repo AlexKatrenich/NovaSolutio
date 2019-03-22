@@ -3,12 +3,17 @@ package ua.com.novasolutio.cart.mock;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ua.com.novasolutio.cart.data.Product;
 
 /*Клас для підміни отримання даних від БД*/
 public class MockDB {
+    private static final String TAG = "MockDB";
     ArrayMap<Integer, Product> productMap;
     private static MockDB instance;
+    private List<OnDataChangedListener> dataChangedListeners = new ArrayList<>();
 
 
     private MockDB(){
@@ -50,6 +55,8 @@ public class MockDB {
         productMap.put(31, new Product(31, "Liquid soap", 1300, 1));
         productMap.put(32, new Product(32, "Nuts", 1200, 1));
         productMap.put(33, new Product(33, "Oreo", 300, 1));
+
+        observeDataChangeListeners();
     }
 
     public ArrayMap<Integer, Product> getProductMap(){
@@ -58,6 +65,7 @@ public class MockDB {
 
     public void setProduct(Product product){
         productMap.put(product.getID(), product);
+        observeDataChangeListeners();
     }
 
     public Product getProductById(Integer id){
@@ -71,5 +79,25 @@ public class MockDB {
         return instance;
     }
 
+    public interface OnDataChangedListener{
+        void dataWasChanged();
+    }
 
+    public void addDataChangedListener(OnDataChangedListener listener){
+        dataChangedListeners.add(listener);
+    }
+
+    public void removeDataChangeListener(OnDataChangedListener listener){
+        dataChangedListeners.remove(listener);
+    }
+    public void clearDataChangedListeners(){
+        dataChangedListeners.clear();
+    }
+
+    private void observeDataChangeListeners(){
+        Log.i(TAG, "observeDataChangeListeners: UPDATE");
+        for (OnDataChangedListener listener : dataChangedListeners) {
+            if(listener != null) listener.dataWasChanged();
+        }
+    }
 }

@@ -17,7 +17,7 @@ import static android.support.constraint.Constraints.TAG;
 
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
-public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView>/*<Model, View>*/{
+public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView> implements MockDB.OnDataChangedListener/*<Model, View>*/{
     /** флажок для відображення завантаження даних
      * @value true - виконується процес завантаження даних, в паралельному потоці
      * @value false - процес завантаження даних не виконується */
@@ -37,7 +37,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void bindView(@NonNull ProductsListView view) {
         super.bindView(view);
-
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
         if(model == null && !isLoadingData){
             loadData();
@@ -49,8 +48,13 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         new LoadDataTask().execute();
     }
 
+    @Override
+    public void dataWasChanged() {
+        loadData();
+    }
+
     /** метод для зберігання та відображення на екрані інформації про додавання додаткової кількості продуктів одного виду
-    * наприклад користувача декілька разів натискає на додавання кави, на екрані відображається 1,2 .... N кількість чашок кави в списку продуктів*/
+    * наприклад користувач декілька разів натискає на додавання кави, на екрані відображається 1,2 .... N кількість чашок кави в списку продуктів*/
 //    public void onAddProductClicked()
 
     private class LoadDataTask extends AsyncTask<Void, Void, Void>{
@@ -68,4 +72,5 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
             isLoadingData = false; // зняття флажка про завантаження даних
         }
     }
+
 }
