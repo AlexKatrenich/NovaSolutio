@@ -2,6 +2,7 @@ package ua.com.novasolutio.cart.views;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -14,7 +15,7 @@ import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
 
 /* Клас для управління заповнення даними View елементу списка ProductsRecyclerView */
-public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView {
+public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView{
     public static final String TAG = "ProductViewHolder";
     private final TextView productCaption;
     private final TextView productPrice;
@@ -39,6 +40,32 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
                 presenter.onContextMenuClicked(v);
             }
         });
+
+        // встановлення прослуховувача кліку по елементу меню
+        mItemClickListener = new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+
+                switch (id){
+                    case R.id.product_change_item :
+
+                        return true;
+
+                    case R.id.product_delete_item :
+                        presenter.onDeleteContextMenuItemClicked();
+                        return true;
+                }
+
+                return false;
+            }
+        };
+    }
+
+    @Override
+    public void bindPresenter(ProductItemPresenter presenter) {
+        super.bindPresenter(presenter);
+        presenter.setPosition(getAdapterPosition());
     }
 
     @Override

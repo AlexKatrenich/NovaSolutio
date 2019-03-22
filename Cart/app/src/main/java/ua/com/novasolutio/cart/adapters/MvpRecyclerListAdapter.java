@@ -1,9 +1,12 @@
 package ua.com.novasolutio.cart.adapters;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.presenters.BasePresenter;
 import ua.com.novasolutio.cart.views.MvpViewHolder;
 
@@ -11,6 +14,7 @@ import ua.com.novasolutio.cart.views.MvpViewHolder;
 public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH extends MvpViewHolder<P>>
         extends MvpRecyclerAdapter<M, P, VH>{
 
+    private static final String TAG = "MvpRecyclerListAdapter";
     private final List<M> models;
 
     public MvpRecyclerListAdapter() {
@@ -77,7 +81,6 @@ public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH ext
                 break;
             }
         }
-
         return position;
     }
 
@@ -94,5 +97,13 @@ public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH ext
     @Override
     protected M getItem(int position) {
         return models.get(position);
+    }
+
+    public void removeItem(M product) {
+        Log.i(TAG, "removeItem: " + product);
+        int position = getItemPosition(product);
+        models.remove(product);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
     }
 }

@@ -37,5 +37,4 @@ public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product,
         return presenter;
     }
 
-
 }

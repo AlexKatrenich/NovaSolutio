@@ -82,8 +82,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     }
 
     @Override
-    public void onDbProductRemove() {
-
+    public void onDbProductRemove(Product product) {
+        ((ProductListFragment)view()).showProductRemove(product);
     }
 
     @Override

@@ -136,4 +136,8 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     public void showProductAdd(Product product) {
         mAdapter.addItem(product);
     }
+
+    public void showProductRemove(Product product) {
+        mAdapter.removeItem(product);
+    }
 }

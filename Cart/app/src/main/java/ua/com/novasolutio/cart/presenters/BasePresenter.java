@@ -7,6 +7,11 @@ import java.lang.ref.WeakReference;
 public abstract class BasePresenter<M, V>{
     protected M model;
     private WeakReference<V> view;
+    protected int position;
+
+    public void setPosition(int pos){
+        position = pos;
+    }
 
     /* отримання та фіксація посилання на модель(об'єкт, список об'єктів), яку повинна відображати View*/
     public void setModel(M model) {
