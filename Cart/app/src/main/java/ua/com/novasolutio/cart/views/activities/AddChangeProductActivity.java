@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.InflateException;
@@ -87,7 +88,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         Intent intent = getIntent();
         int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
         mPresenter.loadModel(productId);
-
     }
 
     @Override
@@ -121,7 +121,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
                 mProductCaption.clearFocus();
                 mPresenter.OnSaveButtonClicked();
                 return true;
-
         }
 
         return super.onOptionsItemSelected(item);

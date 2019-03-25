@@ -3,15 +3,19 @@ package ua.com.novasolutio.cart.presenters;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductView;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
 
-public class AddChangeProductActivityPresenter extends BasePresenter<Product, ProductView> {
+public class AddChangeProductActivityPresenter extends BasePresenter<Product, ProductView>{
     public static final String TAG = "AddChProdActivPresent";
     private boolean isLoadingData = false;
 

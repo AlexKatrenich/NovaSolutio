@@ -3,6 +3,7 @@ package ua.com.novasolutio.cart.presenters;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.SearchView;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -15,7 +16,8 @@ import ua.com.novasolutio.cart.views.ProductsListView;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
-public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView> implements MockDB.OnDataChangedListener/*<Model, View>*/{
+public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView> /*<Model, View>*/
+        implements MockDB.OnDataChangedListener, SearchView.OnQueryTextListener {
     /** флажок для відображення завантаження даних
      * @value true - виконується процес завантаження даних, в паралельному потоці
      * @value false - процес завантаження даних не виконується */
@@ -96,6 +98,27 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void onDbProductChange() {
 
+    }
+
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        List<Product> newProductList = new ArrayList<>();
+
+        for (Product product : model){
+            if(product.getCaption().toLowerCase().contains(userInput)){
+                newProductList.add(product);
+            }
+        }
+
+        view().showProducts(newProductList);
+        return false;
     }
 
 }

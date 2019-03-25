@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
@@ -35,6 +38,10 @@ public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product,
         ProductItemPresenter presenter = new ProductItemPresenter();
         presenter.setModel(product);
         return presenter;
+    }
+
+    public void updateListFromSearchView(List<Product> newList){
+        super.clearAndAddAll(newList);
     }
 
 }

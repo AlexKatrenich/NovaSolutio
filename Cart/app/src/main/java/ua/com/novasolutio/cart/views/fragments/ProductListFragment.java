@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,6 +35,7 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     private TextView tvTotalBalance;
     private RecyclerView rvProductList;
     private ProductsListRecyclerAdapter mAdapter;
+    private SearchView mSearchView;
 
 
     @Nullable
@@ -61,7 +63,7 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         MockDB.getInstance().addDataChangedListener(mPresenter);
 
         /*test data*/
-        ((TextView) v.findViewById(R.id.tv_search_on_list_products)).setText(" SEARCH ON APP ");
+
         ((TextView) v.findViewById(R.id.tv_total_price_product_list_fragment)).setText("200,00 UAH");
 
         rvProductList = v.findViewById(R.id.rv_product_list_fragment);
@@ -75,6 +77,8 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         Log.i(TAG, "init done");
 
+        mSearchView = v.findViewById(R.id.sv_search_product_list_fragment);
+        mSearchView.setOnQueryTextListener(mPresenter);
     }
 
     @Override
