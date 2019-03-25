@@ -23,7 +23,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     private Toolbar mToolbar;
     private AddChangeProductActivityPresenter mPresenter;
     private AppCompatEditText mProductCaption, mProductPrice;
-    public static final String INTENT_CODE = "INTENT_CODE_FOR_GETTING_MODEL";
+    public static final String INTENT_CODE_FOR_GETTING_MODEL = "INTENT_CODE_FOR_GETTING_MODEL";
 
 
     @Override
@@ -85,7 +85,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
 
         // зчитування Intent та передача даних в презентер для відповідного завантаження даних
         Intent intent = getIntent();
-        int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE, -1);
+        int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
         mPresenter.loadModel(productId);
 
     }

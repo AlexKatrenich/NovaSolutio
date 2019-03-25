@@ -1,7 +1,10 @@
 package ua.com.novasolutio.cart.presenters;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.View;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductViewHolder;
+import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
 
 
 public class ProductItemPresenter extends BasePresenter<Product, ProductViewHolder>{
@@ -54,6 +58,12 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
 
     public void onDeleteContextMenuItemClicked() {
         new DeleteProductTask().execute(model);
+    }
+
+    public void onChangeContextMenuItemClicked(Context context) {
+        Intent intent = new Intent(context, AddChangeProductActivity.class);
+        intent.putExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, model.getID());
+        context.startActivity(intent);
     }
 
     // Клас для асинхронного видалення елементу з Бази даних

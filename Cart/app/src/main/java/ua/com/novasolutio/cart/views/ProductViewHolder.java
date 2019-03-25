@@ -26,7 +26,7 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
 //    @Nullable private OnProductLeftSwipeListener lSwipeListener;
     @Nullable private PopupMenu.OnMenuItemClickListener mItemClickListener;
 
-    public ProductViewHolder(@NonNull View itemView) {
+    public ProductViewHolder(@NonNull final View itemView) {
         super(itemView);
         productCaption = (TextView) itemView.findViewById(R.id.tv_product_caption_list_products);
         productPrice = (TextView) itemView.findViewById(R.id.tv_product_price_product_list);
@@ -49,7 +49,7 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
 
                 switch (id){
                     case R.id.product_change_item :
-
+                        presenter.onChangeContextMenuItemClicked(itemView.getContext());
                         return true;
 
                     case R.id.product_delete_item :
