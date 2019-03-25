@@ -14,11 +14,19 @@ public class MockDB {
     ArrayMap<Integer, Product> productMap;
     private static MockDB instance;
     private List<OnDataChangedListener> dataChangedListeners = new ArrayList<>();
+    private Integer idCounter = 0; //Рахувальник ІД-продуктів
 
 
     private MockDB(){
         productMap = new ArrayMap<>();
         setProductListForDB();
+    }
+
+    public static MockDB getInstance() {
+        if(instance == null){
+            instance = new MockDB();
+        }
+        return instance;
     }
 
     private void setProductListForDB(){
@@ -55,6 +63,9 @@ public class MockDB {
         productMap.put(31, new Product(31, "Liquid soap", 1300, 1));
         productMap.put(32, new Product(32, "Nuts", 1200, 1));
         productMap.put(33, new Product(33, "Oreo", 300, 1));
+
+        idCounter = productMap.size();
+        idCounter++;
     }
 
     public ArrayMap<Integer, Product> getProductMap(){
@@ -64,8 +75,8 @@ public class MockDB {
     public void setProduct(Product product){
         Log.i(TAG, "setProduct: " + product);
         productMap.put(product.getID(), product);
+        idCounter++;
     }
-
     public void deleteProductById(Integer id){
         Product i = productMap.remove(id);
         Log.i(TAG, "deleteProductById: Product deleted " + i);
@@ -73,13 +84,6 @@ public class MockDB {
 
     public Product getProductById(Integer id){
         return productMap.get(id);
-    }
-
-    public static MockDB getInstance() {
-        if(instance == null){
-            instance = new MockDB();
-        }
-        return instance;
     }
 
 
@@ -126,4 +130,7 @@ public class MockDB {
         }
     }
 
+    public Integer getIdCounter(){
+        return idCounter;
+    }
 }

@@ -28,6 +28,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
             view().showEmpty();
             Log.i(TAG, "updateView: view().showEmpty();");
         } else {
+            ProductsListView view = view();
+            Log.i(TAG, "updateView: view == null " + String.valueOf(view == null));
             view().showProducts(model);
             Log.i(TAG, "updateView: view().showProducts(model)");
         }
@@ -64,8 +66,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         protected void onPostExecute(ArrayList list) {
              // завантаження мапи об'єктів із заглушки
             setModel(list); // передача списку об'єктів Product в модель(передача посилання на список)
-            updateView();
             Log.i(TAG, "onPostExecute: DATA LOAD, VIEW UPDATE" + list);
+            updateView();
             isLoadingData = false; // зняття флажка про завантаження даних
         }
     }

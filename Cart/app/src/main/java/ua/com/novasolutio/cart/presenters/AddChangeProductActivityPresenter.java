@@ -105,7 +105,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
             MockDB mDB = MockDB.getInstance();
 
             if (product.getID() == -1){
-                product.setID(mDB.getProductMap().size() + 1);
+                product.setID(mDB.getIdCounter());
             }
 
             mDB.setProduct(product);
