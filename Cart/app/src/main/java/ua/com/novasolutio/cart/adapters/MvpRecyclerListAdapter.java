@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.presenters.BasePresenter;
 import ua.com.novasolutio.cart.views.MvpViewHolder;
 

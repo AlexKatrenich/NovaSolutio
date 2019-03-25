@@ -24,14 +24,17 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     protected void updateView() {
-        if (model.size() == 0){
-            view().showEmpty();
-            Log.i(TAG, "updateView: view().showEmpty();");
-        } else {
-            ProductsListView view = view();
-            Log.i(TAG, "updateView: view == null " + String.valueOf(view == null));
-            view().showProducts(model);
-            Log.i(TAG, "updateView: view().showProducts(model)");
+        ProductsListView view = view();
+        if (view != null) {
+            if (model.size() == 0) {
+                view.showEmpty();
+                Log.i(TAG, "updateView: view().showEmpty();");
+            } else {
+
+                Log.i(TAG, "updateView: view == null " + String.valueOf(view == null));
+                view.showProducts(model);
+                Log.i(TAG, "updateView: view().showProducts(model)");
+            }
         }
     }
 

@@ -1,7 +1,6 @@
 package ua.com.novasolutio.cart.presenters;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
@@ -22,10 +21,12 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
 
     public void onProductListFragmentClicked() {
         view().bindFragment(new ProductListFragment());
+        view().invalidateOptionsMenu();
     }
 
     public void onCartFragmentClicked() {
         view().bindFragment(new CartFragment());
+        view().invalidateOptionsMenu();
     }
 
     public void addNewProductMenuClicked() {

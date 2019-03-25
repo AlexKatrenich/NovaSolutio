@@ -2,11 +2,11 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/sorting_item_menu"
+        android:id="@+id/item_sorting_menu"
         android:enabled="true"
         android:icon="@drawable/ic_sort_item_menu"
         android:title="Sorting"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="ifRoom" />
 
     <item
@@ -18,7 +18,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/settings_item_menu"
+        android:id="@+id/item_settings_menu"
         android:enabled="true"
         android:icon="@drawable/ic_settings_item_menu"
         android:title="Setting"

@@ -121,10 +121,10 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.settings_item_menu :
+            case R.id.item_settings_menu :
                 Log.i(TAG, "onOptionsItemSelected: Settings");
                 return true;
-            case R.id.sorting_item_menu :
+            case R.id.item_sorting_menu :
                 Log.i(TAG, "onOptionsItemSelected: Sorting");
                 return true;
             case R.id.item_add_new_product_menu:
@@ -143,4 +143,21 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         PresenterManager.getInstance().savePresenter(mPresenter, outState);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.item_sorting_menu);
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_products_activity);
+        try {
+            ProductListFragment plFragment = (ProductListFragment)currentFragment;
+            item.setVisible(false);
+            Log.i(TAG, "onPrepareOptionsMenu: CurrentFragment IS " + plFragment.getClass().getSimpleName());
+
+        } catch (ClassCastException e){
+            Log.i(TAG, "onPrepareOptionsMenu: CurrentFragment IS " + currentFragment.getClass().getSimpleName());
+            item.setVisible(true);
+            return super.onPrepareOptionsMenu(menu);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
 }

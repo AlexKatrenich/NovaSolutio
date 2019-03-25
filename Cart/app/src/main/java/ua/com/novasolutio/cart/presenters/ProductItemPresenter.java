@@ -16,6 +16,11 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
 
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 99;
+    protected int position;
+
+    public void setPosition(int pos){
+        position = pos;
+    }
 
 
     @Override
