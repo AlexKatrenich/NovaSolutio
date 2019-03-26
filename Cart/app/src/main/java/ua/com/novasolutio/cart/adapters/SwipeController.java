@@ -19,7 +19,7 @@ public class SwipeController extends Callback {
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-        return makeMovementFlags(0, LEFT|RIGHT);
+        return makeMovementFlags(0, RIGHT);
     }
 
     @Override
