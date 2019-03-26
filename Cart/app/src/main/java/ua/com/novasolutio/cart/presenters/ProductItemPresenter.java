@@ -30,8 +30,8 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
     @Override
     protected void updateView() {
         view().setProductCaption(model.getCaption());
-        int price = model.getPrice();
-        String formattedPrice = formatPriceOnText(price);
+        int price = model.getPrice(); // отримання ціни товару в Int значенні
+        String formattedPrice = formatPriceOnText(price); // форматування ціни товару в текстове значення, з додаванням роздільника
         view().setProductPrice(formattedPrice);
         view().setCounterProduct(model.getCount());
     }
@@ -87,5 +87,13 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         }
     }
 
+    public void onItemClick() {
+        model.setCount(model.getCount() + 1);
+        MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+        updateView();
+    }
 
+    public Product getModel(){
+        return model;
+    }
 }

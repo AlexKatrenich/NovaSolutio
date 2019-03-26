@@ -15,7 +15,7 @@ import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
 
 /* Клас для управління заповнення даними View елементу списка ProductsRecyclerView */
-public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView{
+public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView {
     public static final String TAG = "ProductViewHolder";
     private final TextView productCaption;
     private final TextView productPrice;
@@ -60,6 +60,14 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
                 return false;
             }
         };
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick: " + presenter.getModel());
+                presenter.onItemClick();
+            }
+        });
     }
 
     @Override

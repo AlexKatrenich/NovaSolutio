@@ -10,7 +10,7 @@ import ua.com.novasolutio.cart.data.Product;
 
 /*Клас для підміни отримання даних від БД*/
 public class MockDB {
-    private static final String TAG = "MockDB";
+    private static final String TAG = "a";
     ArrayMap<Integer, Product> productMap;
     private static MockDB instance;
     private List<OnDataChangedListener> dataChangedListeners = new ArrayList<>();
