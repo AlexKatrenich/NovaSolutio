@@ -22,7 +22,6 @@ import java.util.List;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.adapters.ProductsListRecyclerAdapter;
-import ua.com.novasolutio.cart.adapters.SwipeController;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
@@ -76,12 +75,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         // Тут потрібно задати адаптер відображення даних в списку
         mAdapter = new ProductsListRecyclerAdapter();
         rvProductList.setAdapter(mAdapter);
-
-        // Додавання SwipeController до RecyclerView
-//        SwipeController swipeController = new SwipeController();
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
-//        itemTouchHelper.attachToRecyclerView(rvProductList);
-
         Log.i(TAG, "init done");
 
         mSearchView = v.findViewById(R.id.sv_search_product_list_fragment);
