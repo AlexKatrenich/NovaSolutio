@@ -32,7 +32,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
                 view.showEmpty();
                 Log.i(TAG, "updateView: view().showEmpty();");
             } else {
-                Log.i(TAG, "updateView: view == null " + String.valueOf(view == null));
                 view.showProducts(model);
                 Long totalCost = MockDB.getInstance().getTotalPriceSelectedProducts();
                 ((ProductListFragment)view).setTotalProductsPrice(formatPriceOnText(totalCost));

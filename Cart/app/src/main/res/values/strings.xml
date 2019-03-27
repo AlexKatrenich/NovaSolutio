@@ -30,5 +30,5 @@
 
     <!--Content Description for buttons-->
     <string name="item_cancel_product_list_recycler_view">CANCEL</string>
-
+    <string name="mic_voice_search">Search</string>
 </resources>
