@@ -32,9 +32,10 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
                 view.showEmpty();
                 Log.i(TAG, "updateView: view().showEmpty();");
             } else {
-
                 Log.i(TAG, "updateView: view == null " + String.valueOf(view == null));
                 view.showProducts(model);
+                Long totalCost = MockDB.getInstance().getTotalPriceSelectedProducts();
+                ((ProductListFragment)view).setTotalProductsPrice(formatPriceOnText(totalCost));
                 Log.i(TAG, "updateView: view().showProducts(model)");
             }
         }
@@ -92,12 +93,21 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void onDbProductRemove(Product product) {
         model.remove(product);
-        ((ProductListFragment)view()).showProductRemove(product);
+        ProductListFragment view = (ProductListFragment)view();
+        if (view != null) {
+            view.showProductRemove(product);
+            Long totalCost = MockDB.getInstance().getTotalPriceSelectedProducts();
+            view.setTotalProductsPrice(formatPriceOnText(totalCost));
+        }
+
     }
 
     @Override
     public void onDbProductChange() {
-
+        if(setupDone()){
+            Long totalPrice = MockDB.getInstance().getTotalPriceSelectedProducts();
+            ((ProductListFragment)view()).setTotalProductsPrice(formatPriceOnText(totalPrice));
+        }
     }
 
 

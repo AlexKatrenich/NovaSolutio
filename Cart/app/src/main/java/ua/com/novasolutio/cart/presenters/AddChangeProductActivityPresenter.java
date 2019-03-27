@@ -23,7 +23,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     protected void updateView() {
         if(model != null){
             view().setProductCaption(model.getCaption());
-            view().setProductPrice(formatPriceOnText(model.getPrice()));
+            view().setProductPrice(formatPriceOnText((long) model.getPrice()));
         }
     }
 
@@ -38,7 +38,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     }
 
     @Override
-    public String formatPriceOnText(int price) {
+    public String formatPriceOnText(long price) {
         StringBuffer priceString = new StringBuffer(String.valueOf(price));
         switch (priceString.length()){
             case 0 :

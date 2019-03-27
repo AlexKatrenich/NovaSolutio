@@ -12,7 +12,9 @@
 
     <!--Вказую валюту для відображення на екрані разом з грошовими одиницями-->
     <string name="name_currency">UAH</string>
+    <string name="default_price_for_items">0.00 UAH</string>
 
+    <!--Контекстне меню-->
     <string name="item_product_change_context_menu">Change</string>
     <string name="item_product_delete_context_menu">Delete</string>
 

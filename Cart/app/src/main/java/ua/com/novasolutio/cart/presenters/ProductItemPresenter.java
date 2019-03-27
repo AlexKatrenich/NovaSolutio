@@ -31,12 +31,13 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
     protected void updateView() {
         view().setProductCaption(model.getCaption());
         int price = model.getPrice(); // отримання ціни товару в Int значенні
-        String formattedPrice = formatPriceOnText(price); // форматування ціни товару в текстове значення, з додаванням роздільника
+        String formattedPrice = formatPriceOnText((long)price); // форматування ціни товару в текстове значення, з додаванням роздільника
         view().setProductPrice(formattedPrice);
         view().setCounterProduct(model.getCount());
         // зміна видимості кнопки, що відповідає за скидання рахувальника кількості товарів
         if (model.getCount() > MIN_VALUE){
             view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
+            MockDB.getInstance().observeOnDbProductChange();
         } else {
             view().changeCancelButtonSize(0);
         }
@@ -94,6 +95,7 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         if(setupDone()) {
             model.setCount(MIN_VALUE);
             MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+            MockDB.getInstance().observeOnDbProductChange();
             updateView();
         }
     }

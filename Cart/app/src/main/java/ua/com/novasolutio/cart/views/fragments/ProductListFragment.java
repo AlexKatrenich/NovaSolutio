@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,8 +64,10 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         /*test data*/
 
-        ((TextView) v.findViewById(R.id.tv_total_price_product_list_fragment)).setText("200,00 UAH");
+        // ініціалізація текстового поля для відображення загальної ціни обраних продуктів
+        tvTotalBalance = v.findViewById(R.id.tv_total_price_product_list_fragment);
 
+        // ініціалізація RecyclerView
         rvProductList = v.findViewById(R.id.rv_product_list_fragment);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(v.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -144,5 +145,9 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
     public void showProductRemove(Product product) {
         mAdapter.removeItem(product);
+    }
+
+    public void setTotalProductsPrice(String countTotalPrice) {
+        tvTotalBalance.setText(countTotalPrice);
     }
 }
