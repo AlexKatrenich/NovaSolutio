@@ -26,6 +26,7 @@
     <string name="product_name_hint_add_activity">Product name</string>
     <string name="product_price_hint_add_activity">Price</string>
 
-    <!---->
+    <!--Content Description for buttons-->
+    <string name="item_cancel_product_list_recycler_view">CANCEL</string>
 
 </resources>

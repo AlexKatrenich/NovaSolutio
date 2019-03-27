@@ -78,9 +78,9 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         rvProductList.setAdapter(mAdapter);
 
         // Додавання SwipeController до RecyclerView
-        SwipeController swipeController = new SwipeController();
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
-        itemTouchHelper.attachToRecyclerView(rvProductList);
+//        SwipeController swipeController = new SwipeController();
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
+//        itemTouchHelper.attachToRecyclerView(rvProductList);
 
         Log.i(TAG, "init done");
 

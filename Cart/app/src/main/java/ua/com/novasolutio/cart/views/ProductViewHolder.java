@@ -1,9 +1,12 @@
 package ua.com.novasolutio.cart.views;
 
+import android.app.ActionBar;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
     private final TextView productPrice;
     private final ImageView contextMenu;
     private final TextView productCount;
+    private final ImageButton btnCancle;
 
 //    @Nullable private OnProductRightSwipeListener rSwipeListener;
 //    @Nullable private OnProductLeftSwipeListener lSwipeListener;
@@ -32,8 +36,9 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
         productPrice = (TextView) itemView.findViewById(R.id.tv_product_price_product_list);
         contextMenu = (ImageView) itemView.findViewById(R.id.iv_context_menu_product_list);
         productCount = (TextView) itemView.findViewById(R.id.tv_count_selected_products_on_list);
+        btnCancle = (ImageButton) itemView.findViewById(R.id.ib_item_product_list_recycler);
 
-        // TODO потрібно задати слухачі для свайпів по віджету та натиснення на кнопку контекстного меню
+        // встановлення прослуховувача кліку по елементу контекстного меню
         contextMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,11 +66,19 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
             }
         };
 
+        // встановлення прослуховувача кліку по загальному елементу RecyclerView
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "onClick: " + presenter.getModel());
                 presenter.onItemClick();
+            }
+        });
+
+        // встановлення прослуховувача кліку по кнопці скидання рахувальника(Product.Count)
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onCanceledButtonClicked();
             }
         });
     }
@@ -110,4 +123,11 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
         menu.show();
     }
 
+    public void changeCancelButtonSize(int size) {
+        if (btnCancle != null){
+            ViewGroup.LayoutParams params =  btnCancle.getLayoutParams();
+            params.width = size;
+            btnCancle.setLayoutParams(params);
+        }
+    }
 }

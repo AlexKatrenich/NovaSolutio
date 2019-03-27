@@ -4,10 +4,10 @@ package ua.com.novasolutio.cart.presenters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
@@ -19,7 +19,7 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
     public static final String TAG = "ProductItemPresenter";
 
     private static final int MIN_VALUE = 0;
-    private static final int MAX_VALUE = 99;
+    private static final int MAX_VALUE = 99; // Максимальне значення для Product.count
     protected int position;
 
     public void setPosition(int pos){
@@ -34,21 +34,14 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         String formattedPrice = formatPriceOnText(price); // форматування ціни товару в текстове значення, з додаванням роздільника
         view().setProductPrice(formattedPrice);
         view().setCounterProduct(model.getCount());
-    }
-
-    public void onLeftSwipeMinusProduct(){
-        if(setupDone() && model.getCount() > MIN_VALUE){
-            model.setCount(model.getCount() - 1);
-            updateView();
+        // зміна видимості кнопки, що відповідає за скидання рахувальника кількості товарів
+        if (model.getCount() > MIN_VALUE){
+            view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
+        } else {
+            view().changeCancelButtonSize(0);
         }
     }
 
-    public void onRightSwipePlusProduct(){
-        if(setupDone() && model.getCount() < MAX_VALUE){
-            model.setCount(model.getCount() + 1);
-            updateView();
-        }
-    }
 
     public void onContextMenuClicked(View v) {
         Log.i(TAG, "onContextMenuClicked: ");
@@ -87,13 +80,21 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         }
     }
 
+    // метод опрацьовує логіку виконання після натиснення користувачем на загальний елемент RecyclerView
     public void onItemClick() {
-        model.setCount(model.getCount() + 1);
-        MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
-        updateView();
+        if(setupDone() && model.getCount() < MAX_VALUE) {
+            model.setCount(model.getCount() + 1);
+            MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+            updateView();
+        }
     }
 
-    public Product getModel(){
-        return model;
+    // метод для обробки кліку по елементу ImageButton(кнопка скидання рахувальника натиснень по елементу Product в RecyclerView)
+    public void onCanceledButtonClicked() {
+        if(setupDone()) {
+            model.setCount(MIN_VALUE);
+            MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+            updateView();
+        }
     }
 }
