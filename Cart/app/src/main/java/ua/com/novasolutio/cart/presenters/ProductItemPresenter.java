@@ -40,6 +40,7 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
             MockDB.getInstance().observeOnDbProductChange();
         } else {
             view().changeCancelButtonSize(0);
+            MockDB.getInstance().observeOnDbProductChange();
         }
     }
 
@@ -93,10 +94,11 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
     // метод для обробки кліку по елементу ImageButton(кнопка скидання рахувальника натиснень по елементу Product в RecyclerView)
     public void onCanceledButtonClicked() {
         if(setupDone()) {
-            model.setCount(MIN_VALUE);
-            MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
-            MockDB.getInstance().observeOnDbProductChange();
-            updateView();
+            if (model.getCount() > MIN_VALUE){
+                model.setCount(model.getCount() - 1);
+                MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+                updateView();
+            }
         }
     }
 }
