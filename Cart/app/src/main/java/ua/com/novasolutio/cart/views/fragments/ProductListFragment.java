@@ -87,12 +87,7 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         mSearchView = v.findViewById(R.id.sv_search_product_list_fragment);
         mSearchView.setOnQueryTextListener(mPresenter);
-        mSearchView.onActionViewExpanded();
-        mSearchView.setIconified(true);
-        if(!mSearchView.isFocused()) {
-            mSearchView.clearFocus();
-            Log.i(TAG, "init: mSearchView.clearFocus()");
-        }
+
         btnVoiceSearch = v.findViewById(R.id.btn_voice_search);
         btnVoiceSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,9 +98,15 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     }
 
     @Override
+    public void onStart() {
+        mPresenter.bindView(this);
+        super.onStart();
+    }
+
+    @Override
     public void onResume() {
         Log.i(TAG, "onResume: ");
-        mPresenter.bindView(this);
+//        mPresenter.bindView(this);
         super.onResume();
     }
 
@@ -113,6 +114,12 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     public void onPause() {
         super.onPause();
         Log.i(TAG, "onPause: ");
+//        mPresenter.unbindView();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
         mPresenter.unbindView();
     }
 
@@ -189,7 +196,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     public void setVoiceSpeechResult(String result){
         Log.i(TAG, "setVoiceSpeechResult: " + result);
         mSearchView.setIconified(false);
-        mSearchView.setQuery(result, false);
-
+        mSearchView.setQuery(result, true);
     }
 }

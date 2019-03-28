@@ -1,6 +1,5 @@
 package ua.com.novasolutio.cart.presenters;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -121,6 +120,20 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public boolean onQueryTextSubmit(String s) {
+        Log.i(TAG, "onQueryTextSubmit: text - " + s);
+        String userInput = s.toLowerCase();
+        List<Product> newProductList = new ArrayList<>();
+
+        for (Product product : model){
+            if(product.getCaption().toLowerCase().contains(userInput)){
+                newProductList.add(product);
+            }
+        }
+
+        if (view() != null){
+            view().showProducts(newProductList);
+            Log.i(TAG, "onQueryTextSubmit: SHOW NEW LIST");
+        }
         return false;
     }
 
@@ -146,7 +159,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     public void onVoiceSearchClick() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
 
         try{
             ((ProductListFragment)view()).startActivityForResult(intent, ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH);
@@ -160,11 +173,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
             }
         }
 
-        if (intent.resolveActivity(((ProductListFragment)view()).getActivity().getPackageManager()) != null) {
-            ((ProductListFragment)view()).startActivityForResult(intent, ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH);
-        } else {
-
-        }
     }
 
 }

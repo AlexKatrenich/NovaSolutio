@@ -92,9 +92,15 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     }
 
     @Override
-    protected void onResume() {
+    protected void onStart() {
         mPresenter.bindView(this);
-        super.onResume();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.unbindView();
     }
 
     @Override
@@ -127,12 +133,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         return super.onOptionsItemSelected(item);
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mPresenter.unbindView();
-    }
 
     @Override
     protected void onDestroy() {
