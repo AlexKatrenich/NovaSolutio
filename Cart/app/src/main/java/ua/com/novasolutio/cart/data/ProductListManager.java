@@ -40,6 +40,15 @@ public class ProductListManager {
         return false;
     }
 
+    public boolean setProducts(Collection<Product> products){
+        if(products != null){
+            mProducts.clear();
+            mProducts.addAll(products);
+            return true;
+        }
+        return false;
+    }
+
     public List<Product> getProductsList(){
         return mProducts;
     }
@@ -61,7 +70,7 @@ public class ProductListManager {
         return null;
     }
 
-    public Long getTotalPriceSelectedproducts(){
+    public Long getTotalPriceSelectedProducts(){
         long totalCost = 0L;
 
         //в циклі перебераються всі елементи та формується загальна ціна по вибраним елементам
@@ -71,5 +80,9 @@ public class ProductListManager {
         }
 
         return totalCost;
+    }
+
+    public boolean removeProduct(Product product){
+        return mProducts.remove(product);
     }
 }

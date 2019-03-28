@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ua.com.novasolutio.cart.data.Product;
+import ua.com.novasolutio.cart.data.ProductListManager;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductViewHolder;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
@@ -34,14 +35,8 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         String formattedPrice = formatPriceOnText((long)price); // форматування ціни товару в текстове значення, з додаванням роздільника
         view().setProductPrice(formattedPrice);
         view().setCounterProduct(model.getCount());
-        // зміна видимості кнопки, що відповідає за скидання рахувальника кількості товарів
-        if (model.getCount() > MIN_VALUE){
-            view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
-            MockDB.getInstance().observeOnDbProductChange();
-        } else {
-            view().changeCancelButtonSize(0);
-            MockDB.getInstance().observeOnDbProductChange();
-        }
+
+        MockDB.getInstance().observeOnDbProductChange();
     }
 
 
@@ -52,7 +47,9 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
 
 
     public void onDeleteContextMenuItemClicked() {
-        new DeleteProductTask().execute(model);
+        ProductListManager.getInstance().removeProduct(model);  // delete product from ProductListManager
+        MockDB.getInstance().observeOnDbProductRemove(model);
+        new DeleteProductTask().execute(model); // delete product from DB
     }
 
     public void onChangeContextMenuItemClicked(Context context) {
@@ -73,20 +70,17 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
             Log.i(TAG, "doInBackground: Delete Product From DB " + product);
             return product;
         }
-
-        @Override
-        protected void onPostExecute(Product product) {
-            Log.i(TAG, "onPostExecute: REMOVE" + product);
-            MockDB.getInstance().observeOnDbProductRemove(product);
-            super.onPostExecute(product);
-        }
     }
 
     // метод опрацьовує логіку виконання після натиснення користувачем на загальний елемент RecyclerView
     public void onItemClick() {
         if(setupDone() && model.getCount() < MAX_VALUE) {
             model.setCount(model.getCount() + 1);
-            MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+            ProductListManager.getInstance().setProductById(model, model.getID());
+            Log.i(TAG, "onItemClick PRODUCT COUNT: " + model.getCount());
+
+            if(model.getCount() > MIN_VALUE) view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
+
             updateView();
         }
     }
@@ -96,7 +90,10 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         if(setupDone()) {
             if (model.getCount() > MIN_VALUE){
                 model.setCount(model.getCount() - 1);
-                MockDB.getInstance().setProduct(model); //Запис до бази даних, TODO зробити асинхронним
+                ProductListManager.getInstance().setProductById(model, model.getID());
+                Log.i(TAG, "onCanceledButtonClicked PRODUCT COUNT: " + model.getCount());
+
+                if (model.getCount() == MIN_VALUE) view().changeCancelButtonSize(0);
                 updateView();
             }
         }

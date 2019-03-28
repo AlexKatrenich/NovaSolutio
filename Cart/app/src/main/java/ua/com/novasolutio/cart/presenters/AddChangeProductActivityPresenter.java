@@ -8,6 +8,7 @@ import android.util.Log;
 
 
 import ua.com.novasolutio.cart.data.Product;
+import ua.com.novasolutio.cart.data.ProductListManager;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductView;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
@@ -64,7 +65,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
             setModel(product);
             isLoadingData = false;
         } else {
-            new LoadDataTask().execute(productId);
+            ProductListManager.getInstance().getProductById(productId);
         }
     }
 
@@ -79,49 +80,30 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     public void OnSaveButtonClicked() {
         new WriteDataTask().execute(model);
 
+        // отримання ІД нового продукту з бази даних(якщо, об'єкт новий)
         MockDB mDB = MockDB.getInstance();
-
         if (model.getID() == -1){
             model.setID(mDB.getIdCounter());
         }
-        mDB.setProduct(model);
-        ((AddChangeProductActivity)view()).onBackPressed();
+
+        if(!ProductListManager.getInstance().setProductById(model, model.getID())) ProductListManager.getInstance().addProduct(model);
+
+        if(setupDone()) ((AddChangeProductActivity)view()).onBackPressed();
     }
 
-    private class LoadDataTask extends AsyncTask<Integer, Void, Product> {
-        @Override
-        protected Product doInBackground(Integer... integers) {
-            SystemClock.sleep(1000); //емуляція завантаження з БД
-            MockDB mockDB = MockDB.getInstance();
-            Product product = mockDB.getProductById(integers[0]);
-            return product;
-        }
+
+    // внутрішній клас для емуляції запису додавання нового продукту до бази даних
+    private class WriteDataTask extends AsyncTask<Product, Void, Void> {
 
         @Override
-        protected void onPostExecute(Product product) {
-            setModel(product);
-            isLoadingData = false; // зняття флажка про завантаження даних
-        }
-    }
-
-    private class WriteDataTask extends AsyncTask<Product, Void, Product> {
-
-        @Override
-        protected Product doInBackground(Product... products) {
+        protected Void doInBackground(Product... products) {
             // емуляція запису в БД
             Product product = products[0];
             Log.i(TAG, "doInBackground: Product: " + product);
-
-            return product;
+            MockDB.getInstance().setProduct(product);
+            return null;
         }
 
-        @Override
-        protected void onPostExecute(Product product) {
-
-            Log.i(TAG, "onPostExecute: " + product);
-            MockDB.getInstance().observeOnDbProductAdd(product);
-            super.onPostExecute(product);
-        }
     }
 
 }

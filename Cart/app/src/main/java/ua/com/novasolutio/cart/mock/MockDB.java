@@ -134,16 +134,4 @@ public class MockDB {
         return idCounter;
     }
 
-    public Long getTotalPriceSelectedProducts(){
-        long totalCost = 0L;
-        //в циклі перебераються всі елементи та формується загальна ціна по вибраним елементам
-        ArrayList<Product> model = new ArrayList<>(productMap.values());
-
-        for (Product p : model){
-            int selectedCount = p.getCount();
-            if(selectedCount > 0) totalCost = totalCost + (long) (p.getPrice() * selectedCount);
-        }
-
-        return totalCost;
-    }
 }

@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Product;
+import ua.com.novasolutio.cart.data.ProductListManager;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
@@ -32,15 +33,15 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     protected void updateView() {
-        ProductsListView view = view();
+        ProductListFragment view = (ProductListFragment) view();
         if (view != null) {
             if (model.size() == 0) {
                 view.showEmpty();
                 Log.i(TAG, "updateView: view().showEmpty();");
             } else {
                 view.showProducts(model);
-                Long totalCost = MockDB.getInstance().getTotalPriceSelectedProducts();
-                ((ProductListFragment)view).setTotalProductsPrice(formatPriceOnText(totalCost));
+                Long totalCost = ProductListManager.getInstance().getTotalPriceSelectedProducts();
+                view.setTotalProductsPrice(formatPriceOnText(totalCost));
                 Log.i(TAG, "updateView: view().showProducts(model)");
             }
         }
@@ -49,10 +50,17 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void bindView(@NonNull ProductsListView view) {
         super.bindView(view);
+        MockDB.getInstance().addDataChangedListener(this);
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
         if(model == null && !isLoadingData){
             loadData();
         }
+    }
+
+    @Override
+    public void unbindView() {
+        MockDB.getInstance().removeDataChangeListener(this);
+        super.unbindView();
     }
 
     private void loadData() {
@@ -60,10 +68,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         new LoadDataTask().execute();
     }
 
-    /** метод для зберігання та відображення на екрані інформації про додавання додаткової кількості продуктів одного виду
-    * наприклад користувач декілька разів натискає на додавання кави, на екрані відображається 1,2 .... N кількість чашок кави в списку продуктів*/
-//    public void onAddProductClicked()
-
+    // внутрішній клас для асинхронного завантаження даних з БД
     private class LoadDataTask extends AsyncTask<Void, Void, ArrayList>{
         @Override
         protected ArrayList doInBackground(Void... voids) {
@@ -77,6 +82,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         protected void onPostExecute(ArrayList list) {
              // завантаження мапи об'єктів із заглушки
             setModel(list); // передача списку об'єктів Product в модель(передача посилання на список)
+            ProductListManager.getInstance().setProducts(list);
             Log.i(TAG, "onPostExecute: DATA LOAD, VIEW UPDATE" + list);
             updateView();
             isLoadingData = false; // зняття флажка про завантаження даних
@@ -103,7 +109,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         ProductListFragment view = (ProductListFragment)view();
         if (view != null) {
             view.showProductRemove(product);
-            Long totalCost = MockDB.getInstance().getTotalPriceSelectedProducts();
+            Long totalCost = ProductListManager.getInstance().getTotalPriceSelectedProducts();
             view.setTotalProductsPrice(formatPriceOnText(totalCost));
         }
 
@@ -112,7 +118,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void onDbProductChange() {
         if(setupDone()){
-            Long totalPrice = MockDB.getInstance().getTotalPriceSelectedProducts();
+            Long totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
             ((ProductListFragment)view()).setTotalProductsPrice(formatPriceOnText(totalPrice));
         }
     }

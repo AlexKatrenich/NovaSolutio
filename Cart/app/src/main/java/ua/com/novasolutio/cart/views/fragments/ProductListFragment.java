@@ -26,7 +26,6 @@ import java.util.List;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.adapters.ProductsListRecyclerAdapter;
 import ua.com.novasolutio.cart.data.Product;
-import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListFragmentPresenter;
 import ua.com.novasolutio.cart.views.ProductsListView;
@@ -66,8 +65,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         } else {
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
-
-        MockDB.getInstance().addDataChangedListener(mPresenter);
 
         /*test data*/
 
@@ -134,8 +131,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
             rvProductList.setLayoutManager(null);
             rvProductList.setAdapter(null);
         }
-
-        MockDB.getInstance().removeDataChangeListener(mPresenter);
         super.onDestroy();
     }
 
