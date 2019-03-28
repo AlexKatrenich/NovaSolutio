@@ -78,7 +78,8 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus) {
                     double formattedPrice = Double.valueOf(mProductPrice.getText().toString());
-                    int price = (int) (formattedPrice*100);
+                    Log.i(TAG, "onFocusChange: formattedPrice - " + formattedPrice);
+                    int price = (int)Math.round(formattedPrice * new Double(100));
                     mPresenter.changeProductPrice(price);
                 }
             }
