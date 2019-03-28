@@ -1,6 +1,9 @@
 package ua.com.novasolutio.cart.views.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +34,15 @@ import ua.com.novasolutio.cart.views.ProductsListView;
 
 /* Фрагмент для відображення списку товарів */
 public class ProductListFragment extends Fragment implements ProductsListView {
+    public static final int REQUEST_CODE_GET_VOICE_SPEECH = 900;
+
     private static final String TAG = "ProductListFragment";
     private ProductListFragmentPresenter mPresenter;
     private TextView tvTotalBalance;
     private RecyclerView rvProductList;
     private ProductsListRecyclerAdapter mAdapter;
     private SearchView mSearchView;
+    private ImageView btnVoiceSearch;
 
 
     @Nullable
@@ -80,6 +87,19 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         mSearchView = v.findViewById(R.id.sv_search_product_list_fragment);
         mSearchView.setOnQueryTextListener(mPresenter);
+        mSearchView.onActionViewExpanded();
+        mSearchView.setIconified(true);
+        if(!mSearchView.isFocused()) {
+            mSearchView.clearFocus();
+            Log.i(TAG, "init: mSearchView.clearFocus()");
+        }
+        btnVoiceSearch = v.findViewById(R.id.btn_voice_search);
+        btnVoiceSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.onVoiceSearchClick();
+            }
+        });
     }
 
     @Override
@@ -149,5 +169,27 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
     public void setTotalProductsPrice(String countTotalPrice) {
         tvTotalBalance.setText(countTotalPrice);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH :
+                if(resultCode == Activity.RESULT_OK && data != null){
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Log.i(TAG, "onActivityResult: SPEECH VOICE RESULT - " + result);
+                    String textResult = result.get(0);
+                    setVoiceSpeechResult(textResult);
+                }
+                break;
+        }
+    }
+
+    public void setVoiceSpeechResult(String result){
+        Log.i(TAG, "setVoiceSpeechResult: " + result);
+        mSearchView.setIconified(false);
+        mSearchView.setQuery(result, false);
+
     }
 }

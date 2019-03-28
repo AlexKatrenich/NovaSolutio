@@ -1,7 +1,12 @@
 package ua.com.novasolutio.cart.presenters;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.SystemClock;
+import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.SearchView;
 import android.util.ArrayMap;
@@ -9,7 +14,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
@@ -86,7 +93,9 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public void onDbProductAdd(Product product) {
-        ((ProductListFragment) view()).showProductAdd(product);
+        if (setupDone()){
+            ((ProductListFragment) view()).showProductAdd(product);
+        }
     }
 
     @Override
@@ -117,6 +126,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        if (!setupDone()) return false;
+
         String userInput = newText.toLowerCase();
         List<Product> newProductList = new ArrayList<>();
 
@@ -125,9 +136,35 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
                 newProductList.add(product);
             }
         }
-
-        view().showProducts(newProductList);
+        if (view() != null){
+            view().showProducts(newProductList);
+        }
         return false;
+    }
+
+    // обробка логіки кліку по елементу розпізнавання голос
+    public void onVoiceSearchClick() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+
+        try{
+            ((ProductListFragment)view()).startActivityForResult(intent, ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH);
+        } catch (ActivityNotFoundException e){
+            try {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW,   Uri.parse("https://market.android.com/details?id=" + ((ProductListFragment)view()).getActivity().getPackageManager()));
+                ((ProductListFragment)view()).startActivity(browserIntent);
+            } catch (ActivityNotFoundException er){
+                String message = ((ProductListFragment)view()).getResources().getString(R.string.speech_voice_search_unable_support);
+                view().showMessage(message);
+            }
+        }
+
+        if (intent.resolveActivity(((ProductListFragment)view()).getActivity().getPackageManager()) != null) {
+            ((ProductListFragment)view()).startActivityForResult(intent, ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH);
+        } else {
+
+        }
     }
 
 }

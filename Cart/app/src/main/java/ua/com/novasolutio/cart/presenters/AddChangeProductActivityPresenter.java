@@ -78,6 +78,13 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
 
     public void OnSaveButtonClicked() {
         new WriteDataTask().execute(model);
+
+        MockDB mDB = MockDB.getInstance();
+
+        if (model.getID() == -1){
+            model.setID(mDB.getIdCounter());
+        }
+        mDB.setProduct(model);
         ((AddChangeProductActivity)view()).onBackPressed();
     }
 
@@ -101,15 +108,8 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
 
         @Override
         protected Product doInBackground(Product... products) {
-            SystemClock.sleep(1000); // емуляція запису в БД
+            // емуляція запису в БД
             Product product = products[0];
-            MockDB mDB = MockDB.getInstance();
-
-            if (product.getID() == -1){
-                product.setID(mDB.getIdCounter());
-            }
-
-            mDB.setProduct(product);
             Log.i(TAG, "doInBackground: Product: " + product);
 
             return product;

@@ -24,6 +24,7 @@
             app:cardMaxElevation="@dimen/card_view_max_elevation_dimen">
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl_root_search_product_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -33,25 +34,30 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/search_view_height_dimen"
                     android:layout_margin="@dimen/search_view_margin_dimen"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:padding="0dp"
+                    android:visibility="visible"
                     app:actionViewClass="android.support.v7.widget.SearchView"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_voice_search"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:queryHint="@string/search_view_default_hint" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/btn_voice_search"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_view_height_dimen"
-                    android:layout_margin="@dimen/search_view_margin_dimen"
                     android:clickable="true"
                     android:contentDescription="@string/mic_voice_search"
+                    android:focusable="true"
+                    android:padding="@dimen/search_view_margin_dimen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sv_search_product_list_fragment"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_mic_search_view"
-                    android:focusable="true" />
+                    app:srcCompat="@drawable/ic_mic_search_view" />
 
             </android.support.constraint.ConstraintLayout>
 

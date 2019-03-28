@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="ua.com.novasolutio.cart">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,5 +22,4 @@
         <activity android:name=".views.activities.AddChangeProductActivity"/>
 
     </application>
-
 </manifest>
