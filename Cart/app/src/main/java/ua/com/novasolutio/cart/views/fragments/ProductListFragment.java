@@ -87,6 +87,9 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
         mSearchView = v.findViewById(R.id.sv_search_product_list_fragment);
         mSearchView.setOnQueryTextListener(mPresenter);
+        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setFocusable(false);
+        mSearchView.setFocusableInTouchMode(false);
 
         btnVoiceSearch = v.findViewById(R.id.btn_voice_search);
         btnVoiceSearch.setOnClickListener(new View.OnClickListener() {

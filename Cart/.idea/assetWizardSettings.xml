@@ -30,9 +30,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="9a0100" />
-                            <entry key="outputName" value="ic_minus_product_list_item" />
+                            <entry key="height" value="512" />
+                            <entry key="outputName" value="ic_minus_sign_inside_a_black_circle" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\EisAndroidDev\Desktop\ic_minus_product_list_item.svg" />
+                            <entry key="sourceFile" value="C:\Users\EisAndroidDev\Desktop\minus-sign-inside-a-black-circle.svg" />
+                            <entry key="width" value="512" />
                           </map>
                         </option>
                       </PersistentState>
