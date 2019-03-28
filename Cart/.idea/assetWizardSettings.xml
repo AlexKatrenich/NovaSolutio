@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_mic_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_remove_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,11 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_mic_search_view" />
-                            <entry key="sourceFile" value="C:\Users\EisAndroidDev" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="color" value="9a0100" />
+                            <entry key="outputName" value="ic_minus_product_list_item" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\EisAndroidDev\Desktop\ic_minus_product_list_item.svg" />
                           </map>
                         </option>
                       </PersistentState>

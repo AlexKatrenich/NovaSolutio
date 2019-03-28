@@ -3,12 +3,9 @@ package ua.com.novasolutio.cart.presenters;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.mock.MockDB;

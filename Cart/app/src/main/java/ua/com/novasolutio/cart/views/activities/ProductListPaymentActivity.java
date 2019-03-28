@@ -1,7 +1,6 @@
 package ua.com.novasolutio.cart.views.activities;
 
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,7 +12,6 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import ua.com.novasolutio.cart.R;
-import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
@@ -160,18 +158,5 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         }
 
         return super.onPrepareOptionsMenu(menu);
-    }
-
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks whether a hardware keyboard is available
-        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-            Log.i(TAG, "onConfigurationChanged: KEYBOARD VISIBLE");
-        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            Log.i(TAG, "onConfigurationChanged: KEYBOARD INVISIBLE");
-        }
     }
 }
