@@ -36,9 +36,9 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
         mPresenter.bindView(this);
+        super.onStart();
     }
 
     /* Ініціалізація елементів Активності*/
