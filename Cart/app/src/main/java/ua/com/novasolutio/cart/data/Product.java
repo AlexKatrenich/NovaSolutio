@@ -1,14 +1,21 @@
 package ua.com.novasolutio.cart.data;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Objects;
 
 
 /* Клас, що описує дані про сутність продукт */
-
+@Entity
 public class Product {
-    private int mID = -1; // ІД об'єкту в БД
+
+    @PrimaryKey private int mID; // ІД об'єкту в БД
+
     private String mCaption; // Назва продукту
+
     private int mPrice; // Ціна продукту, зберігається в копійках, наприклад 2000 = 20,00 грн.
+
     private int mRate = 1; // Популярність вибору продукту, чим частіше його додають в корзину - тим вище значення змінної.
 
     private int mCount; // кількість одиниць продукту вибраного на View, НЕ зберігати в БД!
