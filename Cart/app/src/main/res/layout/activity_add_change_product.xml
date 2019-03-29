@@ -59,7 +59,7 @@
         android:layout_margin="@dimen/layout_forms_margin"
         app:errorEnabled="true">
 
-        <android.support.v7.widget.AppCompatEditText
+        <android.support.v7.widget.AppCompatAutoCompleteTextView
             android:id="@+id/tiet_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

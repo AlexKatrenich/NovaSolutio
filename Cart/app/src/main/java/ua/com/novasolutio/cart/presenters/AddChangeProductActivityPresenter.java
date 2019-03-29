@@ -20,7 +20,9 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     protected void updateView() {
         if(model != null){
             view().setProductCaption(model.getCaption());
-            view().setProductPrice(formatPriceOnText((long) model.getPrice()));
+            if(model.getPrice() != 0) {
+                view().setProductPrice(formatPriceOnText((long) model.getPrice()));
+            }
         }
     }
 
@@ -77,8 +79,16 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
         return false;
     }
 
-    public void changeProductPrice(int price){
-        model.setPrice(price);
+    public boolean changeProductPrice(String s){
+        if(s!= null && !s.isEmpty()){
+            double formattedPrice = Double.valueOf(s);
+            int price = (int)Math.round(formattedPrice * new Double(100));
+            model.setPrice(price);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public void OnSaveButtonClicked() {

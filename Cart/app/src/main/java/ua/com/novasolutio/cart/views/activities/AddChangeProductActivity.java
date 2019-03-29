@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,8 +13,9 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.AddChangeProductActivityPresenter;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
@@ -22,10 +24,14 @@ import ua.com.novasolutio.cart.views.ProductView;
 /** Екран для редагування/додавання нових об'єктів "Product" */
 public class AddChangeProductActivity extends AppCompatActivity implements ProductView {
     private static final String TAG = "AddChangeProdActivity";
+
+    @BindView(R.id.til_product_caption_add_activity) TextInputLayout tilProductCaption;
+    @BindView(R.id.til_product_price_add_activity) TextInputLayout tilProductPrice;
+
     private Toolbar mToolbar;
     private AddChangeProductActivityPresenter mPresenter;
-    private AppCompatEditText mProductCaption, mProductPrice;
-    private TextInputLayout tilProductCaption;
+    private AppCompatEditText mProductCaption;
+    private AppCompatAutoCompleteTextView mProductPrice;
     public static final String INTENT_CODE_FOR_GETTING_MODEL = "INTENT_CODE_FOR_GETTING_MODEL";
 
 
@@ -34,6 +40,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_change_product);
 
+        ButterKnife.bind(this);
         init(savedInstanceState);
     }
 
@@ -62,7 +69,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             }
         });
 
-        tilProductCaption = findViewById(R.id.til_product_caption_add_activity);
         mProductCaption = findViewById(R.id.tiet_product_caption);
         // обробка тексту при зміні фокусу з View та передача результату в презентер
         mProductCaption.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -76,20 +82,19 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
                 }
             }
         });
+
         mProductPrice = findViewById(R.id.tiet_product_price);
         // обробка тексту при зміні фокусу з View та передача результату в презентер
         mProductPrice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus) {
-                    double formattedPrice = Double.valueOf(mProductPrice.getText().toString());
-                    Log.i(TAG, "onFocusChange: formattedPrice - " + formattedPrice);
-                    int price = (int)Math.round(formattedPrice * new Double(100));
-                    mPresenter.changeProductPrice(price);
+                    if(!mPresenter.changeProductPrice(mProductPrice.getText().toString())){
+                        tilProductPrice.setError(getResources().getText(R.string.incorrect_text_input));
+                    }
                 }
             }
         });
-
         // зчитування Intent та передача даних в презентер для відповідного завантаження даних
         Intent intent = getIntent();
         int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
@@ -162,9 +167,5 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     @Override
     public void setProductPrice(String price) {
         mProductPrice.setText(price);
-    }
-
-    public void showError() {
-
     }
 }
