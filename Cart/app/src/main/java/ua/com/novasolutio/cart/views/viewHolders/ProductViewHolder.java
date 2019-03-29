@@ -1,6 +1,5 @@
-package ua.com.novasolutio.cart.views;
+package ua.com.novasolutio.cart.views.viewHolders;
 
-import android.app.ActionBar;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,37 +13,29 @@ import android.widget.TextView;
 
 import javax.annotation.Nullable;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
+import ua.com.novasolutio.cart.views.ProductView;
 
 /* Клас для управління заповнення даними View елементу списка ProductsRecyclerView */
 public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView {
     public static final String TAG = "ProductViewHolder";
-    private final TextView productCaption;
-    private final TextView productPrice;
-    private final ImageView contextMenu;
-    private final TextView productCount;
-    private final ImageButton btnCancle;
 
-//    @Nullable private OnProductRightSwipeListener rSwipeListener;
-//    @Nullable private OnProductLeftSwipeListener lSwipeListener;
+    @BindView(R.id.tv_product_caption_list_products) protected TextView productCaption;
+    @BindView(R.id.tv_product_price_product_list) protected TextView productPrice;
+    @BindView(R.id.iv_context_menu_product_list) protected ImageView contextMenu;
+    @BindView(R.id.tv_count_selected_products_on_list) protected TextView productCount;
+    @BindView(R.id.ib_item_product_list_recycler) protected ImageButton btnCancel;
+
     @Nullable private PopupMenu.OnMenuItemClickListener mItemClickListener;
 
     public ProductViewHolder(@NonNull final View itemView) {
         super(itemView);
-        productCaption = (TextView) itemView.findViewById(R.id.tv_product_caption_list_products);
-        productPrice = (TextView) itemView.findViewById(R.id.tv_product_price_product_list);
-        contextMenu = (ImageView) itemView.findViewById(R.id.iv_context_menu_product_list);
-        productCount = (TextView) itemView.findViewById(R.id.tv_count_selected_products_on_list);
-        btnCancle = (ImageButton) itemView.findViewById(R.id.ib_item_product_list_recycler);
+        ButterKnife.bind(this, itemView);
 
-        // встановлення прослуховувача кліку по елементу контекстного меню
-        contextMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onContextMenuClicked(v);
-            }
-        });
 
         // встановлення прослуховувача кліку по елементу меню
         mItemClickListener = new PopupMenu.OnMenuItemClickListener() {
@@ -74,13 +65,16 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
             }
         });
 
-        // встановлення прослуховувача кліку по кнопці скидання рахувальника(Product.Count)
-        btnCancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onCanceledButtonClicked();
-            }
-        });
+    }
+
+    @OnClick(R.id.iv_context_menu_product_list)
+    public void contextMenuClick(View view){
+        presenter.onContextMenuClicked(view);
+    }
+
+    @OnClick(R.id.ib_item_product_list_recycler)
+    public void onCancelButtonClicked(View view){
+        presenter.onCanceledButtonClicked();
     }
 
     @Override
@@ -124,10 +118,10 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
     }
 
     public void changeCancelButtonSize(int size) {
-        if (btnCancle != null){
-            ViewGroup.LayoutParams params =  btnCancle.getLayoutParams();
+        if (btnCancel != null){
+            ViewGroup.LayoutParams params =  btnCancel.getLayoutParams();
             params.width = size;
-            btnCancle.setLayoutParams(params);
+            btnCancel.setLayoutParams(params);
         }
     }
 }

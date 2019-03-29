@@ -9,7 +9,6 @@ import ua.com.novasolutio.cart.views.fragments.CartFragment;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 public class ProductListPaymentActivityPresenter extends BasePresenter<Void , ProductListPaymentActivity> {
-    public static final String FLAG_SAVE_INSTANCE_PRESENTER = "SAVE_INSTANCE_ProductListPaymentActivityPresenter";
 
     private static final String TAG = "ProdListPayActivPres";
 

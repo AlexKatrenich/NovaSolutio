@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
 import ua.com.novasolutio.cart.mock.MockDB;
-import ua.com.novasolutio.cart.views.ProductViewHolder;
+import ua.com.novasolutio.cart.views.viewHolders.ProductViewHolder;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
 
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ua.com.novasolutio.cart.presenters.BasePresenter;
-import ua.com.novasolutio.cart.views.MvpViewHolder;
+import ua.com.novasolutio.cart.views.viewHolders.MvpViewHolder;
 
 public abstract class MvpRecyclerAdapter <M, P extends BasePresenter, VH extends MvpViewHolder> extends RecyclerView.Adapter<VH> {
     protected final Map<Object, P> presenters;

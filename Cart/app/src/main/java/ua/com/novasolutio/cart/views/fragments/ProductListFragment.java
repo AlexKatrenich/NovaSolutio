@@ -23,6 +23,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.adapters.ProductsListRecyclerAdapter;
 import ua.com.novasolutio.cart.data.Product;
@@ -36,12 +39,13 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     public static final int REQUEST_CODE_GET_VOICE_SPEECH = 900;
 
     private static final String TAG = "ProductListFragment";
-    private ProductListFragmentPresenter mPresenter;
-    private TextView tvTotalBalance;
-    private RecyclerView rvProductList;
-    private ProductsListRecyclerAdapter mAdapter;
-    private SearchView mSearchView;
-    private ImageView btnVoiceSearch;
+
+    protected ProductListFragmentPresenter mPresenter;
+    protected ProductsListRecyclerAdapter mAdapter;
+
+    @BindView(R.id.tv_total_price_product_list_fragment) protected TextView tvTotalBalance;
+    @BindView(R.id.rv_product_list_fragment) protected RecyclerView rvProductList;
+    @BindView(R.id.sv_search_product_list_fragment) protected SearchView mSearchView;
 
 
     @Nullable
@@ -53,7 +57,7 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ButterKnife.bind(this, view);
         init(view, savedInstanceState);
     }
 
@@ -66,13 +70,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
 
-        /*test data*/
-
-        // ініціалізація текстового поля для відображення загальної ціни обраних продуктів
-        tvTotalBalance = v.findViewById(R.id.tv_total_price_product_list_fragment);
-
-        // ініціалізація RecyclerView
-        rvProductList = v.findViewById(R.id.rv_product_list_fragment);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(v.getContext(), LinearLayoutManager.VERTICAL, false);
         rvProductList.setLayoutManager(layoutManager);
@@ -82,19 +79,17 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         rvProductList.setAdapter(mAdapter);
         Log.i(TAG, "init done");
 
-        mSearchView = v.findViewById(R.id.sv_search_product_list_fragment);
+
         mSearchView.setOnQueryTextListener(mPresenter);
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setFocusable(false);
         mSearchView.setFocusableInTouchMode(false);
 
-        btnVoiceSearch = v.findViewById(R.id.btn_voice_search);
-        btnVoiceSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.onVoiceSearchClick();
-            }
-        });
+    }
+
+    @OnClick(R.id.iv_voice_search)
+    public void voiceSearchClick(View view){
+        mPresenter.onVoiceSearchClick();
     }
 
     @Override
@@ -103,17 +98,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         super.onStart();
     }
 
-    @Override
-    public void onResume() {
-        Log.i(TAG, "onResume: ");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-    }
 
     @Override
     public void onStop() {
@@ -129,6 +113,7 @@ public class ProductListFragment extends Fragment implements ProductsListView {
             rvProductList.setLayoutManager(null);
             rvProductList.setAdapter(null);
         }
+        if (mSearchView != null) mSearchView.setOnQueryTextListener(null);
         super.onDestroy();
     }
 

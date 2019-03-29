@@ -1,4 +1,4 @@
-package ua.com.novasolutio.cart.views;
+package ua.com.novasolutio.cart.views.viewHolders;
 
 
 import android.support.annotation.NonNull;

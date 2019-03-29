@@ -40,13 +40,13 @@
                     android:visibility="visible"
                     app:actionViewClass="android.support.v7.widget.SearchView"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_voice_search"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_voice_search"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:queryHint="@string/search_view_default_hint" />
 
                 <ImageView
-                    android:id="@+id/btn_voice_search"
+                    android:id="@+id/iv_voice_search"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_view_height_dimen"
                     android:clickable="true"
