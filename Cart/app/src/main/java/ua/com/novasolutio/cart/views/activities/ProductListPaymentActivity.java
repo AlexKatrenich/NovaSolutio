@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
@@ -20,15 +23,18 @@ import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
  * також в цій активності можна додавати нові товари*/
 public class ProductListPaymentActivity extends AppCompatActivity {
     private static final String TAG = "ProdListPaymentActivity";
-    private Toolbar mToolbar;
-    private BottomNavigationView mNavigationView;
     private ProductListPaymentActivityPresenter mPresenter;
+
+    @BindView(R.id.toolbar_product_list_activity) protected Toolbar mToolbar;
+    @BindView(R.id.bnv_list_products_activity) protected BottomNavigationView mNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
 
+        ButterKnife.bind(this);
         init(savedInstanceState);
 
         // відображення першого фрагменту при відкритті екрану
@@ -50,7 +56,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
 
-        mToolbar = findViewById(R.id.toolbar_product_list_activity);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -60,8 +65,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                         R.string.product_list_activity_caption));
 
         /*Ініціація нижнього меню навігації між фрагментами*/
-        mNavigationView = findViewById(R.id.bnv_list_products_activity);
-
         mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
