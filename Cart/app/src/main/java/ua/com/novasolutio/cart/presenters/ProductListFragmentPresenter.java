@@ -50,10 +50,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void bindView(@NonNull ProductsListView view) {
         super.bindView(view);
-
         ProductListManager.getInstance().addDataChangeListener(this);
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
-        setModel(ProductListManager.getInstance().getProductsList());
         if(model == null && !isLoadingData){
             loadData();
         }
@@ -83,10 +81,9 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         @Override
         protected void onPostExecute(ArrayList list) {
              // завантаження мапи об'єктів із заглушки
-            setModel(list); // передача списку об'єктів Product в модель(передача посилання на список)
             ProductListManager.getInstance().setProducts(list);
+            setModel(ProductListManager.getInstance().getProductsList()); // передача списку об'єктів Product в модель(передача посилання на список)
             Log.i(TAG, "onPostExecute: DATA LOAD, VIEW UPDATE" + list);
-            updateView();
             isLoadingData = false; // зняття флажка про завантаження даних
         }
     }
@@ -160,8 +157,10 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public void onModelAddProduct(Product product) {
+        Log.i(TAG, "onModelAddProduct: " + product);
         if (setupDone()){
             ((ProductListFragment) view()).showProductAdd(product);
+            Log.i(TAG, "onModelAddProduct: SHOW PRODUCT ADD");
         }
     }
 

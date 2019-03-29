@@ -3,6 +3,7 @@ package ua.com.novasolutio.cart.views.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.AddChangeProductActivityPresenter;
@@ -23,6 +25,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     private Toolbar mToolbar;
     private AddChangeProductActivityPresenter mPresenter;
     private AppCompatEditText mProductCaption, mProductPrice;
+    private TextInputLayout tilProductCaption;
     public static final String INTENT_CODE_FOR_GETTING_MODEL = "INTENT_CODE_FOR_GETTING_MODEL";
 
 
@@ -59,6 +62,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             }
         });
 
+        tilProductCaption = findViewById(R.id.til_product_caption_add_activity);
         mProductCaption = findViewById(R.id.tiet_product_caption);
         // обробка тексту при зміні фокусу з View та передача результату в презентер
         mProductCaption.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -66,7 +70,9 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
                     Log.i(TAG, "onFocusChange: CAPTION - " + mProductCaption.getText());
-                    mPresenter.changeProductCaption(String.valueOf(mProductCaption.getText()));
+                    if (!mPresenter.changeProductCaption(String.valueOf(mProductCaption.getText()))){
+                        tilProductCaption.setError(getResources().getText(R.string.incorrect_text_input));
+                    }
                 }
             }
         });
@@ -156,5 +162,9 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     @Override
     public void setProductPrice(String price) {
         mProductPrice.setText(price);
+    }
+
+    public void showError() {
+
     }
 }

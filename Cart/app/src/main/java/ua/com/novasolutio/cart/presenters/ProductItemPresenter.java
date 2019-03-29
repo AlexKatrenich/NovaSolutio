@@ -49,6 +49,7 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
 
     public void onDeleteContextMenuItemClicked() {
         ProductListManager.getInstance().removeProduct(model);  // delete product from ProductListManager
+        Log.i(TAG, "onDeleteContextMenuItemClicked: REMOVE PRODUCT" + model);
         new DeleteProductTask().execute(model); // delete product from DB
     }
 

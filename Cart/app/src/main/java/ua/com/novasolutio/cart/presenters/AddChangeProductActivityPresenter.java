@@ -69,8 +69,12 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
         isLoadingData = false;
     }
 
-    public void changeProductCaption(String caption){
-        model.setCaption(caption);
+    public boolean changeProductCaption(String caption){
+        if (caption != null && !caption.isEmpty()) {
+            model.setCaption(caption);
+            return true;
+        }
+        return false;
     }
 
     public void changeProductPrice(int price){
@@ -78,17 +82,20 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     }
 
     public void OnSaveButtonClicked() {
-        new WriteDataTask().execute(model);
+        if (model.getCaption() != null && !model.getCaption().isEmpty()){
+            new WriteDataTask().execute(model);
 
-        // отримання ІД нового продукту з бази даних(якщо, об'єкт новий)
-        MockDB mDB = MockDB.getInstance();
-        if (model.getID() == -1){
-            model.setID(mDB.getIdCounter());
+            // отримання ІД нового продукту з бази даних(якщо, об'єкт новий)
+            MockDB mDB = MockDB.getInstance();
+            if (model.getID() == -1){
+                model.setID(mDB.getIdCounter());
+            }
+
+            if(!ProductListManager.getInstance().setProductById(model, model.getID())) ProductListManager.getInstance().addProduct(model);
+
+            if(setupDone()) ((AddChangeProductActivity)view()).onBackPressed();
         }
 
-        if(!ProductListManager.getInstance().setProductById(model, model.getID())) ProductListManager.getInstance().addProduct(model);
-
-        if(setupDone()) ((AddChangeProductActivity)view()).onBackPressed();
     }
 
 

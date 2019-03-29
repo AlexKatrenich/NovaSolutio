@@ -37,6 +37,6 @@
 
     <!--Тексти повідомлень користувачу-->
     <string name="speech_voice_search_unable_support">Your device don`t support speech search!</string>
-
+    <string name="incorrect_text_input">Incorrect state on text field</string>
 
 </resources>
