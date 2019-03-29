@@ -1,7 +1,6 @@
 package ua.com.novasolutio.cart.presenters;
 
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -57,16 +56,17 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
 
     public void loadModel(int productId) {
         isLoadingData = true;
-
+        Product product;
         if(productId == -1){
-            Product product = new Product();
+            product = new Product();
             product.setCaption("");
             product.setPrice(0);
-            setModel(product);
-            isLoadingData = false;
         } else {
-            ProductListManager.getInstance().getProductById(productId);
+           product = ProductListManager.getInstance().getProductById(productId);
         }
+
+        setModel(product);
+        isLoadingData = false;
     }
 
     public void changeProductCaption(String caption){

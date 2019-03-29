@@ -24,7 +24,7 @@ import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
 public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView> /*<Model, View>*/
-        implements MockDB.OnDataChangedListener, SearchView.OnQueryTextListener {
+        implements SearchView.OnQueryTextListener, ProductListManager.DataChangeListener {
     /** флажок для відображення завантаження даних
      * @value true - виконується процес завантаження даних, в паралельному потоці
      * @value false - процес завантаження даних не виконується */
@@ -50,8 +50,10 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     @Override
     public void bindView(@NonNull ProductsListView view) {
         super.bindView(view);
-        MockDB.getInstance().addDataChangedListener(this);
+
+        ProductListManager.getInstance().addDataChangeListener(this);
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
+        setModel(ProductListManager.getInstance().getProductsList());
         if(model == null && !isLoadingData){
             loadData();
         }
@@ -59,7 +61,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public void unbindView() {
-        MockDB.getInstance().removeDataChangeListener(this);
+        ProductListManager.getInstance().removeDataChangeListener(this);
         super.unbindView();
     }
 
@@ -89,39 +91,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         }
     }
 
-
-
-    @Override
-    public void productListWasChanged() {
-        loadData();
-    }
-
-    @Override
-    public void onDbProductAdd(Product product) {
-        if (setupDone()){
-            ((ProductListFragment) view()).showProductAdd(product);
-        }
-    }
-
-    @Override
-    public void onDbProductRemove(Product product) {
-        model.remove(product);
-        ProductListFragment view = (ProductListFragment)view();
-        if (view != null) {
-            view.showProductRemove(product);
-            Long totalCost = ProductListManager.getInstance().getTotalPriceSelectedProducts();
-            view.setTotalProductsPrice(formatPriceOnText(totalCost));
-        }
-
-    }
-
-    @Override
-    public void onDbProductChange() {
-        if(setupDone()){
-            Long totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
-            ((ProductListFragment)view()).setTotalProductsPrice(formatPriceOnText(totalPrice));
-        }
-    }
 
 
     @Override
@@ -179,6 +148,40 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
             }
         }
 
+    }
+
+
+    @Override
+    public void onProductListChange() {
+        if (setupDone()){
+            setModel(ProductListManager.getInstance().getProductsList());
+        }
+    }
+
+    @Override
+    public void onModelAddProduct(Product product) {
+        if (setupDone()){
+            ((ProductListFragment) view()).showProductAdd(product);
+        }
+    }
+
+    @Override
+    public void onModelProductRemove(Product product) {
+        model.remove(product);
+        ProductListFragment view = (ProductListFragment)view();
+        if (view != null) {
+            view.showProductRemove(product);
+            Long totalCost = ProductListManager.getInstance().getTotalPriceSelectedProducts();
+            view.setTotalProductsPrice(formatPriceOnText(totalCost));
+        }
+    }
+
+    @Override
+    public void onModelProductChange(Product product) {
+        if(setupDone()){
+            Long totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
+            ((ProductListFragment)view()).setTotalProductsPrice(formatPriceOnText(totalPrice));
+        }
     }
 
 }

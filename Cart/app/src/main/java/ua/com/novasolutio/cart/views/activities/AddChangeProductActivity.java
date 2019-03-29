@@ -87,6 +87,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         // зчитування Intent та передача даних в презентер для відповідного завантаження даних
         Intent intent = getIntent();
         int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
+        Log.i(TAG, "init: PRODUCT ID FORM INTENT: " + productId);
         mPresenter.loadModel(productId);
     }
 

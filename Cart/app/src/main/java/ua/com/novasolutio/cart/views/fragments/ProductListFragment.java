@@ -106,7 +106,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     @Override
     public void onResume() {
         Log.i(TAG, "onResume: ");
-//        mPresenter.bindView(this);
         super.onResume();
     }
 
@@ -114,7 +113,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     public void onPause() {
         super.onPause();
         Log.i(TAG, "onPause: ");
-//        mPresenter.unbindView();
     }
 
     @Override
@@ -196,4 +194,5 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         mSearchView.setIconified(false);
         mSearchView.setQuery(result, true);
     }
+
 }

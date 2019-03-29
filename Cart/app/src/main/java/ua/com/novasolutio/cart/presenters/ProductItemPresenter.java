@@ -36,7 +36,8 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         view().setProductPrice(formattedPrice);
         view().setCounterProduct(model.getCount());
 
-        MockDB.getInstance().observeOnDbProductChange();
+        if(model.getCount() > MIN_VALUE) view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
+        if (model.getCount() == MIN_VALUE) view().changeCancelButtonSize(0);
     }
 
 
@@ -48,13 +49,13 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
 
     public void onDeleteContextMenuItemClicked() {
         ProductListManager.getInstance().removeProduct(model);  // delete product from ProductListManager
-        MockDB.getInstance().observeOnDbProductRemove(model);
         new DeleteProductTask().execute(model); // delete product from DB
     }
 
     public void onChangeContextMenuItemClicked(Context context) {
         Intent intent = new Intent(context, AddChangeProductActivity.class);
         intent.putExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, model.getID());
+        Log.i(TAG, "onChangeContextMenuItemClicked INTENT MODEL ID: " + model.getID());
         context.startActivity(intent);
     }
 
@@ -78,9 +79,6 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
             model.setCount(model.getCount() + 1);
             ProductListManager.getInstance().setProductById(model, model.getID());
             Log.i(TAG, "onItemClick PRODUCT COUNT: " + model.getCount());
-
-            if(model.getCount() > MIN_VALUE) view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
-
             updateView();
         }
     }
@@ -92,8 +90,6 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
                 model.setCount(model.getCount() - 1);
                 ProductListManager.getInstance().setProductById(model, model.getID());
                 Log.i(TAG, "onCanceledButtonClicked PRODUCT COUNT: " + model.getCount());
-
-                if (model.getCount() == MIN_VALUE) view().changeCancelButtonSize(0);
                 updateView();
             }
         }

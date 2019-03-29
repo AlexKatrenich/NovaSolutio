@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 public class ProductListManager {
     public static final String TAG = "ProductListManager";
     protected final ArrayList<Product> mProducts = new ArrayList();
-    public static ProductListManager instance;
-
+    private static ProductListManager instance;
+    private ArrayList<DataChangeListener> mListeners = new ArrayList<>();
 
     private ProductListManager(){
     }
@@ -26,6 +26,7 @@ public class ProductListManager {
             Product p = mProducts.get(i);
             if(p.getID() == id){
                 mProducts.set(i, product);
+                observeModelProductChange(product);
                 return true;
             }
         }
@@ -35,6 +36,7 @@ public class ProductListManager {
     public boolean addProducts(Collection<Product> products){
         if (products != null) {
             mProducts.addAll(products);
+            observeProductListChange();
             return true;
         }
         return false;
@@ -44,6 +46,7 @@ public class ProductListManager {
         if(products != null){
             mProducts.clear();
             mProducts.addAll(products);
+            observeProductListChange();
             return true;
         }
         return false;
@@ -56,6 +59,7 @@ public class ProductListManager {
     public boolean addProduct(Product product){
         if(product != null) {
             mProducts.add(product);
+            observeModelAddProduct(product);
             return true;
         }
 
@@ -83,6 +87,47 @@ public class ProductListManager {
     }
 
     public boolean removeProduct(Product product){
-        return mProducts.remove(product);
+        boolean b = mProducts.remove(product);
+        if (b) observeModelProductRemove(product);
+        return b;
+    }
+
+    public interface DataChangeListener{
+        void onProductListChange();
+        void onModelAddProduct(Product product);
+        void onModelProductRemove(Product product);
+        void onModelProductChange(Product product);
+    }
+
+    public void addDataChangeListener(DataChangeListener listener){
+        if(listener != null) mListeners.add(listener);
+    }
+
+    public void removeDataChangeListener(DataChangeListener listener){
+        if (listener != null) mListeners.remove(listener);
+    }
+
+    public void observeProductListChange(){
+        for (DataChangeListener d: mListeners){
+           if(d != null) d.onProductListChange();
+        }
+    }
+
+    public void observeModelAddProduct(Product product){
+        for (DataChangeListener d: mListeners){
+            if(d != null) d.onModelAddProduct(product);
+        }
+    }
+
+    public void observeModelProductRemove(Product product){
+        for (DataChangeListener d: mListeners){
+            if(d != null) d.onModelProductRemove(product);
+        }
+    }
+
+    public void observeModelProductChange(Product product){
+        for (DataChangeListener d: mListeners){
+            if(d != null) d.onModelProductChange(product);
+        }
     }
 }

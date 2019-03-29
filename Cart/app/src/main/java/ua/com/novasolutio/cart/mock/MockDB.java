@@ -3,8 +3,6 @@ package ua.com.novasolutio.cart.mock;
 import android.util.ArrayMap;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import ua.com.novasolutio.cart.data.Product;
 
@@ -13,7 +11,6 @@ public class MockDB {
     private static final String TAG = "MockDB";
     ArrayMap<Integer, Product> productMap;
     private static MockDB instance;
-    private List<OnDataChangedListener> dataChangedListeners = new ArrayList<>();
     private Integer idCounter = 0; //Рахувальник ІД-продуктів
 
 
@@ -86,49 +83,6 @@ public class MockDB {
         return productMap.get(id);
     }
 
-
-    public interface OnDataChangedListener{
-        void productListWasChanged();
-        void onDbProductAdd(Product product);
-        void onDbProductRemove(Product position);
-        void onDbProductChange();
-    }
-
-    public void addDataChangedListener(OnDataChangedListener listener){
-        dataChangedListeners.add(listener);
-    }
-
-    public void removeDataChangeListener(OnDataChangedListener listener){
-        dataChangedListeners.remove(listener);
-    }
-
-    public void observeProductListWasChanged(){
-        Log.i(TAG, "observeProductListWasChanged: UPDATE");
-        for (OnDataChangedListener listener : dataChangedListeners) {
-            if(listener != null) listener.productListWasChanged();
-        }
-    }
-
-    public void observeOnDbProductAdd(Product product) {
-        Log.i(TAG, "observeOnDbProductAdd: ADD PRODUCT");
-        for (OnDataChangedListener listener : dataChangedListeners) {
-            if(listener != null) listener.onDbProductAdd(product);
-        }
-    }
-
-    public void observeOnDbProductRemove(Product product){
-        Log.i(TAG, "observeOnDbProductRemove: PRODUCT REMOVE " + product);
-        for (OnDataChangedListener listener : dataChangedListeners) {
-            if(listener != null) listener.onDbProductRemove(product);
-        }
-    }
-
-    public void observeOnDbProductChange(){
-        Log.i(TAG, "observeOnDbProductChange: PRODUCT CHANGE");
-        for (OnDataChangedListener listener : dataChangedListeners) {
-            if(listener != null) listener.onDbProductChange();
-        }
-    }
 
     public Integer getIdCounter(){
         return idCounter;
