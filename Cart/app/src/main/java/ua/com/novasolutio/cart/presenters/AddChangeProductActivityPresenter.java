@@ -1,5 +1,6 @@
 package ua.com.novasolutio.cart.presenters;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -30,9 +31,15 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
     public void bindView(@NonNull ProductView view) {
         super.bindView(view);
 
+        // зчитування Intent та відображення даних в залежності від того чи було щось передано чере Інтент
+        Intent intent = ((AddChangeProductActivity)view).getIntent();
+        int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
+        Log.i(TAG, "init: PRODUCT ID FORM INTENT: " + productId);
+        loadModel(productId);
+
         // не потрібно повторно завантажувати дані повторно, якщо вони вже завантажені або в процесі завантаження
         if(model == null && !isLoadingData){
-            loadModel(-1);
+            loadModel(productId);
         }
     }
 

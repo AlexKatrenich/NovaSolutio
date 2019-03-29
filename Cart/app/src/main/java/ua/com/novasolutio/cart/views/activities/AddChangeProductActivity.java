@@ -25,13 +25,14 @@ import ua.com.novasolutio.cart.views.ProductView;
 public class AddChangeProductActivity extends AppCompatActivity implements ProductView {
     private static final String TAG = "AddChangeProdActivity";
 
-    @BindView(R.id.til_product_caption_add_activity) TextInputLayout tilProductCaption;
-    @BindView(R.id.til_product_price_add_activity) TextInputLayout tilProductPrice;
-
-    private Toolbar mToolbar;
+    @BindView(R.id.til_product_caption_add_activity) protected TextInputLayout tilProductCaption;
+    @BindView(R.id.til_product_price_add_activity) protected TextInputLayout tilProductPrice;
+    @BindView(R.id.toolbar_add_change_product_activity) protected Toolbar mToolbar;
+    @BindView(R.id.tiet_product_caption) protected AppCompatEditText mProductCaption;
+    @BindView(R.id.tiet_product_price) protected AppCompatAutoCompleteTextView mProductPrice;
     private AddChangeProductActivityPresenter mPresenter;
-    private AppCompatEditText mProductCaption;
-    private AppCompatAutoCompleteTextView mProductPrice;
+
+
     public static final String INTENT_CODE_FOR_GETTING_MODEL = "INTENT_CODE_FOR_GETTING_MODEL";
 
 
@@ -40,7 +41,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_change_product);
 
-        ButterKnife.bind(this);
+        ButterKnife.bind(this); // Байндинг елементів
         init(savedInstanceState);
     }
 
@@ -52,9 +53,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
 
-        // ініціалізація тулбара
-        mToolbar = findViewById(R.id.toolbar_add_change_product_activity);
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(mToolbar); //встановлення власного Тулбару за замовчуванням
 
         //встановлення кнопки "Back та відмова від Титульної назви екрану"
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,7 +68,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             }
         });
 
-        mProductCaption = findViewById(R.id.tiet_product_caption);
         // обробка тексту при зміні фокусу з View та передача результату в презентер
         mProductCaption.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -83,7 +81,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             }
         });
 
-        mProductPrice = findViewById(R.id.tiet_product_price);
         // обробка тексту при зміні фокусу з View та передача результату в презентер
         mProductPrice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -95,11 +92,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
                 }
             }
         });
-        // зчитування Intent та передача даних в презентер для відповідного завантаження даних
-        Intent intent = getIntent();
-        int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
-        Log.i(TAG, "init: PRODUCT ID FORM INTENT: " + productId);
-        mPresenter.loadModel(productId);
+
     }
 
     @Override
