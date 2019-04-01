@@ -15,11 +15,11 @@ public interface ProductDao {
     @Query("SELECT * FROM product")
     List<Product> getAll();
 
-    @Query("SELECT * FROM product WHERE mID = :id")
-    Product getById(long id);
+    @Query("SELECT * FROM product WHERE product_id LIKE :id")
+    Product getById(int id);
 
     @Insert
-    void insert(Product product);
+    long insert(Product product);
 
     @Update
     void update(Product product);

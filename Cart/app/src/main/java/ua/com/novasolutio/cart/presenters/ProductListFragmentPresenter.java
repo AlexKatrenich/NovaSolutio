@@ -133,7 +133,7 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
 
-        try{
+        try {
             ((ProductListFragment)view()).startActivityForResult(intent, ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH);
         } catch (ActivityNotFoundException e){
             try {
