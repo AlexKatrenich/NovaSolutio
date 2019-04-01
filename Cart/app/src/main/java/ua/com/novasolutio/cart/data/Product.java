@@ -9,7 +9,7 @@ import java.util.Objects;
 
 
 /* Клас, що описує дані про сутність продукт */
-@Entity
+@Entity(tableName = "products")
 public class Product {
 
     @PrimaryKey(autoGenerate = true)
@@ -28,20 +28,18 @@ public class Product {
     @Ignore
     private int mCount; // кількість одиниць продукту вибраного на View, НЕ зберігати в БД!
 
+    @Ignore
     public Product() {
 
     }
+
+
 
     public Product(int mID, String mCaption, int mPrice, int mRate) {
         this.mID = mID;
         this.mCaption = mCaption;
         this.mPrice = mPrice;
         this.mRate = mRate;
-    }
-
-    public Product(int mID, String mCaption) {
-        this.mID = mID;
-        this.mCaption = mCaption;
     }
 
     public int getID() {

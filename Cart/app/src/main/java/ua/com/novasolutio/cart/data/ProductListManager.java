@@ -48,6 +48,7 @@ public class ProductListManager {
         if(products != null){
             mProducts.clear();
             mProducts.addAll(products);
+            Log.i(TAG, "setProducts: " + products);
             observeProductListChange();
             return true;
         }
@@ -62,6 +63,7 @@ public class ProductListManager {
         if(product != null) {
             mProducts.add(product);
             observeModelAddProduct(product);
+            Log.i(TAG, "addProduct: " + product);
             return true;
         }
 
@@ -112,25 +114,37 @@ public class ProductListManager {
 
     public void observeProductListChange(){
         for (DataChangeListener d: mListeners){
-           if(d != null) d.onProductListChange();
+           if(d != null) {
+               d.onProductListChange();
+               Log.i(TAG, "observeProductListChange");
+           }
         }
     }
 
     public void observeModelAddProduct(Product product){
         for (DataChangeListener d: mListeners){
-            if(d != null) d.onModelAddProduct(product);
+            if(d != null) {
+                d.onModelAddProduct(product);
+                Log.i(TAG, "observeModelAddProduct");
+            }
         }
     }
 
     public void observeModelProductRemove(Product product){
         for (DataChangeListener d: mListeners){
-            if(d != null) d.onModelProductRemove(product);
+            if(d != null) {
+                d.onModelProductRemove(product);
+                Log.i(TAG, "observeModelProductRemove");
+            }
         }
     }
 
     public void observeModelProductChange(Product product){
         for (DataChangeListener d: mListeners){
-            if(d != null) d.onModelProductChange(product);
+            if(d != null) {
+                d.onModelProductChange(product);
+                Log.i(TAG, "observeModelProductChange: ");
+            }
         }
     }
 }

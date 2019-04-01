@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
@@ -72,18 +73,14 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
     private class LoadDataTask extends AsyncTask<Void, Void, ArrayList>{
         @Override
         protected ArrayList doInBackground(Void... voids) {
-            SystemClock.sleep(1000); //емуляція завантаження з БД
-            MockDB mDb = MockDB.getInstance();
-            ArrayMap<Integer, Product> map = mDb.getProductMap();
-            return new ArrayList<Product>(map.values());
+            List<Product> list = CartApplication.getInstance().getDatabase().mProductDao().getAll();
+            return new ArrayList<Product>(list);
         }
 
         @Override
         protected void onPostExecute(ArrayList list) {
-             // завантаження мапи об'єктів із заглушки
             ProductListManager.getInstance().setProducts(list);
-            setModel(ProductListManager.getInstance().getProductsList()); // передача списку об'єктів Product в модель(передача посилання на список)
-            Log.i(TAG, "onPostExecute: DATA LOAD, VIEW UPDATE" + list);
+            Log.i(TAG, "onPostExecute: DATA LOAD, VIEW UPDATE:" + list);
             isLoadingData = false; // зняття флажка про завантаження даних
         }
     }
@@ -150,9 +147,8 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public void onProductListChange() {
-        if (setupDone()){
-            setModel(ProductListManager.getInstance().getProductsList());
-        }
+        Log.i(TAG, "onProductListChange: ON PRODUCT LIST CHANGE");
+        setModel(ProductListManager.getInstance().getProductsList());
     }
 
     @Override
