@@ -11,6 +11,11 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,6 +88,20 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             }
         });
 
+        // ініціалізація прослуховувача відкриття/закриття клавіатури
+//        KeyboardVisibilityEvent.setEventListener(this,
+//                new KeyboardVisibilityEventListener() {
+//                    @Override
+//                    public void onVisibilityChanged(boolean isOpen) {
+//                        ViewGroup.LayoutParams params = mNavigationView.getLayoutParams();
+//                        if(isOpen){
+//                            params.height = 0;
+//                        } else {
+//                            params.height = Math.round(getResources().getDimension(R.dimen.bottom_navigation_view_height));
+//                        }
+//                        mNavigationView.setLayoutParams(params);
+//                    }
+//                });
     }
 
     /* Закріплення та відображення фрагментів в активності */

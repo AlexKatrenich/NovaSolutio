@@ -8,10 +8,8 @@ import android.util.Log;
 
 import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.dao.CartDatabase;
-import ua.com.novasolutio.cart.dao.CartDatabase_Impl;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
-import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductView;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
 

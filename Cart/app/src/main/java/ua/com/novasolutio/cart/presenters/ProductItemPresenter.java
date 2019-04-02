@@ -4,14 +4,13 @@ package ua.com.novasolutio.cart.presenters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
-import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.viewHolders.ProductViewHolder;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
 
@@ -65,10 +64,8 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
 
         @Override
         protected Product doInBackground(Product... products) {
-            SystemClock.sleep(500); // емуляція запису в БД
             Product product = products[0];
-            MockDB mDB = MockDB.getInstance();
-            mDB.deleteProductById(product.getID());
+            CartApplication.getInstance().getDatabase().mProductDao().delete(product); // видалення запису з БД
             Log.i(TAG, "doInBackground: Delete Product From DB " + product);
             return product;
         }

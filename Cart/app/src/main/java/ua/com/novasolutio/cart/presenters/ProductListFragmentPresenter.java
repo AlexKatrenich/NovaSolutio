@@ -4,11 +4,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.SearchView;
-import android.util.ArrayMap;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
-import ua.com.novasolutio.cart.mock.MockDB;
 import ua.com.novasolutio.cart.views.ProductsListView;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 

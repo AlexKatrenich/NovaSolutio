@@ -9,4 +9,5 @@
     <dimen name="list_elements_margin_dimen">3dp</dimen>
     <dimen name="search_view_margin_dimen">5dp</dimen>
     <dimen name="search_view_height_dimen">40dp</dimen>
+    <dimen name="bottom_navigation_view_height">60dp</dimen>
 </resources>

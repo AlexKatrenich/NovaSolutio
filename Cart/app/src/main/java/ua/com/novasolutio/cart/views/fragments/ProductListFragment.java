@@ -79,12 +79,11 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         rvProductList.setAdapter(mAdapter);
         Log.i(TAG, "init done");
 
-
+        //
         mSearchView.setOnQueryTextListener(mPresenter);
-        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setIconifiedByDefault(false); //блокується зміна розміру до вкладеної картинки
         mSearchView.setFocusable(false);
         mSearchView.setFocusableInTouchMode(false);
-
     }
 
     @OnClick(R.id.iv_voice_search)
