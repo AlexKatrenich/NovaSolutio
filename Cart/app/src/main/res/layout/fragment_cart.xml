@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,15 +16,15 @@
         <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/layout_forms_margin"
-            app:cardCornerRadius="@dimen/card_view_corners_radius"
             app:strokeColor="@android:color/holo_green_light"
-            app:strokeWidth="@dimen/material_card_view_stroke_width">
+            app:strokeWidth="@dimen/material_card_view_stroke_width"
+            style="@style/SummaryLayoutsCardViewStyle">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/card_view_content_padding">
 
                 <TextView
                     android:id="@+id/tv_cart_to_pay_caption"
@@ -33,7 +32,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:padding="@dimen/card_view_content_padding"
                     android:text="@string/total_price_to_pay" />
 
                 <TextView
@@ -42,7 +40,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="@dimen/card_view_content_padding"
                     android:textAlignment="textEnd" />
             </LinearLayout>
         </android.support.design.card.MaterialCardView>

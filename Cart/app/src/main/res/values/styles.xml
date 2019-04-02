@@ -12,6 +12,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="ProductListItemTextViewStyle" parent="android:Widget.TextView">
@@ -34,6 +35,12 @@
         <item name="android:layout_marginBottom">@dimen/layout_forms_margin</item>
         <item name="android:layout_marginLeft">@dimen/divider_left_right_margin</item>
         <item name="android:layout_marginRight">@dimen/divider_left_right_margin</item>
+    </style>
+
+    <style name="SummaryLayoutsCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_margin">@dimen/layout_forms_margin</item>
+        <item name="cardCornerRadius">@dimen/card_view_corners_radius</item>
+        <item name="android:padding">@dimen/card_view_content_padding</item>
     </style>
 
 </resources>

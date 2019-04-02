@@ -26,10 +26,10 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
                 Log.i(TAG, "updateView: MODEL EMPTY");
             } else {
                 view.showProducts(model);
-                Long totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
-                view.setTotalPrice(formatPriceOnText(totalPrice));
                 Log.i(TAG, "updateView: SHOW PRODUCTS" + model);
             }
+            Long totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
+            view.setTotalPrice(formatPriceOnText(totalPrice));
         }
     }
 
