@@ -36,8 +36,9 @@ public class CartItemViewHolder extends MvpViewHolder<CartItemPresenter> impleme
     }
 
     @OnClick(R.id.ib_delete_item_from_cart_list)
-    public void onDeleteItemClicked(View view){
-        Log.i(TAG, "onDeleteItemClicked: ");
+    public void onDeleteButtonClicked(View view){
+        presenter.onDeleteButtonClicked();
+        Log.i(TAG, "onDeleteButtonClicked: ");
     }
 
     @Override

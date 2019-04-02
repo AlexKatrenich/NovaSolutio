@@ -19,7 +19,7 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
 
     @Override
     protected void updateView() {
-        CartFragment view = (CartFragment) view();
+        CartFragment view = view();
         if(view != null){
             if (model.size() == 0){
                 view.showEmpty();
@@ -36,6 +36,13 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
     @Override
     public void bindView(@NonNull CartFragment view) {
         super.bindView(view);
+        ProductListManager.getInstance().addDataChangeListener(this);
+    }
+
+    @Override
+    public void unbindView() {
+        super.unbindView();
+        ProductListManager.getInstance().removeDataChangeListener(this);
     }
 
     @Override
@@ -52,13 +59,16 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
 
     @Override
     public void onModelProductRemove(Product product) {
-        this.setModel(ProductListManager.getInstance().getProductsList());
+        view().showItemRemove(product); // Відображення на екрані події видалення елементу
+        view().setTotalPrice(formatPriceOnText(ProductListManager
+                .getInstance()
+                .getTotalPriceSelectedProducts())); // перерахунок ціни
     }
 
     @Override
     public void onModelProductChange(Product product) {
         Log.i(TAG, "onModelProductChange:");
-        this.setModel(ProductListManager.getInstance().getProductsList());
+        if(product.getCount() == 0) onModelProductRemove(product);
     }
 
     @Override
