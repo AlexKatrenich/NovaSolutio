@@ -39,8 +39,4 @@ public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product,
         return presenter;
     }
 
-    public void updateListFromSearchView(List<Product> newList){
-        super.clearAndAddAll(newList);
-    }
-
 }

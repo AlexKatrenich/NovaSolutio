@@ -141,11 +141,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.bottom_navigation_view_menu, menu);
-    }
-
     public void showProductAdd(Product product) {
         mAdapter.addItem(product);
     }
