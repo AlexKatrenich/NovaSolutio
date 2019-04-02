@@ -18,10 +18,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
+import ua.com.novasolutio.cart.views.ProductItemListView;
 import ua.com.novasolutio.cart.views.ProductView;
+import ua.com.novasolutio.cart.views.ProductsListView;
 
 /* Клас для управління заповнення даними View елементу списка ProductsRecyclerView */
-public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductView {
+public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> implements ProductItemListView {
     public static final String TAG = "ProductViewHolder";
 
     @BindView(R.id.tv_product_caption_list_products) protected TextView productCaption;
@@ -93,7 +95,7 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
         productPrice.setText(formattedPrice);
     }
 
-
+    @Override
     public void setCounterProduct(int count) {
         if (count == 0){
             productCount.setText("");
