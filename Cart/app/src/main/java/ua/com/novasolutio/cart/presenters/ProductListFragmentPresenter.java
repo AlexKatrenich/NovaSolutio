@@ -50,8 +50,12 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         super.bindView(view);
         ProductListManager.getInstance().addDataChangeListener(this);
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
-        if(model == null && !isLoadingData){
+        List<Product> list = ProductListManager.getInstance().getProductsList();
+        Log.i(TAG, "bindView: list = " + list);
+        if(model == null && !isLoadingData && list.isEmpty()){
             loadData();
+        } else {
+            setModel(list);
         }
     }
 

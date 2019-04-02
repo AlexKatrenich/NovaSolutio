@@ -1,9 +1,11 @@
 package ua.com.novasolutio.cart.views.fragments;
 
+import android.arch.lifecycle.Lifecycle;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +59,12 @@ public class CartFragment extends Fragment implements ProductsListView {
         } else {
             mPresenter = PresenterManager.getInstance().restorePresenter(saveInstanceState);
         }
+
+        getLifecycle().addObserver(mPresenter);
+
+        mAdapter = new CartRecyclerAdapter();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -76,6 +84,11 @@ public class CartFragment extends Fragment implements ProductsListView {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(mRecyclerView !=null){
+            mRecyclerView.setLayoutManager(null);
+            mRecyclerView.setAdapter(null);
+        }
+        getLifecycle().removeObserver(mPresenter);
         Log.i(TAG, "onDestroy: ");
     }
 
