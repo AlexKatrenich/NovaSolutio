@@ -11,11 +11,6 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +28,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     @BindView(R.id.toolbar_product_list_activity) protected Toolbar mToolbar;
     @BindView(R.id.bnv_list_products_activity) protected BottomNavigationView mNavigationView;
 
+    private int bnvSelectedItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +38,21 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init(savedInstanceState);
 
-        // відображення першого фрагменту при відкритті екрану
-        bindFragment(new ProductListFragment());
+        if (savedInstanceState == null) bindFragment(new ProductListFragment());
     }
 
     @Override
     protected void onStart() {
         mPresenter.bindView(this);
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        if(bnvSelectedItemId != 0 ){
+            mNavigationView.setSelectedItemId(bnvSelectedItemId);
+        }
+        super.onResume();
     }
 
     /* Ініціалізація елементів Активності*/
@@ -59,6 +62,8 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             mPresenter = new ProductListPaymentActivityPresenter();
         } else {
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
+            bnvSelectedItemId = savedInstanceState.getInt(TAG_SAVE_INSTANCE_STATE_BOTTOM_NAVIGATION);
+            Log.i(TAG, "onCreate: ID = " + bnvSelectedItemId);
         }
 
         setSupportActionBar(mToolbar);
@@ -88,20 +93,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
             }
         });
 
-        // ініціалізація прослуховувача відкриття/закриття клавіатури
-//        KeyboardVisibilityEvent.setEventListener(this,
-//                new KeyboardVisibilityEventListener() {
-//                    @Override
-//                    public void onVisibilityChanged(boolean isOpen) {
-//                        ViewGroup.LayoutParams params = mNavigationView.getLayoutParams();
-//                        if(isOpen){
-//                            params.height = 0;
-//                        } else {
-//                            params.height = Math.round(getResources().getDimension(R.dimen.bottom_navigation_view_height));
-//                        }
-//                        mNavigationView.setLayoutParams(params);
-//                    }
-//                });
     }
 
     /* Закріплення та відображення фрагментів в активності */
@@ -120,9 +111,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mNavigationView.setItemIconTintList(null);
         setSupportActionBar(null);
-
         super.onDestroy();
     }
 
@@ -158,10 +147,15 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private final String TAG_SAVE_INSTANCE_STATE_BOTTOM_NAVIGATION = "TAG_SAVE_INSTANCE_STATE_BOTTOM_NAVIGATION";
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         PresenterManager.getInstance().savePresenter(mPresenter, outState);
+        int id = mNavigationView.getSelectedItemId();
+        Log.i(TAG, "onSaveInstanceState: ID = " + id);
+        outState.putInt(TAG_SAVE_INSTANCE_STATE_BOTTOM_NAVIGATION, id);
     }
 
     @Override

@@ -19,11 +19,13 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
 
 
     public void onProductListFragmentClicked() {
+        Log.i(TAG, "onProductListFragmentClicked: VIEW = " + String.valueOf(view() != null));
         view().bindFragment(new ProductListFragment());
         view().invalidateOptionsMenu();
     }
 
     public void onCartFragmentClicked() {
+        Log.i(TAG, "onCartFragmentClicked: VIEW = " + String.valueOf(view() != null));
         view().bindFragment(new CartFragment());
         view().invalidateOptionsMenu();
     }

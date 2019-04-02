@@ -1,42 +1,43 @@
 <resources>
     <string name="app_name">Cart</string>
-    
+
+    <!--ЕКРАН СПИСКУ ПРОДУКТІВ-->
+    <string name="bottom_navigation_menu_list_caption">List</string>
+    <string name="bottom_navigation_menu_cart_caption">Cart</string>
     <string name="product_list_activity_caption">Cart</string>
     <string name="product_list_fragment_total_caption">TOTAL:</string>
 
-    <!--Заголовки нижньої панелі навігації на екрані списку продуктів-->
-    <string name="bottom_navigation_menu_list_caption">List</string>
-    <string name="bottom_navigation_menu_cart_caption">Cart</string>
-    
+    <!--Контекстне меню-->
+    <string name="item_product_change_context_menu">Change</string>
+    <string name="item_product_delete_context_menu">Delete</string>
     <string name="context_menu_recycler_view_item">Context menu</string>
 
     <!--Текстове значення валюти для відображення на екрані-->
     <string name="name_currency">UAH</string>
     <string name="default_price_for_items">0.00 UAH</string>
 
-    <!--Контекстне меню-->
-    <string name="item_product_change_context_menu">Change</string>
-    <string name="item_product_delete_context_menu">Delete</string>
-
     <!--Заголовки меню-->
     <string name="item_add_product_activity_menu">Add</string>
     <string name="item_settings_product_activity_menu">Settings</string>
     <string name="item_sorting_product_activity_menu">Sorting</string>
     <string name="item_save_add_change_product">Save</string>
+    <string name="search_view_default_hint">Search...</string>
+    <string name="total_price_to_pay">To pay</string>
+    <string name="column_name_products_on_cart">Name</string>
+    <string name="column_count_selected_products_on_cart">Count</string>
+    <string name="summary_price_every_type_of_product_on_cart">Total</string>
 
-    <!--Поля екрану додавання/редагування товару-->
-    <string name="product_name_hint_add_activity">Product name</string>
-    <string name="product_price_hint_add_activity">Price</string>
-
-    <!--Content Description for buttons-->
+    <!--Content Description для кнопок-->
     <string name="item_cancel_product_list_recycler_view">CANCEL</string>
     <string name="mic_voice_search">Search</string>
-
-    <!--Текстові значення за замовчуванням-->
-    <string name="search_view_default_hint">Search...</string>
 
     <!--Тексти повідомлень користувачу-->
     <string name="speech_voice_search_unable_support">Your device don`t support speech search!</string>
     <string name="incorrect_text_input">Incorrect state on text field</string>
+
+    <!--ЕКРАН ДОДАВАННЯ/РЕДАГУВАННЯ ТОВАРУ-->
+    <!--Підказки на елементах EditText-->
+    <string name="product_name_hint_add_activity">Product name</string>
+    <string name="product_price_hint_add_activity">Price</string>
 
 </resources>

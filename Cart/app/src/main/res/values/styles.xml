@@ -19,4 +19,21 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="ColumnsCaptionTextStyle" parent="android:Widget.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#565759</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/listTextPrimaryColor</item>
+        <item name="android:layout_marginTop">@dimen/layout_forms_margin</item>
+        <item name="android:layout_marginBottom">@dimen/layout_forms_margin</item>
+        <item name="android:layout_marginLeft">@dimen/divider_left_right_margin</item>
+        <item name="android:layout_marginRight">@dimen/divider_left_right_margin</item>
+    </style>
+
 </resources>

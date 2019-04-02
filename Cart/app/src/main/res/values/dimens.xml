@@ -10,4 +10,6 @@
     <dimen name="search_view_margin_dimen">5dp</dimen>
     <dimen name="search_view_height_dimen">40dp</dimen>
     <dimen name="bottom_navigation_view_height">60dp</dimen>
+    <dimen name="material_card_view_stroke_width">2dp</dimen>
+    <dimen name="divider_left_right_margin">30dp</dimen>
 </resources>
