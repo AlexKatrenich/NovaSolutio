@@ -11,9 +11,12 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
@@ -27,7 +30,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_product_list_activity) protected Toolbar mToolbar;
     @BindView(R.id.bnv_list_products_activity) protected BottomNavigationView mNavigationView;
-
+    @BindView(R.id.btn_payment_button) protected Button btnPayment;
     private int bnvSelectedItemId;
 
     @Override
@@ -92,7 +95,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     /* Закріплення та відображення фрагментів в активності */
@@ -175,4 +177,10 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
         return super.onPrepareOptionsMenu(menu);
     }
+
+    @OnClick(R.id.btn_payment_button)
+    public void onPaymentClick(View v){
+        Log.i(TAG, "onPaymentClick: ");
+    }
+
 }

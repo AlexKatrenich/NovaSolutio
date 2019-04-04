@@ -133,8 +133,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_icons8_delete" />
-                            <entry key="sourceFile" value="C:\Users\EisAndroidDev\Desktop\icons8-delete.svg" />
+                            <entry key="outputName" value="ic_payment_button" />
+                            <entry key="sourceFile" value="C:\Users\EisAndroidDev\Desktop\cash-pay.svg" />
                           </map>
                         </option>
                       </PersistentState>

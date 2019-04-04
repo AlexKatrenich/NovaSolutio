@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_activity_product_list_payment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.activities.ProductListPaymentActivity">
@@ -39,6 +40,19 @@
 
     </FrameLayout>
 
+    <Button
+        android:id="@+id/btn_payment_button"
+        android:layout_width="@dimen/payment_button_short_width"
+        android:layout_height="@dimen/payment_button_height"
+        android:background="@drawable/pay_button_shape"
+        android:drawableLeft="@drawable/ic_payment_button"
+        android:textColor="@android:color/white"
+        android:padding="@dimen/layout_forms_margin"
+        app:layout_constraintBottom_toTopOf="@+id/bnv_list_products_activity"
+        app:layout_constraintEnd_toEndOf="@+id/cl_activity_product_list_payment_layout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/cl_activity_product_list_payment_layout" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bnv_list_products_activity"
         android:layout_width="match_parent"
@@ -50,6 +64,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>

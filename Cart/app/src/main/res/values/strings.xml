@@ -6,6 +6,7 @@
     <string name="bottom_navigation_menu_cart_caption">Cart</string>
     <string name="product_list_activity_caption">Cart</string>
     <string name="product_list_fragment_total_caption">TOTAL:</string>
+    <string name="pay_button_product_payment_activity">Pay</string>
 
     <!--Контекстне меню-->
     <string name="item_product_change_context_menu">Change</string>
