@@ -1,5 +1,6 @@
 package ua.com.novasolutio.cart.views.viewHolders;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MenuItem;
@@ -104,7 +105,6 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
             productCount.setText(String.valueOf(count));
             productCount.setVisibility(TextView.VISIBLE);
         }
-
     }
 
     public void showPopupMenu(View v) {

@@ -6,7 +6,8 @@
     android:id="@+id/cl_activity_product_list_payment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.activities.ProductListPaymentActivity">
+    tools:context=".views.activities.ProductListPaymentActivity"
+    android:background="@color/colorPrimaryDark">
 
 
     <android.support.design.widget.AppBarLayout
@@ -22,9 +23,9 @@
             android:id="@+id/toolbar_product_list_activity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:titleTextColor="@color/colorPrimaryDark"
+            app:titleTextColor="@color/textPrimaryColor"
             />
 
     </android.support.design.widget.AppBarLayout>
@@ -33,6 +34,7 @@
         android:id="@+id/fragment_container_products_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/bnv_list_products_activity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,9 +47,10 @@
         android:layout_width="@dimen/payment_button_short_width"
         android:layout_height="@dimen/payment_button_height"
         android:background="@drawable/pay_button_shape"
-        android:drawableLeft="@drawable/ic_payment_button"
+        android:drawableStart="@drawable/ic_payment_button"
         android:textColor="@android:color/white"
-        android:padding="@dimen/layout_forms_margin"
+        android:paddingLeft="@dimen/payment_button_padding"
+        android:paddingRight="@dimen/payment_button_padding"
         app:layout_constraintBottom_toTopOf="@+id/bnv_list_products_activity"
         app:layout_constraintEnd_toEndOf="@+id/cl_activity_product_list_payment_layout"
         app:layout_constraintHorizontal_bias="1.0"

@@ -14,7 +14,8 @@
     <dimen name="divider_left_right_margin">30dp</dimen>
 
     <!--payment button dimens-->
-    <dimen name="payment_button_short_width">40dp</dimen>
-    <dimen name="payment_button_long_width">80dp</dimen>
+    <dimen name="payment_button_short_width">50dp</dimen>
+    <dimen name="payment_button_long_width">90dp</dimen>
     <dimen name="payment_button_height">40dp</dimen>
+    <dimen name="payment_button_padding">15dp</dimen>
 </resources>

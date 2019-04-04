@@ -76,7 +76,7 @@
                 android:clickable="true"
                 android:contentDescription="@string/context_menu_recycler_view_item"
                 android:focusable="true"
-                android:tint="@color/listTextPrimaryColor"
+                android:tint="@color/textPrimaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

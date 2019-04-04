@@ -12,6 +12,7 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import butterknife.BindView;
@@ -181,6 +182,20 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     @OnClick(R.id.btn_payment_button)
     public void onPaymentClick(View v){
         Log.i(TAG, "onPaymentClick: ");
+    }
+
+    public void changeSizePaymentButton(boolean fullSize) {
+        Log.i(TAG, "changeSizePaymentButton FULLSIZE: " + String.valueOf(fullSize));
+
+        ViewGroup.LayoutParams params = btnPayment.getLayoutParams();
+        if (fullSize){
+            btnPayment.setText(getResources().getText(R.string.pay_button_product_payment_activity));
+            //Math.round(getResources().getDimension(R.dimen.payment_button_long_width));
+            params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        } else {
+            btnPayment.setText("");
+            params.width = Math.round(getResources().getDimension(R.dimen.payment_button_short_width));
+        }
     }
 
 }

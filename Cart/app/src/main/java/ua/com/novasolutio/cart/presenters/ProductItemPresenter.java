@@ -3,6 +3,7 @@ package ua.com.novasolutio.cart.presenters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -35,8 +36,12 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         view().setProductPrice(formattedPrice);
         view().setCounterProduct(model.getCount());
 
-        if(model.getCount() > MIN_VALUE) view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
-        if (model.getCount() == MIN_VALUE) view().changeCancelButtonSize(0);
+        if(model.getCount() > MIN_VALUE) {
+            view().changeCancelButtonSize(ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        if (model.getCount() == MIN_VALUE) {
+            view().changeCancelButtonSize(0);
+        }
     }
 
 

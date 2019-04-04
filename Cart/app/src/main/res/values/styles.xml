@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -16,7 +16,7 @@
     </style>
 
     <style name="ProductListItemTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/listTextPrimaryColor</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -30,7 +30,7 @@
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/listTextPrimaryColor</item>
+        <item name="android:background">@color/textPrimaryColor</item>
         <item name="android:layout_marginTop">@dimen/layout_forms_margin</item>
         <item name="android:layout_marginBottom">@dimen/layout_forms_margin</item>
         <item name="android:layout_marginLeft">@dimen/divider_left_right_margin</item>
