@@ -203,30 +203,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TableRow>
-                <android.support.design.card.MaterialCardView
-                    android:layout_weight="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/darker_gray"
-                    android:layout_margin="10dp"
-                    app:cornerRadius="5dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@android:color/holo_green_dark">
-
                     <android.support.design.button.MaterialButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:text="7"
-                        android:textColor="@android:color/black"
-                        android:textSize="24sp" />
-                </android.support.design.card.MaterialCardView>
+                        android:text="100"
+                        android:theme="@style/MaterialButtonStyle"
+                        style="@style/MaterialButtonStyle"/>
             </TableRow>
 
-            <TableRow></TableRow>
+            <TableRow>
 
-            <TableRow></TableRow>
+            </TableRow>
 
-            <TableRow></TableRow>
+            <TableRow>
+
+            </TableRow>
+
+            <TableRow>
+
+            </TableRow>
 
         </TableLayout>
     </LinearLayout>
