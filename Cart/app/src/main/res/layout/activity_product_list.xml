@@ -48,6 +48,7 @@
         android:layout_height="@dimen/payment_button_height"
         android:background="@drawable/pay_button_shape"
         android:drawableStart="@drawable/ic_payment_button"
+        android:visibility="visible"
         android:textColor="@android:color/white"
         android:paddingLeft="@dimen/payment_button_padding"
         android:paddingRight="@dimen/payment_button_padding"

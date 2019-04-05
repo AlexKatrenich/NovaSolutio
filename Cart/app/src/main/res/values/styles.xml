@@ -62,7 +62,7 @@
         <item name="cornerRadius">10dp</item>
         <item name="strokeWidth">2dp</item>
         <item name="strokeColor">@android:color/holo_green_dark</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_margin">5dp</item>
         <item name="android:fontFamily">@font/montserrat</item>

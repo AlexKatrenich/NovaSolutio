@@ -4,10 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet_payment_calculator"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="0dp"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/ll_payments_info_container"
@@ -24,6 +21,7 @@
             android:id="@+id/ib_payment_sheet_button_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/payment_main_button_margin"
             android:src="@drawable/ic_payment_sheet_arrow_down"
             android:background="@android:color/transparent"/>
 
@@ -85,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_payments_info_container">
@@ -99,7 +98,7 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_first"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_first_bill"
                 android:theme="@style/MaterialButtonStyle"
@@ -107,7 +106,7 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_second"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_second_bill"
                 android:theme="@style/MaterialButtonStyle"
@@ -115,7 +114,7 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_third"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_third_bill"
                 android:theme="@style/MaterialButtonStyle"
@@ -123,7 +122,7 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_fourth"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_fourth_bill"
                 android:theme="@style/MaterialButtonStyle"
@@ -131,7 +130,7 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_fifth"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_fifth_bill"
                 android:theme="@style/MaterialButtonStyle"
@@ -139,7 +138,7 @@
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_sixth"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_sixth_bill"
                 android:theme="@style/MaterialButtonStyle"

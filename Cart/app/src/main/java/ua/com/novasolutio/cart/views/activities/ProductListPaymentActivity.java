@@ -4,6 +4,7 @@ package ua.com.novasolutio.cart.views.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presenters.PresenterManager;
 import ua.com.novasolutio.cart.presenters.ProductListPaymentActivityPresenter;
+import ua.com.novasolutio.cart.views.fragments.PaymentSheetFragment;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 /* Activity для відображення користувачу списку товарів, які можна додати до корзини покупок,
@@ -29,9 +31,15 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     private static final String TAG = "ProdListPaymentActivity";
     private ProductListPaymentActivityPresenter mPresenter;
 
-    @BindView(R.id.toolbar_product_list_activity) protected Toolbar mToolbar;
-    @BindView(R.id.bnv_list_products_activity) protected BottomNavigationView mNavigationView;
-    @BindView(R.id.btn_payment_button) protected Button btnPayment;
+    @BindView(R.id.toolbar_product_list_activity)
+    protected Toolbar mToolbar;
+
+    @BindView(R.id.bnv_list_products_activity)
+    protected BottomNavigationView mNavigationView;
+
+    @BindView(R.id.btn_payment_button)
+    protected Button btnPayment;
+
     private int bnvSelectedItemId;
 
     @Override
@@ -182,19 +190,16 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     @OnClick(R.id.btn_payment_button)
     public void onPaymentClick(View v){
         Log.i(TAG, "onPaymentClick: ");
+        PaymentSheetFragment paymentDialog = new PaymentSheetFragment();
+        paymentDialog.show(getSupportFragmentManager(), paymentDialog.getTag());
     }
 
-    public void changeSizePaymentButton(boolean fullSize) {
-        Log.i(TAG, "changeSizePaymentButton FULLSIZE: " + String.valueOf(fullSize));
-
-        ViewGroup.LayoutParams params = btnPayment.getLayoutParams();
-        if (fullSize){
-            btnPayment.setText(getResources().getText(R.string.pay_button_product_payment_activity));
-            //Math.round(getResources().getDimension(R.dimen.payment_button_long_width));
-            params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+    public void changeSizePaymentButton(boolean visible) {
+        Log.i(TAG, "changeSizePaymentButton FULLSIZE: " + String.valueOf(visible));
+        if (visible){
+            btnPayment.setVisibility(View.VISIBLE);
         } else {
-            btnPayment.setText("");
-            params.width = Math.round(getResources().getDimension(R.dimen.payment_button_short_width));
+            btnPayment.setVisibility(View.GONE);
         }
     }
 
