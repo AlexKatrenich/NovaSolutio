@@ -18,4 +18,13 @@
     <dimen name="payment_button_long_width">90dp</dimen>
     <dimen name="payment_button_height">40dp</dimen>
     <dimen name="payment_button_padding">15dp</dimen>
+
+    <!--PaymentSheet buttons dimens-->
+    <dimen name="payment_views_layout_margins">5dp</dimen>
+    <dimen name="payment_views_padding">3dp</dimen>
+    <dimen name="payment_views_text_padding">3dp</dimen>
+    <dimen name="payment_views_bill_buttons_height">25dp</dimen>
+        <!--MaterialCard dimens-->
+        <dimen name="payment_material_card_corners">5dp</dimen>
+        <dimen name="payment_material_card_stroke_width">2dp</dimen>
 </resources>

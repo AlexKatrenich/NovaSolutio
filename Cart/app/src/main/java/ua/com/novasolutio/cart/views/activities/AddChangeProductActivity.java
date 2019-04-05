@@ -75,7 +75,11 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
                 if(!hasFocus){
                     Log.i(TAG, "onFocusChange: CAPTION - " + mProductCaption.getText());
                     if (!mPresenter.changeProductCaption(String.valueOf(mProductCaption.getText()))){
+                        tilProductCaption.setErrorEnabled(true);
                         tilProductCaption.setError(getResources().getText(R.string.incorrect_text_input));
+                    } else {
+                        tilProductCaption.setError(null);
+                        tilProductCaption.setErrorEnabled(false);
                     }
                 }
             }
@@ -87,7 +91,11 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus) {
                     if(!mPresenter.changeProductPrice(mProductPrice.getText().toString())){
+                        tilProductPrice.setErrorEnabled(true);
                         tilProductPrice.setError(getResources().getText(R.string.incorrect_text_input));
+                    } else {
+                        tilProductPrice.setError(null);
+                        tilProductPrice.setErrorEnabled(false);
                     }
                 }
             }

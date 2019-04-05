@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet_payment_calculator"
     android:layout_width="match_parent"
@@ -9,61 +10,225 @@
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Cash"
-            android:textAlignment="center"
-            android:layout_margin="@dimen/list_elements_margin_dimen"
-            android:layout_weight="1"/>
+            style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
 
         <android.support.design.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/list_elements_margin_dimen"
-            app:cardCornerRadius="@dimen/card_view_corners_radius"
-            app:strokeColor="@android:color/darker_gray"
-            app:strokeWidth="@dimen/material_card_view_stroke_width"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:strokeColor="@android:color/holo_green_dark"
+            app:strokeWidth="@dimen/payment_material_card_stroke_width"
+            android:padding="@dimen/payment_views_padding"
+            android:layout_margin="@dimen/payment_views_layout_margins"
+            app:cardCornerRadius="@dimen/payment_material_card_corners">
 
             <TextView
+                android:id="@+id/tv_payment_sheet_customer_cash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/list_elements_margin_dimen"
                 android:text="300.00"
-                />
+                android:textAlignment="viewStart"
+                style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
 
         </android.support.design.card.MaterialCardView>
 
         <View
             android:id="@+id/divider"
-            android:layout_width="1dp"
+            android:layout_width="@dimen/payment_material_card_stroke_width"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/list_elements_margin_dimen"
+            android:layout_margin="@dimen/payment_views_layout_margins"
             android:background="@android:color/darker_gray" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_margin="@dimen/list_elements_margin_dimen"
-            android:text="Change"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/list_elements_margin_dimen"
             android:layout_weight="1"
-            android:text="50.00"/>
+            android:text="Change"
+            style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
+
+        <TextView
+            android:id="@+id/tv_payment_sheet_customer_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="50.00"
+            android:textAlignment="viewStart"
+            style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_payment_numbers_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <LinearLayout
+            android:id="@+id/ll_payment_bills"
+            android:layout_width="73dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/list_elements_margin_dimen">
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/payment_views_layout_margins"
+                android:padding="@dimen/payment_views_padding"
+                app:cardCornerRadius="@dimen/payment_material_card_corners"
+                app:strokeColor="@android:color/holo_green_dark"
+                app:strokeWidth="@dimen/payment_material_card_stroke_width">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/payment_views_bill_buttons_height"
+                    android:background="@android:color/transparent"
+                    android:text="@string/payment_button_first_bill"
+                    style="@style/PaymentBottomSheetTextViewCaptionStyle.TextViewNormalText"/>
+
+            </android.support.design.card.MaterialCardView>
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/payment_views_layout_margins"
+                android:padding="@dimen/payment_views_padding"
+                app:cardCornerRadius="@dimen/payment_material_card_corners"
+                app:strokeColor="@android:color/holo_green_dark"
+                app:strokeWidth="@dimen/payment_material_card_stroke_width">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/payment_views_bill_buttons_height"
+                    android:background="@android:color/transparent"
+                    android:text="@string/payment_button_second_bill"
+                    style="@style/PaymentBottomSheetTextViewCaptionStyle.TextViewNormalText"/>
+
+            </android.support.design.card.MaterialCardView>
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/payment_views_layout_margins"
+                android:padding="@dimen/payment_views_padding"
+                app:cardCornerRadius="@dimen/payment_material_card_corners"
+                app:strokeColor="@android:color/holo_green_dark"
+                app:strokeWidth="@dimen/payment_material_card_stroke_width">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/payment_views_bill_buttons_height"
+                    android:background="@android:color/transparent"
+                    android:text="@string/payment_button_third_bill"
+                    style="@style/PaymentBottomSheetTextViewCaptionStyle.TextViewNormalText"/>
+
+            </android.support.design.card.MaterialCardView>
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/payment_views_layout_margins"
+                android:padding="@dimen/payment_views_padding"
+                app:cardCornerRadius="@dimen/payment_material_card_corners"
+                app:strokeColor="@android:color/holo_green_dark"
+                app:strokeWidth="@dimen/payment_material_card_stroke_width">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/payment_views_bill_buttons_height"
+                    android:background="@android:color/transparent"
+                    android:text="@string/payment_button_fourth_bill"
+                    style="@style/PaymentBottomSheetTextViewCaptionStyle.TextViewNormalText"/>
+
+            </android.support.design.card.MaterialCardView>
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/payment_views_layout_margins"
+                android:padding="@dimen/payment_views_padding"
+                app:cardCornerRadius="@dimen/payment_material_card_corners"
+                app:strokeColor="@android:color/holo_green_dark"
+                app:strokeWidth="@dimen/payment_material_card_stroke_width">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/payment_views_bill_buttons_height"
+                    android:background="@android:color/transparent"
+                    android:text="@string/payment_button_fifth_bill"
+                    style="@style/PaymentBottomSheetTextViewCaptionStyle.TextViewNormalText"/>
+
+            </android.support.design.card.MaterialCardView>
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/payment_views_layout_margins"
+                android:padding="@dimen/payment_views_padding"
+                app:cardCornerRadius="@dimen/payment_material_card_corners"
+                app:strokeColor="@android:color/holo_green_dark"
+                app:strokeWidth="@dimen/payment_material_card_stroke_width">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/payment_views_bill_buttons_height"
+                    android:background="@android:color/transparent"
+                    android:text="@string/payment_button_sixth_bill"
+                    style="@style/PaymentBottomSheetTextViewCaptionStyle.TextViewNormalText"/>
+
+            </android.support.design.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableRow>
+                <android.support.design.card.MaterialCardView
+                    android:layout_weight="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray"
+                    android:layout_margin="10dp"
+                    app:cornerRadius="5dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@android:color/holo_green_dark">
+
+                    <android.support.design.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:text="7"
+                        android:textColor="@android:color/black"
+                        android:textSize="24sp" />
+                </android.support.design.card.MaterialCardView>
+            </TableRow>
+
+            <TableRow></TableRow>
+
+            <TableRow></TableRow>
+
+            <TableRow></TableRow>
+
+        </TableLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

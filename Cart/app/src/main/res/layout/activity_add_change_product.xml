@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.activities.AddChangeProductActivity">
+    tools:context=".views.activities.AddChangeProductActivity"
+    android:background="@color/colorPrimary">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/add_change_product_activity_bar_layout"
@@ -36,8 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_change_product_activity_bar_layout"
-        android:layout_margin="@dimen/layout_forms_margin"
-        app:errorEnabled="true">
+        android:layout_margin="@dimen/layout_forms_margin">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/tiet_product_caption"
@@ -45,7 +45,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/product_name_hint_add_activity"
             android:maxLines="1"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/textPrimaryColor"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -58,7 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_product_caption_add_activity"
         android:layout_margin="@dimen/layout_forms_margin"
-        app:errorEnabled="true">
+        >
 
         <android.support.v7.widget.AppCompatAutoCompleteTextView
             android:id="@+id/tiet_product_price"
@@ -66,7 +67,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/product_price_hint_add_activity"
             android:maxLines="1"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal"
+            android:textColor="@color/textPrimaryColor"/>
 
     </android.support.design.widget.TextInputLayout>
 

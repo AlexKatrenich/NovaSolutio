@@ -39,5 +39,14 @@
     <!--Підказки на елементах EditText-->
     <string name="product_name_hint_add_activity">Product name</string>
     <string name="product_price_hint_add_activity">Price</string>
+    
+    <!--Фрагмент оплати-->
+    <string name="payment_button_first_bill">+10</string>
+    <string name="payment_button_second_bill">+20</string>
+    <string name="payment_button_third_bill">+50</string>
+    <string name="payment_button_fourth_bill">+100</string>
+    <string name="payment_button_fifth_bill">+200</string>
+    <string name="payment_button_sixth_bill">+500</string>
+
 
 </resources>
