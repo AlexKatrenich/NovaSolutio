@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_payment_calculator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -21,15 +21,17 @@
             android:id="@+id/ib_payment_sheet_button_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/payment_main_button_margin"
+            android:layout_marginStart="@dimen/payment_main_button_margin"
             android:src="@drawable/ic_payment_sheet_arrow_down"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cash"
+            android:text="@string/payment_text_view_cash_caption"
             style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
 
         <android.support.design.card.MaterialCardView
@@ -46,7 +48,7 @@
                 android:id="@+id/tv_payment_sheet_customer_cash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="300.00"
+                tools:text="300.00"
                 android:textAlignment="viewStart"
                 style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
 
@@ -60,18 +62,18 @@
             android:background="@android:color/darker_gray" />
 
         <TextView
+            style="@style/PaymentBottomSheetTextViewCaptionStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Change"
-            style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
+            android:text="@string/payment_text_view_change_caption" />
 
         <TextView
             android:id="@+id/tv_payment_sheet_customer_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="50.00"
+            tools:text="50.00"
             android:textAlignment="viewStart"
             style="@style/PaymentBottomSheetTextViewCaptionStyle"/>
 
@@ -84,7 +86,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/btn_payment_make_payment"
+        app:layout_constraintBottom_toTopOf="@+id/btn_main_make_payment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_payments_info_container">
@@ -318,7 +320,7 @@
     </LinearLayout>
 
     <android.support.design.button.MaterialButton
-        android:id="@+id/btn_payment_make_payment"
+        android:id="@+id/btn_main_make_payment"
         style="@style/MaterialButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

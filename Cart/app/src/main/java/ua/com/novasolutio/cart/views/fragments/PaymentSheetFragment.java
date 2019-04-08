@@ -17,6 +17,7 @@ import ua.com.novasolutio.cart.R;
 
 // клас для відображення фрагменту проведення оплати в корзині
 public class PaymentSheetFragment extends BottomSheetDialogFragment {
+
     public PaymentSheetFragment() {
         // потрібен пустий конструктор
     }
@@ -49,5 +50,12 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.bottom_sheet_payment_calculator, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 }

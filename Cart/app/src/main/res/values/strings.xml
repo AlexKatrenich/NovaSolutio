@@ -64,7 +64,9 @@
         <string name="payment_numb_button_null">0</string>
         <string name="payment_numb_button_clear">C</string>
 
-
+        <!--Назви TextView для відображення інформації в ModalBottomSheet діалог проведення платежу-->
+        <string name="payment_text_view_cash_caption">Cash</string>
+        <string name="payment_text_view_change_caption">Change</string>
 
 
 </resources>
