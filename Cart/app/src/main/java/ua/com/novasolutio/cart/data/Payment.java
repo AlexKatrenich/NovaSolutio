@@ -15,7 +15,7 @@ public class Payment {
     @Nullable
     private List<Product> product; // список проданих продуктів
 
-    private int totalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
+    private long totalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
 
 
     /* Constructor */
@@ -61,11 +61,11 @@ public class Payment {
         this.product = product;
     }
 
-    public int getTotalPrice() {
+    public long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(long totalPrice) {
         this.totalPrice = totalPrice;
     }
 

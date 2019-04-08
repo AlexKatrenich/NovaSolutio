@@ -96,8 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/list_elements_margin_dimen"
-            android:paddingRight="@dimen/list_elements_margin_dimen">
+            android:paddingLeft="@dimen/payment_views_layout_margins"
+            android:paddingRight="@dimen/payment_views_layout_margins">
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_first"

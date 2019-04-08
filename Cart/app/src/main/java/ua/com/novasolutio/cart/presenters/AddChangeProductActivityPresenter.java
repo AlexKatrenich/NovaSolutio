@@ -102,14 +102,6 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
         if (model.getCaption() != null && !model.getCaption().isEmpty()){
             new WriteDataTask().execute(model);
 
-            // отримання ІД нового продукту з бази даних(якщо, об'єкт новий)
-//            MockDB mDB = MockDB.getInstance();
-//            if (model.getID() == -1){
-//                model.setID(mDB.getIdCounter());
-//            }
-
-//            if(!ProductListManager.getInstance().setProductById(model, model.getID())) ProductListManager.getInstance().addProduct(model);
-
             if(setupDone()) ((AddChangeProductActivity)view()).onBackPressed();
         }
 
