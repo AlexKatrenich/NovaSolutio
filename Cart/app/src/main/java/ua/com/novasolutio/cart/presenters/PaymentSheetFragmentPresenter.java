@@ -10,19 +10,43 @@ import ua.com.novasolutio.cart.views.fragments.PaymentSheetFragment;
 public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, PaymentSheetFragment> {
     public static final String TAG = "PaySheetFragPresenter";
 
-    private long totalPrice = 0; // змінна відображає загальну ціну продажі
 
-    private long currentCash = 0; // змінна відображає суму, що дав покупець
+    // Перерахування можливих купюр
+    public enum Bills {
+        TEN,
+        TWENTY,
+        FIFTY,
+        ONE_HUNDRED,
+        TWO_HUNDRED,
+        FIVE_HUNDRED
+    }
 
-    private long currentChange = 0; // змінна відображає решту, що повинен віддати покупцеві касир
+    public enum KeyboardButtons{
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+        FIVE,
+        SIX,
+        SEVEN,
+        EIGHT,
+        NINE,
+        NULL,
+        DOT,
+        CANCEL
+    }
+
+    private long totalPrice = 0L; // змінна відображає загальну ціну продажі
+
+    private long currentCash = 0L; // змінна відображає суму, що дав покупець
 
 
     @Override
     protected void updateView() {
-        currentChange = currentCash - totalPrice;
+        long currentChange = currentCash - totalPrice; // перерахунок решти для покупця
 
         view().updateUI(formatPriceOnText(currentCash),
-                currentCash >= 0 ? formatPriceOnText(currentCash) : "0.00 ");
+                currentChange >= 0L ? formatPriceOnText(currentChange) : "0.00 ");
 
         Log.i(TAG, "updateView Cash: " + currentCash + " CHANGE: " + currentChange);
     }
@@ -59,4 +83,66 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
     public void onCloseButtonClicked() {
         view().dismiss();
     }
+
+    // метод для прорахунку додавання купюр до загальної суми розрахунку
+    public void onPaymentButtonBillClicked(Bills bills) {
+
+        switch (bills) {
+            case TEN:
+                currentCash = currentCash + 1000;
+                break;
+            case TWENTY:
+                currentCash = currentCash + 2000;
+                break;
+            case FIFTY:
+                currentCash = currentCash + 5000;
+                break;
+            case ONE_HUNDRED:
+                currentCash = currentCash + 10000;
+                break;
+            case TWO_HUNDRED:
+                currentCash = currentCash + 20000;
+                break;
+            case FIVE_HUNDRED:
+                currentCash = currentCash + 50000;
+                break;
+        }
+
+        updateView();
+    }
+
+    // очищення поля введення суми
+    public void onKeyboardButtonClicked(KeyboardButtons buttons) {
+        switch (buttons) {
+            case ONE:
+                break;
+            case TWO:
+                break;
+            case THREE:
+                break;
+            case FOUR:
+                break;
+            case FIVE:
+                break;
+            case SIX:
+                break;
+            case SEVEN:
+                break;
+            case EIGHT:
+                break;
+            case NINE:
+                break;
+            case DOT:
+                break;
+            case NULL:
+                break;
+            case CANCEL:
+                currentCash = 0;
+                break;
+        }
+
+        updateView();
+    }
+
+
 }

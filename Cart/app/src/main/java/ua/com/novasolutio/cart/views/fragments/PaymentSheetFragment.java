@@ -99,7 +99,6 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
 
     // метод для відображення на екрані готівки та решти по платежу
     public void updateUI(String currentCash, String currentChange){
-
         Log.i(TAG, String.format("updateUI CASH: %s, CHANGE: %s ", currentCash, currentChange));
 
         if (currentCash != null && currentCash != ""){
@@ -117,5 +116,65 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
     public void onClosePaymentFragmentButtonClicked(){
         mPresenter.onCloseButtonClicked();
         Log.i(TAG, "onClosePaymentFragmentButtonClicked: ");
+    }
+
+    /* Обробка кліків по кнопкам додавання покупюрного додавання до суми сплати*/
+    @OnClick(R.id.btn_payment_bill_first)
+    public void onPaymentButtonBillClicked(){
+        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TEN);
+    }
+
+    @OnClick(R.id.btn_payment_bill_second)
+    public void onPaymentButtonBillSecondClicked(){
+        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TWENTY);
+    }
+
+    @OnClick(R.id.btn_payment_bill_third)
+    public void onPaymentButtonBillThirdClicked(){
+        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.FIFTY);
+    }
+
+    @OnClick(R.id.btn_payment_bill_fourth)
+    public void onPaymentButtonBillFourthClicked(){
+        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.ONE_HUNDRED);
+    }
+
+    @OnClick(R.id.btn_payment_bill_fifth)
+    public void onPaymentButtonBillFifthClicked(){
+        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TWO_HUNDRED);
+    }
+
+    @OnClick(R.id.btn_payment_bill_sixth)
+    public void onPaymentButtonBillSixthClicked(){
+        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.FIVE_HUNDRED);
+    }
+    /* -------------------------------------------------------------------------------------------- */
+
+    /* Обробка кліків по кнопкам почислового додавання до суми сплати*/
+//    @OnClick(R.id.btn_payment_numb_one)
+//    public void
+//    @OnClick(R.id.btn_payment_numb_two)
+//
+//    @OnClick(R.id.btn_payment_numb_three)
+//
+//    @OnClick(R.id.btn_payment_numb_four)
+//
+//    @OnClick(R.id.btn_payment_numb_five)
+//
+//    @OnClick(R.id.btn_payment_numb_six)
+//
+//    @OnClick(R.id.btn_payment_numb_seven)
+//
+//    @OnClick(R.id.btn_payment_numb_eight)
+//
+//    @OnClick(R.id.btn_payment_numb_nine)
+//
+//    @OnClick(R.id.btn_payment_numb_null)
+//
+//    @OnClick(R.id.btn_payment_numb_dot)
+
+    @OnClick(R.id.btn_payment_numb_cancel)
+    public void onPaymentClearButtonClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.CANCEL);
     }
 }

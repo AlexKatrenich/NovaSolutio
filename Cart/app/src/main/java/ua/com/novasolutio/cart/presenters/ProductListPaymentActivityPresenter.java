@@ -11,6 +11,7 @@ import ua.com.novasolutio.cart.data.ProductListManager;
 import ua.com.novasolutio.cart.views.activities.AddChangeProductActivity;
 import ua.com.novasolutio.cart.views.activities.ProductListPaymentActivity;
 import ua.com.novasolutio.cart.views.fragments.CartFragment;
+import ua.com.novasolutio.cart.views.fragments.PaymentSheetFragment;
 import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 
 public class ProductListPaymentActivityPresenter extends BasePresenter<Void , ProductListPaymentActivity> implements ProductListManager.DataChangeListener {
@@ -39,7 +40,11 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         Log.i(TAG, "onProductListFragmentClicked: VIEW = " + String.valueOf(view() != null));
         view().bindFragment(new ProductListFragment());
         view().invalidateOptionsMenu();
-        view().changeSizePaymentButton(false);
+        if(ProductListManager.getInstance().getTotalPriceSelectedProducts() > 0) {
+            view().changeSizePaymentButton(true);
+        } else {
+            view().changeSizePaymentButton(false);
+        }
     }
 
     public void onCartFragmentClicked() {
@@ -89,5 +94,11 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         }
 
         return false;
+    }
+
+    public void onPaymentClicked() {
+        onCartFragmentClicked();
+        view().showPaymentDialog();
+        Log.i(TAG, "onPaymentClicked: ");
     }
 }

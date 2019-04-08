@@ -188,10 +188,9 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_payment_button)
-    public void onPaymentClick(View v){
+    public void onPaymentClick(){
         Log.i(TAG, "onPaymentClick: ");
-        PaymentSheetFragment paymentDialog = new PaymentSheetFragment();
-        paymentDialog.show(getSupportFragmentManager(), paymentDialog.getTag());
+        mPresenter.onPaymentClicked();
     }
 
     public void changeSizePaymentButton(boolean visible) {
@@ -203,4 +202,9 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         }
     }
 
+    public void showPaymentDialog() {
+        PaymentSheetFragment paymentDialog = new PaymentSheetFragment();
+        paymentDialog.show(getSupportFragmentManager(), paymentDialog.getTag());
+        Log.i(TAG, "showPaymentDialog: ");
+    }
 }
