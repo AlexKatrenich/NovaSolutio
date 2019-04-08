@@ -80,10 +80,11 @@
 
     <LinearLayout
         android:id="@+id/ll_payment_numbers_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btn_payment_make_payment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_payments_info_container">
@@ -94,78 +95,84 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/list_elements_margin_dimen"
-            android:layout_weight="1">
+            android:paddingRight="@dimen/list_elements_margin_dimen">
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_first"
+                style="@style/MaterialButtonStyle.BillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_first_bill"
-                android:theme="@style/MaterialButtonStyle"
-                style="@style/MaterialButtonStyle.BillButton"/>
+                android:theme="@style/MaterialButtonStyle" />
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_second"
+                style="@style/MaterialButtonStyle.BillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_second_bill"
-                android:theme="@style/MaterialButtonStyle"
-                style="@style/MaterialButtonStyle.BillButton"/>
+                android:theme="@style/MaterialButtonStyle" />
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_third"
+                style="@style/MaterialButtonStyle.BillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_third_bill"
-                android:theme="@style/MaterialButtonStyle"
-                style="@style/MaterialButtonStyle.BillButton"/>
+                android:theme="@style/MaterialButtonStyle" />
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_fourth"
+                style="@style/MaterialButtonStyle.BillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_fourth_bill"
-                android:theme="@style/MaterialButtonStyle"
-                style="@style/MaterialButtonStyle.BillButton"/>
+                android:theme="@style/MaterialButtonStyle" />
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_fifth"
+                style="@style/MaterialButtonStyle.BillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_fifth_bill"
-                android:theme="@style/MaterialButtonStyle"
-                style="@style/MaterialButtonStyle.BillButton"/>
+                android:theme="@style/MaterialButtonStyle" />
 
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_payment_bill_sixth"
+                style="@style/MaterialButtonStyle.BillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/payment_button_sixth_bill"
-                android:theme="@style/MaterialButtonStyle"
-                style="@style/MaterialButtonStyle.BillButton"/>
-
+                android:theme="@style/MaterialButtonStyle" />
 
 
         </LinearLayout>
 
-        <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:gravity="center"
-            android:layout_weight="1">
 
-            <TableRow
+        <android.support.constraint.ConstraintLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingRight="@dimen/list_elements_margin_dimen"
+            android:paddingLeft="@dimen/list_elements_margin_dimen">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_seven"
                     style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_seven"
                     android:theme="@style/MaterialButtonStyle" />
 
@@ -174,6 +181,7 @@
                     style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_eight"
                     android:theme="@style/MaterialButtonStyle" />
 
@@ -182,99 +190,131 @@
                     style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_nine"
                     android:theme="@style/MaterialButtonStyle" />
-            </TableRow>
+            </LinearLayout>
 
-            <TableRow
-                android:layout_height="match_parent"
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_four"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_four"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
+                    android:theme="@style/MaterialButtonStyle" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_five"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_five"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
+                    android:theme="@style/MaterialButtonStyle" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_six"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_six"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
-            </TableRow>
+                    android:theme="@style/MaterialButtonStyle" />
+            </LinearLayout>
 
-            <TableRow
-                android:layout_height="match_parent"
+            <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_one"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_one"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
+                    android:theme="@style/MaterialButtonStyle" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_two"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_two"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
+                    android:theme="@style/MaterialButtonStyle" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_three"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_three"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
-            </TableRow>
+                    android:theme="@style/MaterialButtonStyle" />
+            </LinearLayout>
 
-            <TableRow
-                android:layout_height="match_parent"
+            <LinearLayout
+                android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_null"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_null"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
+                    android:theme="@style/MaterialButtonStyle" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_dot"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_dot"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
+                    android:theme="@style/MaterialButtonStyle" />
 
                 <android.support.design.button.MaterialButton
                     android:id="@+id/btn_payment_numb_cancel"
+                    style="@style/MaterialButtonStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/payment_numb_button_clear"
-                    android:theme="@style/MaterialButtonStyle"
-                    style="@style/MaterialButtonStyle"/>
-            </TableRow>
+                    android:theme="@style/MaterialButtonStyle" />
+            </LinearLayout>
 
-        </TableLayout>
+        </android.support.constraint.ConstraintLayout>
+
     </LinearLayout>
 
     <android.support.design.button.MaterialButton
@@ -282,9 +322,11 @@
         style="@style/MaterialButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/MaterialButtonStyle"
         android:layout_margin="@dimen/payment_main_button_margin"
+        android:layout_marginBottom="8dp"
         android:text="@string/payment_main_button_caption"
+        android:theme="@style/MaterialButtonStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_payment_numbers_container" />

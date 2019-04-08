@@ -28,6 +28,6 @@
         <dimen name="payment_material_card_corners">5dp</dimen>
         <dimen name="payment_material_card_stroke_width">2dp</dimen>
 
-    <dimen name="payment_main_button_margin">15dp</dimen>
+    <dimen name="payment_main_button_margin">10dp</dimen>
 
 </resources>
