@@ -17,6 +17,8 @@ public class Payment {
 
     private long totalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
 
+    private long change;
+
 
     /* Constructor */
     public Payment() {
@@ -67,6 +69,14 @@ public class Payment {
 
     public void setTotalPrice(long totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public long getChange() {
+        return change;
+    }
+
+    public void setChange(long change) {
+        this.change = change;
     }
 
     /* Override methods*/

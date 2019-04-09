@@ -51,7 +51,12 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         Log.i(TAG, "onCartFragmentClicked: VIEW = " + String.valueOf(view() != null));
         view().bindFragment(new CartFragment());
         view().invalidateOptionsMenu();
-        view().changeSizePaymentButton(true);
+
+        if(ProductListManager.getInstance().getTotalPriceSelectedProducts() > 0) {
+            view().changeSizePaymentButton(true);
+        } else {
+            view().changeSizePaymentButton(false);
+        }
     }
 
     public void addNewProductMenuClicked() {

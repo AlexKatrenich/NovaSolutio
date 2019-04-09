@@ -98,18 +98,18 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
     }
 
     // метод для відображення на екрані готівки та решти по платежу
-    public void updateUI(String currentCash, String currentChange){
-        Log.i(TAG, String.format("updateUI CASH: %s, CHANGE: %s ", currentCash, currentChange));
-
+    public void updateUiCash(String currentCash){
+        Log.i(TAG, String.format("updateUI CASH: %s", currentCash));
         if (currentCash != null && currentCash != ""){
             mCash.setText(currentCash);
         }
 
+    }
+
+    public void updateUiChange(String currentChange){
         if(currentChange != null && currentChange != ""){
             mChange.setText(currentChange);
         }
-
-
     }
 
     @OnClick(R.id.ib_payment_sheet_button_close)
@@ -151,30 +151,65 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
     /* -------------------------------------------------------------------------------------------- */
 
     /* Обробка кліків по кнопкам почислового додавання до суми сплати*/
-//    @OnClick(R.id.btn_payment_numb_one)
-//    public void
-//    @OnClick(R.id.btn_payment_numb_two)
-//
-//    @OnClick(R.id.btn_payment_numb_three)
-//
-//    @OnClick(R.id.btn_payment_numb_four)
-//
-//    @OnClick(R.id.btn_payment_numb_five)
-//
-//    @OnClick(R.id.btn_payment_numb_six)
-//
-//    @OnClick(R.id.btn_payment_numb_seven)
-//
-//    @OnClick(R.id.btn_payment_numb_eight)
-//
-//    @OnClick(R.id.btn_payment_numb_nine)
-//
-//    @OnClick(R.id.btn_payment_numb_null)
-//
-//    @OnClick(R.id.btn_payment_numb_dot)
+    @OnClick(R.id.btn_payment_numb_one)
+    public void onButtonkeyboardOneClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.ONE, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_two)
+    public void onButtonkeyboardTwoClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.TWO, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_three)
+    public void onButtonkeyboardThreeClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.THREE, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_four)
+    public void onButtonkeyboardFourClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.FOUR, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_five)
+    public void onButtonkeyboardFiveClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.FIVE, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_six)
+    public void onButtonkeyboardSixClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.SIX, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_seven)
+    public void onButtonkeyboardSevenClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.SEVEN, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_eight)
+    public void onButtonkeyboardEightClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.EIGHT, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_nine)
+    public void onButtonkeyboardNineClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.NINE, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_null)
+    public void onButtonkeyboardNullClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.NULL, String.valueOf(mCash.getText()));
+    }
+
+    @OnClick(R.id.btn_payment_numb_dot)
+    public void onButtonkeyboardDotClicked(){
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.DOT, String.valueOf(mCash.getText()));
+    }
 
     @OnClick(R.id.btn_payment_numb_cancel)
     public void onPaymentClearButtonClicked(){
-        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.CANCEL);
+        mPresenter.onKeyboardButtonClicked(PaymentSheetFragmentPresenter.KeyboardButtons.CANCEL, String.valueOf(mCash.getText()));
     }
+    /* ------------------------------------------------------------------------------------------ */
+
 }

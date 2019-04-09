@@ -9,7 +9,7 @@ import ua.com.novasolutio.cart.views.fragments.PaymentSheetFragment;
 
 public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, PaymentSheetFragment> {
     public static final String TAG = "PaySheetFragPresenter";
-
+    private boolean userInput = false;
 
     // Перерахування можливих купюр
     public enum Bills {
@@ -21,6 +21,7 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         FIVE_HUNDRED
     }
 
+    // перерахування кнопок власної клавіатури
     public enum KeyboardButtons{
         ONE,
         TWO,
@@ -45,15 +46,15 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
     protected void updateView() {
         long currentChange = currentCash - totalPrice; // перерахунок решти для покупця
 
-        view().updateUI(formatPriceOnText(currentCash),
-                currentChange >= 0L ? formatPriceOnText(currentChange) : "0.00 ");
-
+        view().updateUiChange(currentChange >= 0L ? formatPriceOnText(currentChange) : "0.00");
+        view().updateUiCash(formatPriceOnText(currentCash));
         Log.i(TAG, "updateView Cash: " + currentCash + " CHANGE: " + currentChange);
     }
 
     @Override
     public void bindView(@NonNull PaymentSheetFragment view) {
         totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
+        currentCash = totalPrice;
         super.bindView(view);
         Log.i(TAG, "bindView: TOTAL PRICE: " + String.valueOf(totalPrice));
         updateView();
@@ -79,13 +80,17 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         return priceString.append(' ').toString();
     }
 
-
+    // закриття фрагменту, коли користувач натискає на кнопку відміни
     public void onCloseButtonClicked() {
         view().dismiss();
     }
 
     // метод для прорахунку додавання купюр до загальної суми розрахунку
     public void onPaymentButtonBillClicked(Bills bills) {
+        if(!userInput) {
+            currentCash = 0;
+            userInput = true;
+        }
 
         switch (bills) {
             case TEN:
@@ -109,40 +114,77 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         }
 
         updateView();
+        Log.i(TAG, "onPaymentButtonBillClicked: ");
     }
 
     // очищення поля введення суми
-    public void onKeyboardButtonClicked(KeyboardButtons buttons) {
+    public void onKeyboardButtonClicked(KeyboardButtons buttons, String stringValue) {
+        if(!userInput) {
+            currentCash = 0;
+            userInput = true;
+            stringValue = "";
+        }
+
         switch (buttons) {
             case ONE:
+                addNumberToCash("1", stringValue);
                 break;
             case TWO:
+                addNumberToCash("2", stringValue);
                 break;
             case THREE:
+                addNumberToCash("3", stringValue);
                 break;
             case FOUR:
+                addNumberToCash("4", stringValue);
                 break;
             case FIVE:
+                addNumberToCash("5", stringValue);
                 break;
             case SIX:
+                addNumberToCash("6", stringValue);
                 break;
             case SEVEN:
+                addNumberToCash("7", stringValue);
                 break;
             case EIGHT:
+                addNumberToCash("8", stringValue);
                 break;
             case NINE:
+                addNumberToCash("9", stringValue);
                 break;
             case DOT:
+                view().updateUiCash(stringValue + ".");
                 break;
             case NULL:
+                addNumberToCash("0", stringValue);
                 break;
             case CANCEL:
                 currentCash = 0;
+                updateView();
                 break;
         }
-
-        updateView();
+        Log.i(TAG, "onKeyboardButtonClicked: ");
     }
 
+
+    private void addNumberToCash(String numb, String stringValue) {
+        stringValue = stringValue + numb;
+        double priceDouble;
+
+        try {
+            priceDouble = Double.valueOf(stringValue);
+            view().updateUiCash(stringValue);
+        } catch (NumberFormatException e){
+            priceDouble = Double.valueOf(numb);
+            view().updateUiCash(numb);
+        }
+
+        currentCash = Math.round(priceDouble * new Double(100));
+        long currentChange = currentCash - totalPrice;
+        view().updateUiChange(currentChange >= 0L ? formatPriceOnText(currentChange) : "0.00");
+
+        Log.i(TAG, "addNumberToCash CASH: " + currentCash + " CURRENT_CHANGE: " + currentChange);
+    }
 
 }
