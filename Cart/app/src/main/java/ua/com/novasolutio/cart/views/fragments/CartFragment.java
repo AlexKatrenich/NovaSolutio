@@ -1,6 +1,5 @@
 package ua.com.novasolutio.cart.views.fragments;
 
-import android.arch.lifecycle.Lifecycle;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

@@ -34,6 +34,7 @@
     <!--Тексти повідомлень користувачу-->
     <string name="speech_voice_search_unable_support">Your device don`t support speech search!</string>
     <string name="incorrect_text_input">Incorrect state on text field</string>
+    <string name="incorrect_cash_value">Don`t enough cash for payment</string>
 
     <!--ЕКРАН ДОДАВАННЯ/РЕДАГУВАННЯ ТОВАРУ-->
     <!--Підказки на елементах EditText-->

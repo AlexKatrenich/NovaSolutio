@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -212,4 +213,12 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
     }
     /* ------------------------------------------------------------------------------------------ */
 
+    @OnClick(R.id.btn_main_make_payment)
+    public void onPaymentButtonClicked(){
+        mPresenter.onPaymentButtonClicked(String.valueOf(mCash.getText()));
+    }
+
+    public void showMessage(String message){
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
+    }
 }

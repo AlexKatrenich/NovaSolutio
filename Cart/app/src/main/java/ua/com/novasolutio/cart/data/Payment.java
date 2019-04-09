@@ -13,7 +13,7 @@ public class Payment {
     private long paymentDate; // дата проведення платежу
 
     @Nullable
-    private List<Product> product; // список проданих продуктів
+    private List<Product> mProducts; // список проданих продуктів
 
     private long totalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
 
@@ -30,10 +30,10 @@ public class Payment {
         this.totalPrice = totalPrice;
     }
 
-    public Payment(int id, long paymentDate, @Nullable List<Product> product, int totalPrice) {
+    public Payment(int id, long paymentDate, @Nullable List<Product> products, int totalPrice) {
         this.id = id;
         this.paymentDate = paymentDate;
-        this.product = product;
+        this.mProducts = products;
         this.totalPrice = totalPrice;
     }
 
@@ -55,12 +55,12 @@ public class Payment {
     }
 
     @Nullable
-    public List<Product> getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return mProducts;
     }
 
-    public void setProduct(@Nullable List<Product> product) {
-        this.product = product;
+    public void setProducts(@Nullable List<Product> products) {
+        this.mProducts = products;
     }
 
     public long getTotalPrice() {
@@ -99,6 +99,7 @@ public class Payment {
                 "id=" + id +
                 ", paymentDate=" + paymentDate +
                 ", totalPrice=" + totalPrice +
+                ", change=" + change +
                 '}';
     }
 }

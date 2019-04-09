@@ -1,9 +1,17 @@
 package ua.com.novasolutio.cart.presenters;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.data.Payment;
+import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
 import ua.com.novasolutio.cart.views.fragments.PaymentSheetFragment;
 
@@ -167,7 +175,7 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         Log.i(TAG, "onKeyboardButtonClicked: ");
     }
 
-
+    // метод для форматування вхідних даних зі штучної клавіатури
     private void addNumberToCash(String numb, String stringValue) {
         stringValue = stringValue + numb;
         double priceDouble;
@@ -187,4 +195,41 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         Log.i(TAG, "addNumberToCash CASH: " + currentCash + " CURRENT_CHANGE: " + currentChange);
     }
 
+    public void onPaymentButtonClicked(String cash) {
+        double priceDouble = Double.valueOf(cash);
+        currentCash = Math.round(priceDouble * new Double(100));
+        long currentChange = currentCash - totalPrice;
+
+        // перевірка на достатню величину введеної суми платежу
+        if (currentCash >= totalPrice){
+            // створення нового об'єкту платежу
+            Payment payment = new Payment();
+            payment.setTotalPrice(currentCash);
+            payment.setChange(currentChange);
+
+            // внесення до платежу переліку продуктів
+            List<Product> products = ProductListManager.getInstance().getProductsList();
+            List<Product> selectedProducts = new ArrayList<>();
+
+            for (Product p : products) {
+                if(p.getCount() > 0){
+                    selectedProducts.add(p);
+                    p.setCount(0);
+                    ProductListManager.getInstance().setProductById(p, p.getID()); // обнулення переліку обраних продуктів в БД
+                }
+            }
+
+            payment.setProducts(selectedProducts);
+            Date currentTime = Calendar.getInstance().getTime();
+            payment.setPaymentDate(currentTime.getTime());
+
+            // TODO запис до БД платежу
+
+            Log.i(TAG, "onPaymentButtonClicked: " + payment);
+            view().dismiss();
+        } else {
+            String message = view().getResources().getString(R.string.incorrect_cash_value);
+            view().showMessage(message);
+        }
+    }
 }
