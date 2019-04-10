@@ -122,4 +122,8 @@ public class CartFragment extends Fragment implements ProductsListView {
     public void showItemRemove(Product product){
         mAdapter.removeItem(product);
     }
+
+    public CartFragmentPresenter getPresenter() {
+        return mPresenter;
+    }
 }

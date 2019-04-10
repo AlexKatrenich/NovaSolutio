@@ -3,9 +3,10 @@ package ua.com.novasolutio.cart.views.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,7 +14,6 @@ import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import butterknife.BindView;
@@ -123,6 +123,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         setSupportActionBar(null);
+        mNavigationView.setOnNavigationItemSelectedListener(null);
         super.onDestroy();
     }
 
@@ -138,6 +139,8 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         return true;
     }
 
+    private MenuItem sortMenuItem;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -146,6 +149,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 Log.i(TAG, "onOptionsItemSelected: Settings");
                 return true;
             case R.id.item_sorting_menu :
+                sortMenuItem = item;
                 Log.i(TAG, "onOptionsItemSelected: Sorting");
                 return true;
             case R.id.item_add_new_product_menu:
@@ -153,8 +157,27 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 mPresenter.addNewProductMenuClicked();
                 Log.i(TAG, "onOptionsItemSelected: Add new product");
                 return true;
-        }
 
+            case R.id.item_sort_ascending_caption :
+                mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.CAPTION_ASCENDING);
+                Log.i(TAG, "onOptionsItemSelected SORTING BY ASCENDING CAPTION");
+                return true;
+
+            case R.id.item_sort_descending_caption :
+                mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.CAPTION_DESCENDING);
+                Log.i(TAG, "onOptionsItemSelected: SORTING BY DESCENDING CAPTION");
+                return true;
+
+            case R.id.item_sort_ascending_price :
+                mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.PRICE_ASCENDING);
+                Log.i(TAG, "onOptionsItemSelected: SORTING BY ASCENDING PRICE");
+                return true;
+
+            case R.id.item_sort_descending_price :
+                mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.PRICE_DESCENDING);
+                Log.i(TAG, "onOptionsItemSelected: SORTING BY DESCENDING PRICE");
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -206,5 +229,19 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         PaymentSheetFragment paymentDialog = new PaymentSheetFragment();
         paymentDialog.show(getSupportFragmentManager(), paymentDialog.getTag());
         Log.i(TAG, "showPaymentDialog: ");
+    }
+
+    public void changeSortIcon(boolean ascending){
+        if (sortMenuItem != null) {
+            sortMenuItem.setIcon(ResourcesCompat.getDrawable(
+                    getResources(),
+                    ascending == true ?
+                            R.drawable.ic_sort_menu_item_ascending : R.drawable.ic_sort_menu_item_descending,
+                    null));
+        }
+    }
+
+    public ProductListPaymentActivityPresenter getPresenter() {
+        return mPresenter;
     }
 }

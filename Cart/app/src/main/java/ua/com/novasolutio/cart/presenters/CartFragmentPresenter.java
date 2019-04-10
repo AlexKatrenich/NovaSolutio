@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,7 +82,6 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
                 iter.remove();
             }
         }
-
         Log.i(TAG, "setModel: " + list);
         super.setModel(list);
     }

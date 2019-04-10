@@ -4,10 +4,31 @@
     <item
         android:id="@+id/item_sorting_menu"
         android:enabled="true"
-        android:icon="@drawable/ic_sort_item_menu"
-        android:title="Sorting"
+        android:icon="@drawable/ic_sort_menu_item_ascending"
+        android:title="@string/item_sorting_product_activity_menu"
         android:visible="false"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" >
+
+        <menu>
+            <item
+                android:id="@+id/item_sort_ascending_price"
+                android:icon="@drawable/ic_sort_by_numeric_ascending"
+                android:title="@string/item_sort_ascending_price"/>
+            <item
+                android:id="@+id/item_sort_descending_price"
+                android:icon="@drawable/ic_sort_by_numeric_descending"
+                android:title="@string/item_sort_descending_price"/>
+            <item
+                android:id="@+id/item_sort_ascending_caption"
+                android:icon="@drawable/ic_sort_by_alphabet_ascending"
+                android:title="@string/item_sort_ascending_caption"/>
+            <item
+                android:id="@+id/item_sort_descending_caption"
+                android:icon="@drawable/ic_sort_by_alphabet_descending"
+                android:title="@string/item_sort_descending_caption"/>
+
+        </menu>
+    </item>
 
     <item
         android:id="@+id/item_add_new_product_menu"

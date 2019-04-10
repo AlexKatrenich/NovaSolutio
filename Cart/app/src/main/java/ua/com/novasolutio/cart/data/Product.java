@@ -105,6 +105,7 @@ public class Product {
                 ", mPrice=" + mPrice +
                 ", mRate=" + mRate +
                 ", deleted=" + mDeleted +
+                ", count=" + mCount +
                 '}';
     }
 

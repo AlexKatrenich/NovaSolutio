@@ -47,8 +47,11 @@ public class ProductListManager {
     public boolean setProducts(Collection<Product> products){
         if(products != null){
             mProducts.clear();
-            mProducts.addAll(products);
-            Log.i(TAG, "setProducts: " + products);
+            for (Product p: products) {
+                mProducts.add(p);
+            }
+
+            Log.i(TAG, "Products: " + mProducts);
             observeProductListChange();
             return true;
         }

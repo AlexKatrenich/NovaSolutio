@@ -20,8 +20,12 @@
     <!--Заголовки меню-->
     <string name="item_settings_product_activity_menu">Settings</string>
     <string name="item_sorting_product_activity_menu">Sorting</string>
+        <string name="item_sort_ascending_price">Price</string>
+        <string name="item_sort_descending_price">Price</string>
+        <string name="item_sort_ascending_caption">Caption</string>
+        <string name="item_sort_descending_caption">Caption</string>
     <string name="item_save_add_change_product">Save</string>
-    <string name="search_view_default_hint">Search...</string>
+    <string name="search_view_default_hint">Search…</string>
     <string name="total_price_to_pay">To pay:</string>
     <string name="column_name_products_on_cart">Name</string>
     <string name="column_count_selected_products_on_cart">Count</string>
