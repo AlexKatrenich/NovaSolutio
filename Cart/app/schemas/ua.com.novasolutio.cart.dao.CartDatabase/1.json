@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7e23dc260b3b786e6d79e2b358fd822f",
+    "identityHash": "ac0d2008efdfb5c22cd9be7a3765e599",
     "entities": [
       {
         "tableName": "products",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`product_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `caption` TEXT, `price` INTEGER NOT NULL, `rate` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`product_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `caption` TEXT, `price` INTEGER NOT NULL, `rate` INTEGER NOT NULL, `deleted` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mID",
@@ -31,6 +31,12 @@
             "columnName": "rate",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "mDeleted",
+            "columnName": "deleted",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -45,7 +51,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7e23dc260b3b786e6d79e2b358fd822f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ac0d2008efdfb5c22cd9be7a3765e599\")"
     ]
   }
 }

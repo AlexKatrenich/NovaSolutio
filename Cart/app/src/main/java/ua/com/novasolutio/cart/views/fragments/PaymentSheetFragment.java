@@ -81,7 +81,6 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
         } else {
             mPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
-
     }
 
     @Override

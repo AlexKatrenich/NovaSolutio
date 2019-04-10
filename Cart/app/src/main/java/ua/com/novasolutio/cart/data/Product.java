@@ -28,18 +28,20 @@ public class Product {
     @Ignore
     private int mCount; // кількість одиниць продукту вибраного на View, НЕ зберігати в БД!
 
+    @ColumnInfo(name = "deleted")
+    private boolean mDeleted = false; // прапорець для визначення, чи був продукт видалений зі списку для відображення користувачеві
+
     @Ignore
     public Product() {
 
     }
 
-
-
-    public Product(int mID, String mCaption, int mPrice, int mRate) {
+    public Product(int mID, String mCaption, int mPrice, int mRate, boolean mDeleted) {
         this.mID = mID;
         this.mCaption = mCaption;
         this.mPrice = mPrice;
         this.mRate = mRate;
+        this.mDeleted = mDeleted;
     }
 
     public int getID() {
@@ -87,7 +89,6 @@ public class Product {
         if(obj instanceof Product){
             return ((Product) obj).getCaption().equals(this.getCaption()) && ((Product) obj).getPrice() == this.getPrice();
         }
-
         return false;
     }
 
@@ -103,6 +104,15 @@ public class Product {
                 ", mCaption='" + mCaption + '\'' +
                 ", mPrice=" + mPrice +
                 ", mRate=" + mRate +
+                ", deleted=" + mDeleted +
                 '}';
+    }
+
+    public boolean isDeleted() {
+        return mDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        mDeleted = deleted;
     }
 }

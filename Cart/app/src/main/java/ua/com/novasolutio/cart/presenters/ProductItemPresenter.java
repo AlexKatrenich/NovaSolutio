@@ -70,7 +70,8 @@ public class ProductItemPresenter extends BasePresenter<Product, ProductViewHold
         @Override
         protected Product doInBackground(Product... products) {
             Product product = products[0];
-            CartApplication.getInstance().getDatabase().mProductDao().delete(product); // видалення запису з БД
+            product.setDeleted(true);
+            CartApplication.getInstance().getDatabase().mProductDao().update(product); // видалення запису з БД
             Log.i(TAG, "doInBackground: Delete Product From DB " + product);
             return product;
         }

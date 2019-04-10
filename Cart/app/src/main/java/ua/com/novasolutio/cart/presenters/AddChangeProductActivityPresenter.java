@@ -70,6 +70,7 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
             product = new Product();
             product.setCaption("");
             product.setPrice(0);
+            product.setDeleted(false);
         } else {
            product = ProductListManager.getInstance().getProductById(productId);
         }
@@ -116,7 +117,6 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
             // емуляція запису в БД
             Product product = products[0];
             Log.i(TAG, "doInBackground: Product: " + product);
-//            MockDB.getInstance().setProduct(product);
             CartDatabase db = CartApplication.getInstance().getDatabase();
 
             if (db.mProductDao().update(product) == 0){
