@@ -14,10 +14,17 @@ import java.util.List;
 
 import ua.com.novasolutio.cart.data.Product;
 import ua.com.novasolutio.cart.data.ProductListManager;
+import ua.com.novasolutio.cart.views.activities.ProductListPaymentActivity;
 import ua.com.novasolutio.cart.views.fragments.CartFragment;
 
-public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFragment> implements ProductListManager.DataChangeListener, LifecycleObserver {
+public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFragment>
+        implements ProductListManager.DataChangeListener,
+                        LifecycleObserver,
+                        ProductListPaymentActivityPresenter.ChangeSortingStateListener {
     public static final String TAG = "CartFragmentPresenter";
+
+    // статус сортування по замовчуванню
+    private ProductListPaymentActivityPresenter.SortingState mSortingState = ProductListPaymentActivityPresenter.SortingState.CAPTION_ASCENDING;
 
     @Override
     protected void updateView() {
@@ -39,10 +46,14 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
     public void bindView(@NonNull CartFragment view) {
         super.bindView(view);
         ProductListManager.getInstance().addDataChangeListener(this);
+        // підписка на зміну статусу сортування по натисненні на кнопку сортування
+        if(view().getActivity() != null) ((ProductListPaymentActivity)view().getActivity()).getPresenter().setChangeSortingStateListener(this);
     }
 
     @Override
     public void unbindView() {
+        // видалення підписки на статус
+        if(view().getActivity() != null) ((ProductListPaymentActivity)view().getActivity()).getPresenter().setChangeSortingStateListener(null);
         super.unbindView();
         ProductListManager.getInstance().removeDataChangeListener(this);
     }
@@ -90,6 +101,61 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void loadModel(){
         Log.i(TAG, "loadModel: ");
-        this.setModel(ProductListManager.getInstance().getProductsList());
+        sortingStateChanged(mSortingState);
+    }
+
+    @Override
+    public void sortingStateChanged(ProductListPaymentActivityPresenter.SortingState state) {
+        ArrayList<Product> list = new ArrayList<>(ProductListManager.getInstance().getProductsList());
+        Log.i(TAG, "onSortItemClicked: LIST: " + list);
+        switch (state){
+
+            case CAPTION_ASCENDING:
+                Collections.sort(list, new Comparator<Product>() {
+                    @Override
+                    public int compare(Product o1, Product o2) {
+                        String s1 = o1.getCaption().toLowerCase();
+                        String s2 = o2.getCaption().toLowerCase();
+                        return s1.compareTo(s2);
+                    }
+                });
+                break;
+
+            case CAPTION_DESCENDING:
+                Collections.sort(list, new Comparator<Product>() {
+                    @Override
+                    public int compare(Product o1, Product o2) {
+                        String s1 = o1.getCaption().toLowerCase();
+                        String s2 = o2.getCaption().toLowerCase();
+                        return s2.compareTo(s1);
+                    }
+                });
+                break;
+
+            case PRICE_ASCENDING:
+                Collections.sort(list, new Comparator<Product>() {
+                    @Override
+                    public int compare(Product o1, Product o2) {
+                        Integer i1 = o1.getPrice();
+                        Integer i2 = o2.getPrice();
+                        return i1.compareTo(i2);
+                    }
+                });
+                break;
+
+            case PRICE_DESCENDING:
+                Collections.sort(list, new Comparator<Product>() {
+                    @Override
+                    public int compare(Product o1, Product o2) {
+                        Integer i1 = o1.getPrice();
+                        Integer i2 = o2.getPrice();
+                        return i2.compareTo(i1);
+                    }
+                });
+                break;
+        }
+
+        mSortingState = state; //змінюємо поточне значення сортування
+        setModel(list);
     }
 }

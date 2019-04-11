@@ -216,6 +216,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         mPresenter.onPaymentClicked();
     }
 
+    // метод для зміни розміру кнопки виклику фрагменту/діалогу оплати
     public void changeSizePaymentButton(boolean visible) {
         Log.i(TAG, "changeSizePaymentButton FULLSIZE: " + String.valueOf(visible));
         if (visible){
@@ -225,12 +226,14 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         }
     }
 
+    // метод викликає діалог оплати товарів в корзині
     public void showPaymentDialog() {
         PaymentSheetFragment paymentDialog = new PaymentSheetFragment();
         paymentDialog.show(getSupportFragmentManager(), paymentDialog.getTag());
         Log.i(TAG, "showPaymentDialog: ");
     }
 
+    // метод для зміни в тулбарі іконки сортування
     public void changeSortIcon(boolean ascending){
         if (sortMenuItem != null) {
             sortMenuItem.setIcon(ResourcesCompat.getDrawable(

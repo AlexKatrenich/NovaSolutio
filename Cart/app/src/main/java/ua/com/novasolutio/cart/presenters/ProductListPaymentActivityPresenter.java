@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import ua.com.novasolutio.cart.data.Product;
@@ -19,7 +17,7 @@ import ua.com.novasolutio.cart.views.fragments.ProductListFragment;
 public class ProductListPaymentActivityPresenter extends BasePresenter<Void , ProductListPaymentActivity> implements ProductListManager.DataChangeListener {
 
     private static final String TAG = "ProdListPayActivPres";
-    private SortingState currentSortingState = SortingState.CAPTION_ASCENDING;
+
 
     @Override
     protected void updateView() {
@@ -110,6 +108,21 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         Log.i(TAG, "onPaymentClicked: ");
     }
 
+    /* Опрацювання статусу сортування списку (кнопка сортування на тулбарі)*/
+
+    // інтерфейс для прослуховувача зміни статусу
+    public interface ChangeSortingStateListener {
+        void sortingStateChanged(SortingState state);
+    }
+
+    // конкретний об'єкт слухача зміни статусу сортування
+    private ChangeSortingStateListener mChangeSortingStateListener;
+
+    public void setChangeSortingStateListener(ChangeSortingStateListener changeSortingStateListener) {
+        mChangeSortingStateListener = changeSortingStateListener;
+    }
+
+    // перелік статусів сортування
     public enum SortingState {
         CAPTION_ASCENDING,
         CAPTION_DESCENDING,
@@ -117,61 +130,30 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         PRICE_DESCENDING
     }
 
-    // метод сортування списку продуктів в залежності від обраного виду сортування
+    // опрацювання логіки при натисненні на відповідну кнопку сортування
     public void onSortItemClicked(SortingState sortingState) {
         ArrayList<Product> list = new ArrayList<>(ProductListManager.getInstance().getProductsList());
         Log.i(TAG, "onSortItemClicked: LIST: " + list);
         switch (sortingState){
 
             case CAPTION_ASCENDING:
-                Collections.sort(list, new Comparator<Product>() {
-                    @Override
-                    public int compare(Product o1, Product o2) {
-                        String s1 = o1.getCaption().toLowerCase();
-                        String s2 = o2.getCaption().toLowerCase();
-                        return s1.compareTo(s2);
-                    }
-                });
                 view().changeSortIcon(true);
                 break;
 
             case CAPTION_DESCENDING:
-                Collections.sort(list, new Comparator<Product>() {
-                    @Override
-                    public int compare(Product o1, Product o2) {
-                        String s1 = o1.getCaption().toLowerCase();
-                        String s2 = o2.getCaption().toLowerCase();
-                        return s2.compareTo(s1);
-                    }
-                });
                 view().changeSortIcon(false);
                 break;
 
             case PRICE_ASCENDING:
-                Collections.sort(list, new Comparator<Product>() {
-                    @Override
-                    public int compare(Product o1, Product o2) {
-                        Integer i1 = o1.getPrice();
-                        Integer i2 = o2.getPrice();
-                        return i1.compareTo(i2);
-                    }
-                });
                 view().changeSortIcon(true);
                 break;
 
             case PRICE_DESCENDING:
-                Collections.sort(list, new Comparator<Product>() {
-                    @Override
-                    public int compare(Product o1, Product o2) {
-                        Integer i1 = o1.getPrice();
-                        Integer i2 = o2.getPrice();
-                        return i2.compareTo(i1);
-                    }
-                });
                 view().changeSortIcon(false);
                 break;
         }
-        Log.i(TAG, "onSortItemClicked: LIST AFTER SORT: " + list);
-        ProductListManager.getInstance().setProducts(list);
+
+        if (mChangeSortingStateListener != null) mChangeSortingStateListener.sortingStateChanged(sortingState);
     }
+
 }
