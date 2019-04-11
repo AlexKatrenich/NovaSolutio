@@ -130,6 +130,12 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         PRICE_DESCENDING
     }
 
+    private SortingState mSortingState = SortingState.CAPTION_ASCENDING;
+
+    public SortingState getSortingState() {
+        return mSortingState;
+    }
+
     // опрацювання логіки при натисненні на відповідну кнопку сортування
     public void onSortItemClicked(SortingState sortingState) {
         ArrayList<Product> list = new ArrayList<>(ProductListManager.getInstance().getProductsList());
@@ -153,6 +159,7 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
                 break;
         }
 
+        mSortingState = sortingState;
         if (mChangeSortingStateListener != null) mChangeSortingStateListener.sortingStateChanged(sortingState);
     }
 

@@ -47,7 +47,10 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
         super.bindView(view);
         ProductListManager.getInstance().addDataChangeListener(this);
         // підписка на зміну статусу сортування по натисненні на кнопку сортування
-        if(view().getActivity() != null) ((ProductListPaymentActivity)view().getActivity()).getPresenter().setChangeSortingStateListener(this);
+        if(view().getActivity() != null) {
+            ((ProductListPaymentActivity)view().getActivity()).getPresenter().setChangeSortingStateListener(this);
+            mSortingState = ((ProductListPaymentActivity)view().getActivity()).getPresenter().getSortingState();
+        }
     }
 
     @Override
