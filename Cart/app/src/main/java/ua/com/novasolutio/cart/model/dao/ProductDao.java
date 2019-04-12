@@ -18,7 +18,7 @@ public interface ProductDao {
     @Query("SELECT * FROM products WHERE deleted = 0")
     List<Product> getAllActive();
 
-    @Query("SELECT * FROM products WHERE product_id LIKE :id")
+    @Query("SELECT * FROM products WHERE id LIKE :id")
     Product getById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

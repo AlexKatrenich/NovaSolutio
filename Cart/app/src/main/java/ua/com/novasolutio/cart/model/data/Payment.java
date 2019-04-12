@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Payment {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "payment_id")
+    @ColumnInfo(name = "id")
     private int mId; // Ід об'єкту в БД
 
     @ColumnInfo(name = "date")
@@ -32,15 +32,18 @@ public class Payment {
 
 
     /* Constructor */
+    @Ignore
     public Payment() {
     }
 
-    public Payment(int id, long paymentDate, int totalPrice) {
-        this.mId = id;
-        this.mPaymentDate = paymentDate;
-        this.mTotalPrice = totalPrice;
+    public Payment(int id, long paymentDate, long totalPrice, long change) {
+        mId = id;
+        mPaymentDate = paymentDate;
+        mTotalPrice = totalPrice;
+        mChange = change;
     }
 
+    @Ignore
     public Payment(int id, long paymentDate, @Nullable List<Product> products, int totalPrice) {
         this.mId = id;
         this.mPaymentDate = paymentDate;

@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Product {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "product_id")
+    @ColumnInfo(name = "id")
     private int mID; // ІД об'єкту в БД
 
     @ColumnInfo(name = "caption")

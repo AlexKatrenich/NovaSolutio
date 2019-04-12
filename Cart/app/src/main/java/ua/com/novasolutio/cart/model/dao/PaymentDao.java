@@ -16,7 +16,7 @@ public interface PaymentDao {
     @Query("SELECT * FROM payments")
     List<Payment> getAll();
 
-    @Query("SELECT * FROM payments WHERE payment_id = :id")
+    @Query("SELECT * FROM payments WHERE id = :id")
     Payment getById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -1,5 +1,6 @@
 package ua.com.novasolutio.cart.presentation.presenter.payment;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -8,10 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.model.dao.CartDatabase;
 import ua.com.novasolutio.cart.model.data.Payment;
 import ua.com.novasolutio.cart.model.data.Product;
 import ua.com.novasolutio.cart.model.data.ProductListManager;
+import ua.com.novasolutio.cart.model.data.ProductPaymentJoin;
 import ua.com.novasolutio.cart.presentation.presenter.BasePresenter;
 import ua.com.novasolutio.cart.ui.fragment.PaymentSheetFragment;
 
@@ -223,13 +227,34 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
             Date currentTime = Calendar.getInstance().getTime();
             payment.setPaymentDate(currentTime.getTime());
 
-            // TODO запис до БД платежу
+            new WriteDataTask().execute(payment);
 
             Log.i(TAG, "onPaymentButtonClicked: " + payment);
             view().dismiss();
         } else {
             String message = view().getResources().getString(R.string.incorrect_cash_value);
             view().showMessage(message);
+        }
+    }
+
+    private class WriteDataTask extends AsyncTask<Payment, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Payment... payments) {
+            Payment payment = payments[0];
+            CartDatabase db = CartApplication.getInstance().getDatabase();
+            boolean result = false;
+
+            // TODO write to DB
+            int id = (int)db.mPaymentDao().insert(payment); // запис платежу до БД
+            payment.setId(id); // оновлення ІД платежу
+            ArrayList<Product> soldProducts = new ArrayList<>(payment.getProducts());
+            // Запис таблиці проданих продуктів(ІД продукту, ІД платежу, кількість проданого продукту)
+            for (Product p : soldProducts){
+                ProductPaymentJoin productPaymentJoin = new ProductPaymentJoin(p.getID(), payment.getId(), p.getCount());
+                db.mProductPaymentDao().insert(productPaymentJoin);
+            }
+            return null;
         }
     }
 }
