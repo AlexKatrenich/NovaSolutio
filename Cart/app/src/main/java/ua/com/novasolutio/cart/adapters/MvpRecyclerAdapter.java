@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.HashMap;
 import java.util.Map;
 
-import ua.com.novasolutio.cart.presenters.BasePresenter;
-import ua.com.novasolutio.cart.views.viewHolders.MvpViewHolder;
+import ua.com.novasolutio.cart.presentation.presenter.BasePresenter;
+import ua.com.novasolutio.cart.ui.view_holder.MvpViewHolder;
 
 public abstract class MvpRecyclerAdapter <M, P extends BasePresenter, VH extends MvpViewHolder> extends RecyclerView.Adapter<VH> {
     protected final Map<Object, P> presenters;

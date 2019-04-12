@@ -6,7 +6,7 @@
     android:id="@+id/cl_activity_product_list_payment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.activities.ProductListPaymentActivity"
+    tools:context=".ui.activity.product_list.ProductListPaymentActivity"
     android:background="@color/colorPrimaryDark">
 
 

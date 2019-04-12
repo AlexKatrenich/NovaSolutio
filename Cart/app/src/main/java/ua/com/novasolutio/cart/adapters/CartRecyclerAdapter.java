@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import ua.com.novasolutio.cart.R;
-import ua.com.novasolutio.cart.data.Product;
-import ua.com.novasolutio.cart.presenters.CartItemPresenter;
-import ua.com.novasolutio.cart.views.viewHolders.CartItemViewHolder;
+import ua.com.novasolutio.cart.model.data.Product;
+import ua.com.novasolutio.cart.presentation.presenter.product_item.CartItemPresenter;
+import ua.com.novasolutio.cart.ui.view_holder.CartItemViewHolder;
 
 
 public class CartRecyclerAdapter extends MvpRecyclerListAdapter<Product, CartItemPresenter, CartItemViewHolder> {

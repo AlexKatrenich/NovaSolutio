@@ -3,7 +3,7 @@ package ua.com.novasolutio.cart;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
-import ua.com.novasolutio.cart.dao.CartDatabase;
+import ua.com.novasolutio.cart.model.dao.CartDatabase;
 
 public class CartApplication extends Application {
     private static CartApplication instance;

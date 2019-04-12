@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import ua.com.novasolutio.cart.presenters.BasePresenter;
-import ua.com.novasolutio.cart.views.viewHolders.MvpViewHolder;
+import ua.com.novasolutio.cart.presentation.presenter.BasePresenter;
+import ua.com.novasolutio.cart.ui.view_holder.MvpViewHolder;
 
 /* Абстрактний клас для інкапсуляції типових дій відображення елементів списку в RecyclerView*/
 public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH extends MvpViewHolder<P>>

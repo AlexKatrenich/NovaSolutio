@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import ua.com.novasolutio.cart.R;
-import ua.com.novasolutio.cart.data.Product;
-import ua.com.novasolutio.cart.presenters.ProductItemPresenter;
-import ua.com.novasolutio.cart.views.viewHolders.ProductViewHolder;
+import ua.com.novasolutio.cart.model.data.Product;
+import ua.com.novasolutio.cart.presentation.presenter.product_item.ProductItemPresenter;
+import ua.com.novasolutio.cart.ui.view_holder.ProductViewHolder;
 
 /* Адаптер для управління відображення даних в RecyclerView фрагмента ProductListFragment*/
 public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product, ProductItemPresenter, ProductViewHolder>{
