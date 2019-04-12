@@ -75,8 +75,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         @Override
         protected ArrayList doInBackground(Void... voids) {
             List<Product> list = CartApplication.getInstance().getDatabase().mProductDao().getAllActive();
-            List<Product> test = CartApplication.getInstance().getDatabase().mProductDao().getAll();
-            Log.i(TAG, "doInBackground FULL LIST PRODUCTS: " + test);
             Log.i(TAG, "doInBackground LIST ACTIVE PRODUCTS: " + list);
             return new ArrayList<Product>(list);
         }

@@ -1,23 +1,34 @@
 package ua.com.novasolutio.cart.data;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.Nullable;
 
 import java.util.List;
 import java.util.Objects;
 
 // клас для відображення об'єкту
+@Entity(tableName = "payments")
 public class Payment {
 
-    private int id; // Ід об'єкту в БД
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "payment_id")
+    private int mId; // Ід об'єкту в БД
 
-    private long paymentDate; // дата проведення платежу
+    @ColumnInfo(name = "date")
+    private long mPaymentDate; // дата проведення платежу
 
     @Nullable
+    @Ignore
     private List<Product> mProducts; // список проданих продуктів
 
-    private long totalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
+    @ColumnInfo(name = "price")
+    private long mTotalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
 
-    private long change;
+    @ColumnInfo(name = "change")
+    private long mChange; // загальна решта клієнту по платежу(в копійках 3000 = 30,00 грн)
 
 
     /* Constructor */
@@ -25,33 +36,33 @@ public class Payment {
     }
 
     public Payment(int id, long paymentDate, int totalPrice) {
-        this.id = id;
-        this.paymentDate = paymentDate;
-        this.totalPrice = totalPrice;
+        this.mId = id;
+        this.mPaymentDate = paymentDate;
+        this.mTotalPrice = totalPrice;
     }
 
     public Payment(int id, long paymentDate, @Nullable List<Product> products, int totalPrice) {
-        this.id = id;
-        this.paymentDate = paymentDate;
+        this.mId = id;
+        this.mPaymentDate = paymentDate;
         this.mProducts = products;
-        this.totalPrice = totalPrice;
+        this.mTotalPrice = totalPrice;
     }
 
     /* Getter and Setter */
     public int getId() {
-        return id;
+        return mId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public long getPaymentDate() {
-        return paymentDate;
+        return mPaymentDate;
     }
 
     public void setPaymentDate(long paymentDate) {
-        this.paymentDate = paymentDate;
+        this.mPaymentDate = paymentDate;
     }
 
     @Nullable
@@ -64,19 +75,19 @@ public class Payment {
     }
 
     public long getTotalPrice() {
-        return totalPrice;
+        return mTotalPrice;
     }
 
     public void setTotalPrice(long totalPrice) {
-        this.totalPrice = totalPrice;
+        this.mTotalPrice = totalPrice;
     }
 
     public long getChange() {
-        return change;
+        return mChange;
     }
 
     public void setChange(long change) {
-        this.change = change;
+        this.mChange = change;
     }
 
     /* Override methods*/
@@ -85,21 +96,21 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return id == payment.id ;
+        return mId == payment.mId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(mId);
     }
 
     @Override
     public String toString() {
         return "Payment{" +
-                "id=" + id +
-                ", paymentDate=" + paymentDate +
-                ", totalPrice=" + totalPrice +
-                ", change=" + change +
+                "mId=" + mId +
+                ", mPaymentDate=" + mPaymentDate +
+                ", mTotalPrice=" + mTotalPrice +
+                ", mChange=" + mChange +
                 '}';
     }
 }

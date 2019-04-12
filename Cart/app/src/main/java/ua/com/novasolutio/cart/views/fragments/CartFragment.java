@@ -123,7 +123,4 @@ public class CartFragment extends Fragment implements ProductsListView {
         mAdapter.removeItem(product);
     }
 
-    public CartFragmentPresenter getPresenter() {
-        return mPresenter;
-    }
 }

@@ -130,7 +130,7 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         PRICE_DESCENDING
     }
 
-    private SortingState mSortingState = SortingState.CAPTION_ASCENDING;
+    private SortingState mSortingState = SortingState.CAPTION_ASCENDING; // змінна для зберігання статусу сортування списку продуктів
 
     public SortingState getSortingState() {
         return mSortingState;
