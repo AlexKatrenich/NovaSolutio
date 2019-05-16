@@ -217,18 +217,17 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
 
             for (Product p : products) {
                 if(p.getCount() > 0){
-                    selectedProducts.add(p);
+                    selectedProducts.add(new Product(p.getID(), p.getCaption(), p.getPrice(), p.getRate(), p.getCount(), p.isDeleted()));
                     p.setCount(0);
-                    ProductListManager.getInstance().setProductById(p, p.getID()); // обнулення переліку обраних продуктів в БД
+                    ProductListManager.getInstance().observeProductListChange(); // обнулення переліку обраних продуктів в БД
                 }
             }
-
             payment.setProducts(selectedProducts);
             Date currentTime = Calendar.getInstance().getTime();
             payment.setPaymentDate(currentTime.getTime());
 
             new WriteDataTask().execute(payment);
-
+            Log.i(TAG, "onPaymentButtonClicked: SELECTED PRODUCTS " + selectedProducts);
             Log.i(TAG, "onPaymentButtonClicked: " + payment);
             view().dismiss();
         } else {
@@ -243,15 +242,16 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         protected Void doInBackground(Payment... payments) {
             Payment payment = payments[0];
             CartDatabase db = CartApplication.getInstance().getDatabase();
-            boolean result = false;
 
             // TODO write to DB
             int id = (int)db.mPaymentDao().insert(payment); // запис платежу до БД
             payment.setId(id); // оновлення ІД платежу
+            Log.i(TAG, "doInBackground: PAYMENT ID:" + id);
             ArrayList<Product> soldProducts = new ArrayList<>(payment.getProducts());
             // Запис таблиці проданих продуктів(ІД продукту, ІД платежу, кількість проданого продукту)
             for (Product p : soldProducts){
                 ProductPaymentJoin productPaymentJoin = new ProductPaymentJoin(p.getID(), payment.getId(), p.getCount());
+                Log.i(TAG, "doInBackground: Write SoldProduct " + productPaymentJoin);
                 db.mProductPaymentDao().insert(productPaymentJoin);
             }
             return null;

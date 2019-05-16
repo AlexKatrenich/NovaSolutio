@@ -28,7 +28,7 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
     @BindView(R.id.til_product_price_add_activity) protected TextInputLayout tilProductPrice;
     @BindView(R.id.toolbar_add_change_product_activity) protected Toolbar mToolbar;
     @BindView(R.id.tiet_product_caption) protected AppCompatEditText mProductCaption;
-    @BindView(R.id.tiet_product_price) protected AppCompatAutoCompleteTextView mProductPrice;
+    @BindView(R.id.tiet_product_price) protected AppCompatEditText mProductPrice;
     private AddChangeProductActivityPresenter mPresenter;
 
 

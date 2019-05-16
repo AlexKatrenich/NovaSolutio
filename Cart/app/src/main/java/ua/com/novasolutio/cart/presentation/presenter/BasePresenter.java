@@ -1,8 +1,6 @@
 package ua.com.novasolutio.cart.presentation.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import java.lang.ref.WeakReference;
 
 public abstract class BasePresenter<M, V>{

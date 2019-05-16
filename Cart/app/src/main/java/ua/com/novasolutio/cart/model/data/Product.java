@@ -44,6 +44,16 @@ public class Product {
         this.mDeleted = mDeleted;
     }
 
+    @Ignore
+    public Product(int ID, String caption, int price, int rate, int count, boolean deleted) {
+        mID = ID;
+        mCaption = caption;
+        mPrice = price;
+        mRate = rate;
+        mCount = count;
+        mDeleted = deleted;
+    }
+
     public int getID() {
         return mID;
     }

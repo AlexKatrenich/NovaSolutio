@@ -29,4 +29,14 @@ public class ProductPaymentJoin {
         this.paymentID = paymentID;
         this.productCount = productCount;
     }
+
+
+    @Override
+    public String toString() {
+        return "ProductPaymentJoin{" +
+                "productID=" + productID +
+                ", paymentID=" + paymentID +
+                ", productCount=" + productCount +
+                '}';
+    }
 }
