@@ -4,6 +4,7 @@
     <!--ЕКРАН СПИСКУ ПРОДУКТІВ-->
     <string name="bottom_navigation_menu_list_caption">List</string>
     <string name="bottom_navigation_menu_cart_caption">Cart</string>
+    <string name="bottom_navigation_menu_report_caption">Report</string>
     <string name="product_list_activity_caption">Cart</string>
     <string name="product_list_fragment_total_caption">TOTAL:</string>
     <string name="pay_button_product_payment_activity">Pay</string>
@@ -72,6 +73,11 @@
         <!--Назви TextView для відображення інформації в ModalBottomSheet діалог проведення платежу-->
         <string name="payment_text_view_cash_caption">Cash</string>
         <string name="payment_text_view_change_caption">Change</string>
+    
+        <!--ЕКРАН ЗВІТІВ ПО ЧЕКАМ-->
+        <string name="reports_fragment_check_number_caption">Payment number</string>
+        <string name="reports_fragment_check_date_caption">Date</string>
+        <string name="reports_fragment_check_price_caption">Price</string>
 
 
 </resources>

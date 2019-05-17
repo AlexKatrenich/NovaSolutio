@@ -12,4 +12,10 @@
         android:title="@string/bottom_navigation_menu_cart_caption"
         />
 
+    <item
+        android:id="@+id/item_report"
+        android:icon="@drawable/ic_report_black"
+        android:title="@string/bottom_navigation_menu_report_caption"
+        />
+
 </menu>

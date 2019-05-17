@@ -41,5 +41,4 @@ public abstract class MvpRecyclerAdapter <M, P extends BasePresenter, VH extends
         presenters.remove(getModelId(model));
     }
 
-
 }

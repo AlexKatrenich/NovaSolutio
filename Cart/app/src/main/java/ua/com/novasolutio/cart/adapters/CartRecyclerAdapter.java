@@ -36,4 +36,5 @@ public class CartRecyclerAdapter extends MvpRecyclerListAdapter<Product, CartIte
         return new CartItemViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cart_recycler_view, parent, false));
     }
+
 }

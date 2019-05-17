@@ -59,8 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/column_name_products_on_cart"
-            android:textAlignment="center" />
+            android:text="@string/column_name_products_on_cart" />
 
         <TextView
             android:id="@+id/tv_cart_count_selected_products"
@@ -68,8 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/column_count_selected_products_on_cart"
-            android:textAlignment="center" />
+            android:text="@string/column_count_selected_products_on_cart" />
 
         <TextView
             android:id="@+id/tv_summa_counted_product"
@@ -77,12 +75,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/summary_price_every_type_of_product_on_cart"
-            android:textAlignment="center" />
+            android:text="@string/summary_price_every_type_of_product_on_cart" />
     </LinearLayout>
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/divider_cart_list"
         style="@style/Divider"
         app:layout_constraintBottom_toTopOf="@+id/fl_recycler_view_cart_container"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +93,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view">
+        app:layout_constraintTop_toBottomOf="@+id/divider_cart_list">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_cart_selected_product_list"

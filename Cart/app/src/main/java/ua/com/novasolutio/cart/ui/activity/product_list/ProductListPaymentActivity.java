@@ -99,6 +99,9 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                         // передача презентеру обробки натистення на елемент ItemCart
                         mPresenter.onCartFragmentClicked();
                         return true;
+                    case R.id.item_report :
+                        mPresenter.onReportFragmentClicked();
+                        return true;
                 }
                 return false;
             }

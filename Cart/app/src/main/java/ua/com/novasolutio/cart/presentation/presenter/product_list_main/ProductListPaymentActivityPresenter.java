@@ -14,6 +14,7 @@ import ua.com.novasolutio.cart.ui.activity.product.AddChangeProductActivity;
 import ua.com.novasolutio.cart.ui.activity.product_list.ProductListPaymentActivity;
 import ua.com.novasolutio.cart.ui.fragment.CartFragment;
 import ua.com.novasolutio.cart.ui.fragment.ProductListFragment;
+import ua.com.novasolutio.cart.ui.fragment.PaymentsReportFragment;
 
 public class ProductListPaymentActivityPresenter extends BasePresenter<Void , ProductListPaymentActivity> implements ProductListManager.DataChangeListener {
 
@@ -59,6 +60,11 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
         } else {
             view().changeSizePaymentButton(false);
         }
+    }
+
+    public void onReportFragmentClicked() {
+        view().bindFragment(new PaymentsReportFragment());
+        view().invalidateOptionsMenu();
     }
 
     public void addNewProductMenuClicked() {
