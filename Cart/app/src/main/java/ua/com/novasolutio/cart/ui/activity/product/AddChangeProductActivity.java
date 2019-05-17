@@ -99,7 +99,6 @@ public class AddChangeProductActivity extends AppCompatActivity implements Produ
                 }
             }
         });
-
     }
 
     @Override

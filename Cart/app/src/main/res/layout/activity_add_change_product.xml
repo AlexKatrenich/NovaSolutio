@@ -37,8 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_change_product_activity_bar_layout"
-        android:layout_margin="@dimen/layout_forms_margin"
-        android:colorAccent="#000">
+        android:layout_margin="@dimen/layout_forms_margin">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/tiet_product_caption"
@@ -59,8 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_product_caption_add_activity"
-        android:layout_margin="@dimen/layout_forms_margin"
-        app:boxStrokeColor="@android:color/holo_blue_bright">
+        android:layout_margin="@dimen/layout_forms_margin">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/tiet_product_price"
