@@ -9,15 +9,16 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import ua.com.novasolutio.cart.model.data.Payment;
 
 @Dao
 public interface PaymentDao {
     @Query("SELECT * FROM payments")
-    List<Payment> getAll();
+    Flowable<List<Payment>> getAll();
 
     @Query("SELECT * FROM payments WHERE id = :id")
-    Payment getById(int id);
+    Flowable<Payment> getById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Payment payment);

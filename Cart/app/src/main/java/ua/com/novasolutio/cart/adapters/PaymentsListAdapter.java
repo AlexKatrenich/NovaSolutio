@@ -34,6 +34,7 @@ public class PaymentsListAdapter extends RecyclerView.Adapter<PaymentReportViewH
     }
 
     public void setPayments(Collection<Payment> payments){
+        mPaymentList.clear();
         mPaymentList.addAll(payments);
         notifyDataSetChanged();
     }

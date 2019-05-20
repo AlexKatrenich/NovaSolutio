@@ -75,7 +75,7 @@
         <string name="payment_text_view_change_caption">Change</string>
     
         <!--ЕКРАН ЗВІТІВ ПО ЧЕКАМ-->
-        <string name="reports_fragment_check_number_caption">Payment number</string>
+        <string name="reports_fragment_check_number_caption">Number</string>
         <string name="reports_fragment_check_date_caption">Date</string>
         <string name="reports_fragment_check_price_caption">Price</string>
 
