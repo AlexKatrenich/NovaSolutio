@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.presentation.presenter.PresenterManager;
 import ua.com.novasolutio.cart.presentation.presenter.product_list_main.ProductListPaymentActivityPresenter;
+import ua.com.novasolutio.cart.ui.fragment.CartFragment;
 import ua.com.novasolutio.cart.ui.fragment.PaymentSheetFragment;
 import ua.com.novasolutio.cart.ui.fragment.ProductListFragment;
 
@@ -199,13 +200,13 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.item_sorting_menu);
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_products_activity);
         try {
-            ProductListFragment plFragment = (ProductListFragment)currentFragment;
-            item.setVisible(false);
+            CartFragment plFragment = (CartFragment)currentFragment;
+            item.setVisible(true);
             Log.i(TAG, "onPrepareOptionsMenu: CurrentFragment IS " + plFragment.getClass().getSimpleName());
 
         } catch (ClassCastException e){
             Log.i(TAG, "onPrepareOptionsMenu: CurrentFragment IS " + currentFragment.getClass().getSimpleName());
-            item.setVisible(true);
+            item.setVisible(false);
             return super.onPrepareOptionsMenu(menu);
         }
 
