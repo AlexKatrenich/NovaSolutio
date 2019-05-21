@@ -210,6 +210,7 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
             Payment payment = new Payment();
             payment.setTotalPrice(totalPrice);
             payment.setChange(currentChange);
+            payment.setUserCash(currentCash);
 
             // внесення до платежу переліку продуктів
             List<Product> products = ProductListManager.getInstance().getProductsList();

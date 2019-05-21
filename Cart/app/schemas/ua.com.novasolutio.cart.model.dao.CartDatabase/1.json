@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8dd94a11728626c6a87a4072fb549a5e",
+    "identityHash": "4e1c25f61d20152318bd5e0bb955c37e",
     "entities": [
       {
         "tableName": "products",
@@ -50,7 +50,7 @@
       },
       {
         "tableName": "payments",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `price` INTEGER NOT NULL, `change` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `total_price` INTEGER NOT NULL, `user_cash` INTEGER NOT NULL, `change` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "mId",
@@ -66,7 +66,13 @@
           },
           {
             "fieldPath": "mTotalPrice",
-            "columnName": "price",
+            "columnName": "total_price",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mUserCash",
+            "columnName": "user_cash",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -145,7 +151,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8dd94a11728626c6a87a4072fb549a5e\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4e1c25f61d20152318bd5e0bb955c37e\")"
     ]
   }
 }

@@ -18,12 +18,11 @@
             android:name=".ui.activity.product_list.ProductListPaymentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.product.AddChangeProductActivity"/>
-
+        <activity android:name=".ui.activity.payment.PaymentReportActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

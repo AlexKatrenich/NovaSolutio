@@ -24,8 +24,11 @@ public class Payment {
     @Ignore
     private List<Product> mProducts; // список проданих продуктів
 
-    @ColumnInfo(name = "price")
+    @ColumnInfo(name = "total_price")
     private long mTotalPrice; // загальна вартість платежу(в копійках 3000 = 30,00 грн)
+
+    @ColumnInfo(name = "user_cash")
+    private long mUserCash;
 
     @ColumnInfo(name = "change")
     private long mChange; // загальна решта клієнту по платежу(в копійках 3000 = 30,00 грн)
@@ -34,13 +37,15 @@ public class Payment {
     /* Constructor */
     @Ignore
     public Payment() {
+
     }
 
-    public Payment(int id, long paymentDate, long totalPrice, long change) {
+    public Payment(int id, long paymentDate, long totalPrice, long userCash, long change) {
         mId = id;
         mPaymentDate = paymentDate;
         mTotalPrice = totalPrice;
         mChange = change;
+        mUserCash = userCash;
     }
 
     @Ignore
@@ -93,6 +98,14 @@ public class Payment {
         this.mChange = change;
     }
 
+    public long getUserCash() {
+        return mUserCash;
+    }
+
+    public void setUserCash(long userCash) {
+        mUserCash = userCash;
+    }
+
     /* Override methods*/
     @Override
     public boolean equals(Object o) {
@@ -114,6 +127,8 @@ public class Payment {
                 ", mPaymentDate=" + mPaymentDate +
                 ", mTotalPrice=" + mTotalPrice +
                 ", mChange=" + mChange +
+                ", mUserCash=" + mUserCash +
                 '}';
     }
+
 }

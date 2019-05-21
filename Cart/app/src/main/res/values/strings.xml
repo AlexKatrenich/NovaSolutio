@@ -79,5 +79,16 @@
         <string name="reports_fragment_check_date_caption">Date</string>
         <string name="reports_fragment_check_price_caption">Price</string>
 
+    <!--ЕКРАН ВІДОБРАЖЕННЯ ЧЕКУ-->
+    <string name="payment_report_activity_check_number_caption">Check №</string>
+    <string name="payment_report_activity_check_date_caption">Check date:</string>
+    <string name="payment_report_activity_check_products_list">Goods:</string>
+    <string name="payment_report_activity_name_product">Name</string>
+    <string name="payment_report_activity_count_product">Count</string>
+    <string name="payment_report_activity_total_price_product">Price</string>
+    <string name="payment_report_activity_check_total_price_caption">Total price:</string>
+    <string name="payment_report_activity_given_cash">Cash:</string>
+    <string name="payment_report_activity_payment_change">Change:</string>
+
 
 </resources>
