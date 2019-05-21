@@ -4,4 +4,6 @@ import ua.com.novasolutio.cart.model.data.Payment;
 
 public interface PaymentReportView {
     void showPayment(Payment payment);
+
+    void onButtonBackPressed();
 }

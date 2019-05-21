@@ -6,6 +6,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import ua.com.novasolutio.cart.model.data.ProductPaymentJoin;
 
 @Dao
@@ -14,6 +15,6 @@ public interface ProductPaymentDao {
     void insert(ProductPaymentJoin productPaymentJoin);
 
     @Query("SELECT * FROM product_payment WHERE payment_id=:paymentId")
-    List<ProductPaymentJoin> getSoldProductsCount(final int paymentId);
+    Flowable<List<ProductPaymentJoin>> getSoldProductsCount(final int paymentId);
 
 }

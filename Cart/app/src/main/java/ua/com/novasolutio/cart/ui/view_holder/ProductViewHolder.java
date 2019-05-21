@@ -38,32 +38,24 @@ public class ProductViewHolder extends MvpViewHolder<ProductItemPresenter> imple
 
 
         // встановлення прослуховувача кліку по елементу меню
-        mItemClickListener = new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
+        mItemClickListener = item -> {
+            int id = item.getItemId();
 
-                switch (id){
-                    case R.id.product_change_item :
-                        presenter.onChangeContextMenuItemClicked(itemView.getContext());
-                        return true;
+            switch (id){
+                case R.id.product_change_item :
+                    presenter.onChangeContextMenuItemClicked(itemView.getContext());
+                    return true;
 
-                    case R.id.product_delete_item :
-                        presenter.onDeleteContextMenuItemClicked();
-                        return true;
-                }
-
-                return false;
+                case R.id.product_delete_item :
+                    presenter.onDeleteContextMenuItemClicked();
+                    return true;
             }
+
+            return false;
         };
 
         // встановлення прослуховувача кліку по загальному елементу RecyclerView
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onItemClick();
-            }
-        });
+        itemView.setOnClickListener(v -> presenter.onItemClick());
 
     }
 
