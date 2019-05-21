@@ -121,32 +121,32 @@ public class PaymentSheetFragment extends BottomSheetDialogFragment {
     /* Обробка кліків по кнопкам додавання покупюрного додавання до суми сплати*/
     @OnClick(R.id.btn_payment_bill_first)
     public void onPaymentButtonBillClicked(){
-        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TEN);
+        mPresenter.onButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TEN);
     }
 
     @OnClick(R.id.btn_payment_bill_second)
     public void onPaymentButtonBillSecondClicked(){
-        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TWENTY);
+        mPresenter.onButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TWENTY);
     }
 
     @OnClick(R.id.btn_payment_bill_third)
     public void onPaymentButtonBillThirdClicked(){
-        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.FIFTY);
+        mPresenter.onButtonBillClicked(PaymentSheetFragmentPresenter.Bills.FIFTY);
     }
 
     @OnClick(R.id.btn_payment_bill_fourth)
     public void onPaymentButtonBillFourthClicked(){
-        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.ONE_HUNDRED);
+        mPresenter.onButtonBillClicked(PaymentSheetFragmentPresenter.Bills.ONE_HUNDRED);
     }
 
     @OnClick(R.id.btn_payment_bill_fifth)
     public void onPaymentButtonBillFifthClicked(){
-        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TWO_HUNDRED);
+        mPresenter.onButtonBillClicked(PaymentSheetFragmentPresenter.Bills.TWO_HUNDRED);
     }
 
     @OnClick(R.id.btn_payment_bill_sixth)
     public void onPaymentButtonBillSixthClicked(){
-        mPresenter.onPaymentButtonBillClicked(PaymentSheetFragmentPresenter.Bills.FIVE_HUNDRED);
+        mPresenter.onButtonBillClicked(PaymentSheetFragmentPresenter.Bills.FIVE_HUNDRED);
     }
     /* -------------------------------------------------------------------------------------------- */
 

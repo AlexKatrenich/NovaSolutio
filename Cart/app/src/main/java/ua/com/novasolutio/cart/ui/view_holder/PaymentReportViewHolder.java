@@ -32,9 +32,9 @@ public class PaymentReportViewHolder extends RecyclerView.ViewHolder {
     public PaymentReportViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        itemView.setOnClickListener(v -> {
-            Toast.makeText(itemView.getContext(), "Click on element: ", Toast.LENGTH_SHORT).show();
-        });
+        itemView.setOnClickListener(v -> Toast.makeText(itemView.getContext()
+                , "Click on element: "
+                , Toast.LENGTH_SHORT).show());
     }
 
     public void bind(Payment payment){

@@ -6,6 +6,11 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
+import java.util.Observable;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.model.dao.CartDatabase;
 import ua.com.novasolutio.cart.model.data.Product;
@@ -102,41 +107,58 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
 
     public void OnSaveButtonClicked() {
         if (model.getCaption() != null && !model.getCaption().isEmpty()){
-            new WriteDataTask().execute(model);
+            writeProductToDb(model);
 
             if(setupDone()) ((AddChangeProductActivity)view()).onBackPressed();
+
         }
 
     }
 
+    private void writeProductToDb(Product product){
+        CartDatabase db = CartApplication.getInstance().getDatabase();
+        Flowable.just(product)
+                .subscribeOn(Schedulers.io())
+                .subscribe(product1 -> {
+                    Long id = db.mProductDao().insert(product1);
+
+                    Flowable.just(id).observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(aLong -> {
+                                product1.setID(aLong.intValue());
+                                ProductListManager.getInstance().addProduct(product1);
+                                    }
+                                    ,throwable -> Log.e(TAG, "writeProductToDb: ", throwable));
+                });
+
+    }
 
     // внутрішній клас для емуляції запису додавання нового продукту до бази даних
-    private class WriteDataTask extends AsyncTask<Product, Void, Product> {
-
-        @Override
-        protected Product doInBackground(Product... products) {
-            // емуляція запису в БД
-            Product product = products[0];
-            Log.i(TAG, "doInBackground: Product: " + product);
-            CartDatabase db = CartApplication.getInstance().getDatabase();
-
-            if (db.mProductDao().update(product) == 0){
-                long productID = db.mProductDao().insert(product);
-                product.setID((int) productID);
-            }
-
-            return product;
-        }
-
-        @Override
-        protected void onPostExecute(Product product) {
-            Log.i(TAG, "onPostExecute PRODUCT " + product);
-            // заміна або додавання нового продукту в залежності від того чи елемент з таким Ід вже є в списку
-            if (!ProductListManager.getInstance().setProductById(product, product.getID())) {
-                ProductListManager.getInstance().addProduct(product);
-            }
-            super.onPostExecute(product);
-        }
-    }
+//    private class WriteDataTask extends AsyncTask<Product, Void, Product> {
+//
+//        @Override
+//        protected Product doInBackground(Product... products) {
+//            // емуляція запису в БД
+//            Product product = products[0];
+//            Log.i(TAG, "doInBackground: Product: " + product);
+//            CartDatabase db = CartApplication.getInstance().getDatabase();
+//
+//            if (db.mProductDao().update(product) == 0){
+//                long productID = db.mProductDao().insert(product);
+//                product.setID((int) productID);
+//            }
+//
+//            return product;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Product product) {
+//            Log.i(TAG, "onPostExecute PRODUCT " + product);
+//            // заміна або додавання нового продукту в залежності від того чи елемент з таким Ід вже є в списку
+//            if (!ProductListManager.getInstance().setProductById(product, product.getID())) {
+//                ProductListManager.getInstance().addProduct(product);
+//            }
+//            super.onPostExecute(product);
+//        }
+//    }
 
 }

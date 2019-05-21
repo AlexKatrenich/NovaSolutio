@@ -8,6 +8,8 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 import ua.com.novasolutio.cart.model.data.Product;
 
 @Dao
@@ -22,7 +24,7 @@ public interface ProductDao {
     Product getById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Product product);
+    Long insert(Product product);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     int update(Product product);

@@ -98,7 +98,7 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
     }
 
     // метод для прорахунку додавання купюр до загальної суми розрахунку
-    public void onPaymentButtonBillClicked(Bills bills) {
+    public void onButtonBillClicked(Bills bills) {
         if(!userInput) {
             currentCash = 0;
             userInput = true;
@@ -126,7 +126,7 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         }
 
         updateView();
-        Log.i(TAG, "onPaymentButtonBillClicked: ");
+        Log.i(TAG, "onButtonBillClicked: ");
     }
 
     // очищення поля введення суми
@@ -208,7 +208,7 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         if (currentCash >= totalPrice){
             // створення нового об'єкту платежу
             Payment payment = new Payment();
-            payment.setTotalPrice(currentCash);
+            payment.setTotalPrice(totalPrice);
             payment.setChange(currentChange);
 
             // внесення до платежу переліку продуктів
@@ -225,6 +225,8 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
             payment.setProducts(selectedProducts);
             Date currentTime = Calendar.getInstance().getTime();
             payment.setPaymentDate(currentTime.getTime());
+
+
 
             new WriteDataTask().execute(payment);
             Log.i(TAG, "onPaymentButtonClicked: SELECTED PRODUCTS " + selectedProducts);

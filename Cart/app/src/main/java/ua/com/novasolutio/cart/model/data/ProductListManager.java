@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import io.reactivex.Observable;
+
 public class ProductListManager {
     public static final String TAG = "ProductListManager";
     protected final ArrayList<Product> mProducts = new ArrayList();
@@ -64,9 +66,17 @@ public class ProductListManager {
 
     public boolean addProduct(Product product){
         if(product != null) {
-            mProducts.add(product);
-            observeModelAddProduct(product);
-            Log.i(TAG, "addProduct: " + product);
+            Observable.fromIterable(mProducts)
+                    .contains(product)
+                    .subscribe((aBoolean, throwable) -> {
+                        if (aBoolean) {
+                            setProductById(product, product.getID());
+                        } else {
+                            mProducts.add(product);
+                            observeModelAddProduct(product);
+                            Log.i(TAG, "addProduct: " + product);
+                        }
+                    });
             return true;
         }
 
