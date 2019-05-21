@@ -16,6 +16,7 @@ public class PaymentReportActivity extends AppCompatActivity implements PaymentR
     public static final String TAG = "PaymentReportActivity";
     private PaymentReportActivityPresenter mPresenter;
 
+    public static final String PAYMENT_ID_TAG = "PAYMENT_ID_TAG";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -10,44 +10,48 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimaryDark">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/ib_back_payment_report_activity"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@android:string/cancel"
-            android:src="@drawable/ic_arrow_back_24dp" />
+            android:gravity="center_vertical">
+            <ImageButton
+                android:id="@+id/ib_back_payment_report_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@android:string/cancel"
+                android:src="@drawable/ic_arrow_back_24dp" />
 
-        <TextView
-            android:id="@+id/tv_check_number_caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:layout_marginStart="38dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/payment_report_activity_check_number_caption"
-            android:textSize="22sp"
-            android:textColor="@android:color/black"/>
+            <TextView
+                android:id="@+id/tv_check_number_caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center"
+                android:layout_marginStart="38dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/payment_report_activity_check_number_caption"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"/>
 
-        <TextView
-            android:id="@+id/tv_check_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            tools:text="123456"
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/tv_check_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="center"
+                tools:text="123456"
+                android:textColor="@android:color/black"
+                android:textSize="22sp" />
+        </LinearLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <TextView
