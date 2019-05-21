@@ -11,9 +11,12 @@ import java.util.List;
 
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.model.data.Payment;
+import ua.com.novasolutio.cart.presentation.presenter.payments_report.PaymentReportViewHolderPresenter;
 import ua.com.novasolutio.cart.ui.view_holder.PaymentReportViewHolder;
 
-public class PaymentsListAdapter extends RecyclerView.Adapter<PaymentReportViewHolder> {
+public class PaymentsListAdapter
+        extends MvpRecyclerListAdapter<Payment, PaymentReportViewHolderPresenter, PaymentReportViewHolder> {
+
     private List<Payment> mPaymentList = new ArrayList<>();
 
     @NonNull
@@ -23,30 +26,18 @@ public class PaymentsListAdapter extends RecyclerView.Adapter<PaymentReportViewH
                 .inflate(R.layout.item_payments_list, viewGroup, false));
     }
 
+    @NonNull
     @Override
-    public void onBindViewHolder(@NonNull PaymentReportViewHolder holder, int i) {
-        holder.bind(mPaymentList.get(i));
+    protected Object getModelId(Payment model) {
+        return model.getId();
     }
 
+    @NonNull
     @Override
-    public int getItemCount() {
-        return mPaymentList.size();
-    }
-
-    public void setPayments(Collection<Payment> payments){
-        mPaymentList.clear();
-        mPaymentList.addAll(payments);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems(){
-        mPaymentList.clear();
-        notifyDataSetChanged();
-    }
-
-    public void addPaymentReportRecently(Payment payment){
-        mPaymentList.add(payment);
-        notifyItemInserted(mPaymentList.size() - 1);
+    protected PaymentReportViewHolderPresenter createPresenter(@NonNull Payment model) {
+        PaymentReportViewHolderPresenter presenter = new PaymentReportViewHolderPresenter();
+        presenter.setModel(model);
+        return presenter;
     }
 
 

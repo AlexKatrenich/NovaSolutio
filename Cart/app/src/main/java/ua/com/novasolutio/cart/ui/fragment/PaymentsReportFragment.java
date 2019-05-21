@@ -86,7 +86,7 @@ public class PaymentsReportFragment extends Fragment implements PaymentsListRepo
     @Override
     public void showPaymentsList(List<Payment> payments) {
         Log.i(TAG, "showPaymentsList: " + payments);
-        mPaymentsListAdapter.setPayments(payments);
+        mPaymentsListAdapter.clearAndAddAll(payments);
     }
 
     @Override

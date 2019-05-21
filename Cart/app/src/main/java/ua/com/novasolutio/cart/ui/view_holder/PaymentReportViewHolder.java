@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,8 +15,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.model.data.Payment;
+import ua.com.novasolutio.cart.presentation.presenter.payments_report.PaymentReportViewHolderPresenter;
+import ua.com.novasolutio.cart.presentation.view.PaymentsListItem;
 
-public class PaymentReportViewHolder extends RecyclerView.ViewHolder {
+public class PaymentReportViewHolder extends MvpViewHolder<PaymentReportViewHolderPresenter>
+        implements PaymentsListItem {
+
     public static final String TAG = "PaymentReportVH";
 
     @BindView(R.id.tv_payment_list_item_number)
@@ -32,21 +35,7 @@ public class PaymentReportViewHolder extends RecyclerView.ViewHolder {
     public PaymentReportViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        itemView.setOnClickListener(v -> Toast.makeText(itemView.getContext()
-                , "Click on element: "
-                , Toast.LENGTH_SHORT).show());
-    }
-
-    public void bind(Payment payment){
-        Log.i(TAG, "bind: Payment:" + payment);
-        paymentNumber.setText(String.valueOf(payment.getId()));
-
-        Date time = new Date(payment.getPaymentDate());
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault());
-        format.setTimeZone(TimeZone.getDefault());
-        paymentDate.setText(format.format(time));
-
-        paymentPrice.setText(formatPrice(payment.getTotalPrice()));
+        itemView.setOnClickListener(v -> presenter.clickOnItem());
     }
 
     private String formatPrice(long l){
@@ -74,4 +63,15 @@ public class PaymentReportViewHolder extends RecyclerView.ViewHolder {
     }
 
 
+    @Override
+    public void showPayment(Payment payment) {
+        paymentNumber.setText(String.valueOf(payment.getId()));
+
+        Date time = new Date(payment.getPaymentDate());
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault());
+        format.setTimeZone(TimeZone.getDefault());
+        paymentDate.setText(format.format(time));
+
+        paymentPrice.setText(formatPrice(payment.getTotalPrice()));
+    }
 }
