@@ -10,8 +10,10 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         app:elevation="0dp"
+        android:gravity="center_vertical"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,6 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/payment_report_activity_check_date_caption"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +98,7 @@
         android:layout_height="wrap_content"
         style="@style/PaymentReportTextViewStyle"
         android:text="@string/payment_report_activity_check_total_price_caption"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/payment_report_activity_given_cash"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +145,7 @@
         android:layout_height="wrap_content"
         style="@style/PaymentReportTextViewStyle"
         android:text="@string/payment_report_activity_payment_change"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,6 +167,7 @@
             style="@style/ColumnsCaptionTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:layout_weight="1"
             android:text="@string/column_name_products_on_cart" />
 
@@ -169,6 +176,7 @@
             style="@style/ColumnsCaptionTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:layout_weight="1"
             android:text="@string/column_count_selected_products_on_cart" />
 
@@ -178,6 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@android:color/black"
             android:text="@string/summary_price_every_type_of_product_on_cart" />
     </LinearLayout>
 
@@ -188,7 +197,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <android.support.v7.widget.RecyclerView
+    <ListView
+        android:id="@+id/lv_product_list_payment_report"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -197,6 +207,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2">
 
-    </android.support.v7.widget.RecyclerView>
+    </ListView>
 
 </android.support.constraint.ConstraintLayout>

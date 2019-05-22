@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -16,7 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.adapters.PaymentReportProductListAdapter;
 import ua.com.novasolutio.cart.model.data.Payment;
+import ua.com.novasolutio.cart.model.data.Product;
 import ua.com.novasolutio.cart.presentation.presenter.PresenterManager;
 import ua.com.novasolutio.cart.presentation.presenter.payments_report.PaymentReportActivityPresenter;
 import ua.com.novasolutio.cart.presentation.view.PaymentReportView;
@@ -41,6 +46,10 @@ public class PaymentReportActivity extends AppCompatActivity implements PaymentR
     @BindView(R.id.tv_check_change)
     protected TextView checkChange;
 
+    @BindView(R.id.lv_product_list_payment_report)
+    protected ListView mListView;
+
+    protected PaymentReportProductListAdapter mAdapter;
 
 
     @Override
@@ -60,6 +69,9 @@ public class PaymentReportActivity extends AppCompatActivity implements PaymentR
 
         int paymentId = getIntent().getIntExtra(PAYMENT_ID_TAG, -1);
         mPresenter.setPaymentId(paymentId);
+
+        mAdapter = new PaymentReportProductListAdapter(this, new ArrayList<>());
+        mListView.setAdapter(mAdapter);
     }
 
     @Override
@@ -105,6 +117,8 @@ public class PaymentReportActivity extends AppCompatActivity implements PaymentR
                 mPresenter.formatPriceOnText(payment.getUserCash())
         );
 
+        List<Product> products = payment.getProducts();
+        if (products != null) mAdapter.setData(products);
     }
 
     @Override

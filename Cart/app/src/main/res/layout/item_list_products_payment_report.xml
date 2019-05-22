@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="15dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:gravity="center_vertical"
+    android:layout_margin="4dp">
+
+    <TextView
+        android:id="@+id/tv_payment_report_products_caption"
+        style="@style/ProductListItemTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        tools:text="Шоколадка"
+        android:layout_marginLeft="@dimen/list_elements_margin_dimen"
+        android:layout_marginRight="@dimen/list_elements_margin_dimen"
+        />
+
+    <TextView
+        android:id="@+id/tv_payment_report_products_count"
+        style="@style/ProductListItemTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_elements_margin_dimen"
+        android:layout_marginRight="@dimen/list_elements_margin_dimen"
+        android:layout_weight="3"
+        android:textAlignment="center"
+        tools:text="2"
+        />
+
+    <TextView
+        android:id="@+id/tv_payment_report_products_price"
+        style="@style/ProductListItemTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textAlignment="textEnd"
+        android:layout_marginLeft="@dimen/list_elements_margin_dimen"
+        android:layout_marginRight="@dimen/list_elements_margin_dimen"
+        tools:text="200.00 UAH"
+        />
+
+</LinearLayout>
