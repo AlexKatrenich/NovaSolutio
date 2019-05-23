@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.model.data.Product;
 
 public class PaymentReportProductListAdapter extends BaseAdapter {
@@ -92,7 +93,7 @@ public class PaymentReportProductListAdapter extends BaseAdapter {
         }
 
         // додавання назви грошових одиниць до відображення ціни на екрані
-        String currency = "UAH";
+        String currency = CurrencyManager.getInstance().getCurrencyName();
         priceString.append(' ').append(currency).append(' ');
 
         return priceString.toString();

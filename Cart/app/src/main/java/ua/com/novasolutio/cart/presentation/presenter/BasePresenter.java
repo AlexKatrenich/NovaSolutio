@@ -3,6 +3,8 @@ package ua.com.novasolutio.cart.presentation.presenter;
 import android.support.annotation.NonNull;
 import java.lang.ref.WeakReference;
 
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
+
 public abstract class BasePresenter<M, V>{
     protected M model;
     private WeakReference<V> view;
@@ -55,8 +57,7 @@ public abstract class BasePresenter<M, V>{
         }
 
         // додавання назви грошових одиниць до відображення ціни на екрані
-        //TODO додати можливість задавати валюту через екран, зберігати через SharedPreference.
-        String currency = "UAH";
+        String currency = CurrencyManager.getInstance().getCurrencyName();
         priceString.append(' ').append(currency).append(' ');
 
         return priceString.toString();

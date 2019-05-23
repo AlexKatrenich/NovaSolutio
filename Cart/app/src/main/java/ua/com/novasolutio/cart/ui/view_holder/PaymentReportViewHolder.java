@@ -17,6 +17,7 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.model.data.Payment;
 import ua.com.novasolutio.cart.presentation.presenter.payments_report.PaymentReportViewHolderPresenter;
 import ua.com.novasolutio.cart.presentation.view.PaymentsListItem;
@@ -62,8 +63,7 @@ public class PaymentReportViewHolder extends MvpViewHolder<PaymentReportViewHold
         }
 
         // додавання назви грошових одиниць до відображення ціни на екрані
-        //TODO додати можливість задавати валюту через екран, зберігати через SharedPreference.
-        String currency = "UAH";
+        String currency = CurrencyManager.getInstance().getCurrencyName();
         priceString.append(' ').append(currency).append(' ');
 
         return priceString.toString();

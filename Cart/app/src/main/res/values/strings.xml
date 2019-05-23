@@ -15,8 +15,8 @@
     <string name="context_menu_recycler_view_item">Контекстное меню</string>
 
     <!--Текстове значення валюти для відображення на екрані-->
-    <string name="name_currency">ГРН</string>
-    <string name="default_price_for_items">0.00 UAH</string>
+    <string name="default_price_for_items">0.00</string>
+    <string name="name_currency">Валюта</string>
 
     <!--Заголовки меню-->
     <string name="item_settings_product_activity_menu">Настройки</string>

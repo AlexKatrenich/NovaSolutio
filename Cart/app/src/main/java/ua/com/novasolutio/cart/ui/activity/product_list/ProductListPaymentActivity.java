@@ -1,6 +1,8 @@
 package ua.com.novasolutio.cart.ui.activity.product_list;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.presentation.presenter.PresenterManager;
 import ua.com.novasolutio.cart.presentation.presenter.product_list_main.ProductListPaymentActivityPresenter;
 import ua.com.novasolutio.cart.ui.fragment.CartFragment;
@@ -42,6 +45,11 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     protected FloatingActionButton btnPayment;
 
     private int bnvSelectedItemId;
+
+    public static final String APP_PREFERENCE = "App_settings";
+    public static final String CURRENCY_PREFERENCE_NAME = "currency_name";
+    private SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +95,12 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(
                         R.string.product_list_activity_caption));
 
+        preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
+        if(preferences.contains(APP_PREFERENCE)){
+            String currencyName = preferences.getString(CURRENCY_PREFERENCE_NAME, "UAH");
+            CurrencyManager.getInstance().setCurrencyName(currencyName);
+        }
+
         /*Ініціація нижнього меню навігації між фрагментами*/
         mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -121,6 +135,10 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         mPresenter.unbindView();
+        preferences
+                .edit()
+                .putString(CURRENCY_PREFERENCE_NAME, CurrencyManager.getInstance().getCurrencyName())
+                .apply();
         super.onStop();
     }
 

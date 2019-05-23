@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import com.facebook.stetho.Stetho;
 
 import ua.com.novasolutio.cart.model.dao.CartDatabase;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 
 public class CartApplication extends Application {
     private static CartApplication instance;
@@ -17,7 +18,8 @@ public class CartApplication extends Application {
         super.onCreate();
 
         instance = this;
-        mDatabase = Room.databaseBuilder(this, CartDatabase.class, "CartDatabase")
+        mDatabase = Room
+                .databaseBuilder(this, CartDatabase.class, "CartDatabase")
                 .build();
         Stetho.initializeWithDefaults(this);
     }
