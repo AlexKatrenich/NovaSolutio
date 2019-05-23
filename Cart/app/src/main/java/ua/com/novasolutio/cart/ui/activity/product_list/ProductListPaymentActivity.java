@@ -4,6 +4,7 @@ package ua.com.novasolutio.cart.ui.activity.product_list;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     protected BottomNavigationView mNavigationView;
 
     @BindView(R.id.btn_payment_button)
-    protected Button btnPayment;
+    protected FloatingActionButton btnPayment;
 
     private int bnvSelectedItemId;
 
@@ -202,10 +203,8 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         try {
             CartFragment plFragment = (CartFragment)currentFragment;
             item.setVisible(true);
-            Log.i(TAG, "onPrepareOptionsMenu: CurrentFragment IS " + plFragment.getClass().getSimpleName());
 
         } catch (ClassCastException e){
-            Log.i(TAG, "onPrepareOptionsMenu: CurrentFragment IS " + currentFragment.getClass().getSimpleName());
             item.setVisible(false);
             return super.onPrepareOptionsMenu(menu);
         }
@@ -215,17 +214,15 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_payment_button)
     public void onPaymentClick(){
-        Log.i(TAG, "onPaymentClick: ");
         mPresenter.onPaymentClicked();
     }
 
     // метод для зміни розміру кнопки виклику фрагменту/діалогу оплати
     public void changeSizePaymentButton(boolean visible) {
-        Log.i(TAG, "changeSizePaymentButton FULLSIZE: " + String.valueOf(visible));
         if (visible){
-            btnPayment.setVisibility(View.VISIBLE);
+            btnPayment.show();
         } else {
-            btnPayment.setVisibility(View.GONE);
+            btnPayment.hide();
         }
     }
 
@@ -233,7 +230,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     public void showPaymentDialog() {
         PaymentSheetFragment paymentDialog = new PaymentSheetFragment();
         paymentDialog.show(getSupportFragmentManager(), paymentDialog.getTag());
-        Log.i(TAG, "showPaymentDialog: ");
     }
 
     // метод для зміни в тулбарі іконки сортування

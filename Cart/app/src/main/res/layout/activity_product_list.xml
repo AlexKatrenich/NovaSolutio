@@ -37,25 +37,26 @@
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/bnv_list_products_activity"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_list_activity_bar_layout">
+        app:layout_constraintTop_toBottomOf="@+id/product_list_activity_bar_layout"
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
-    <Button
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_payment_button"
-        android:layout_width="@dimen/payment_button_short_width"
-        android:layout_height="@dimen/payment_button_height"
-        android:background="@drawable/pay_button_shape"
-        android:drawableStart="@drawable/ic_payment_button"
-        android:visibility="visible"
-        android:textColor="@android:color/white"
-        android:paddingLeft="@dimen/payment_button_padding"
-        android:paddingRight="@dimen/payment_button_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_payment_button"
         app:layout_constraintBottom_toTopOf="@+id/bnv_list_products_activity"
-        app:layout_constraintEnd_toEndOf="@+id/cl_activity_product_list_payment_layout"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_container_products_activity"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/cl_activity_product_list_payment_layout" />
+        app:layout_constraintStart_toStartOf="@+id/fragment_container_products_activity" />
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bnv_list_products_activity"
