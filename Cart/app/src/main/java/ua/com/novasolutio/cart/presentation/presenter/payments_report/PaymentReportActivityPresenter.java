@@ -1,5 +1,6 @@
 package ua.com.novasolutio.cart.presentation.presenter.payments_report;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -7,12 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
 import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.model.dao.CartDatabase;
@@ -44,14 +40,12 @@ public class PaymentReportActivityPresenter extends BasePresenter<Payment, Payme
         super.setModel(model);
     }
 
+    @SuppressLint("CheckResult")
     private void getModelFromDB() {
         if (paymentId != null && paymentId != -1){
             Flowable<Payment> paymentFlowable = getPaymentFromDb(paymentId);
-//            paymentFlowable.subscribe(this::setModel);
             Flowable<List<ProductPaymentJoin>> productPaymentList = getProductsPaymentListByPaymentId(paymentId);
 
-
-            List<Product> productList = new ArrayList<>();
             paymentFlowable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .zip(productPaymentList, paymentFlowable, (productPaymentJoins, payment) -> {
@@ -65,30 +59,8 @@ public class PaymentReportActivityPresenter extends BasePresenter<Payment, Payme
                         }
                         payment.setProducts(products);
                         return payment;
-                    }).subscribe(this::setModel, throwable -> Log.i(TAG, "getModelFromDB: "));
+                    }).subscribe(this::setModel, throwable -> Log.e(TAG, "getModelFromDB: ", throwable));
 
-//            productPaymentList.subscribe(productPaymentJoins -> Observable.fromArray(productPaymentJoins.toArray())
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .zipWith()
-//
-
-//                    .map(o -> {
-//                        int id = ((ProductPaymentJoin)o).productID;
-//                        int count = ((ProductPaymentJoin)o).productCount;
-//                        Log.i(TAG, "getModelFromDB: ProductID: " + id);
-//                        Single<Product> product = CartApplication.getInstance().getDatabase().mProductDao().getById(id);
-//                        product.subscribe((p, throwable) -> p.setCount(count));
-//                        return null;
-//                    }).subscribe(productList::add
-//                        , throwable -> {
-//                                Log.e(TAG, "getModelFromDB: Exception", throwable);
-//                            }
-//                        , () -> {
-//                                if (setupDone()) model.setProducts(productList);
-//                                updateView();
-//                                Log.i(TAG, "getModelFromDB: productList: " + productList);
-//                            }));
 
         }
     }
