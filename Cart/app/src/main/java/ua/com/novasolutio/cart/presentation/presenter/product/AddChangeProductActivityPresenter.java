@@ -40,7 +40,6 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
         // зчитування Intent та відображення даних в залежності від того чи було щось передано чере Інтент
         Intent intent = ((AddChangeProductActivity)view).getIntent();
         int productId = intent.getIntExtra(AddChangeProductActivity.INTENT_CODE_FOR_GETTING_MODEL, -1);
-        Log.i(TAG, "init: PRODUCT ID FORM INTENT: " + productId);
         loadModel(productId);
 
         // не потрібно повторно завантажувати дані повторно, якщо вони вже завантажені або в процесі завантаження
@@ -131,34 +130,5 @@ public class AddChangeProductActivityPresenter extends BasePresenter<Product, Pr
                 });
 
     }
-
-    // внутрішній клас для емуляції запису додавання нового продукту до бази даних
-//    private class WriteDataTask extends AsyncTask<Product, Void, Product> {
-//
-//        @Override
-//        protected Product doInBackground(Product... products) {
-//            // емуляція запису в БД
-//            Product product = products[0];
-//            Log.i(TAG, "doInBackground: Product: " + product);
-//            CartDatabase db = CartApplication.getInstance().getDatabase();
-//
-//            if (db.mProductDao().update(product) == 0){
-//                long productID = db.mProductDao().insert(product);
-//                product.setID((int) productID);
-//            }
-//
-//            return product;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Product product) {
-//            Log.i(TAG, "onPostExecute PRODUCT " + product);
-//            // заміна або додавання нового продукту в залежності від того чи елемент з таким Ід вже є в списку
-//            if (!ProductListManager.getInstance().setProductById(product, product.getID())) {
-//                ProductListManager.getInstance().addProduct(product);
-//            }
-//            super.onPostExecute(product);
-//        }
-//    }
 
 }

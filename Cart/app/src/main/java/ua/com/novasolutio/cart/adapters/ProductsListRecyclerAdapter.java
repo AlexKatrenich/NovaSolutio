@@ -18,7 +18,6 @@ public class ProductsListRecyclerAdapter extends MvpRecyclerListAdapter<Product,
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        Log.i(TAG, "onCreateViewHolder: ");
         return new ProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list_recycler_view, parent, false));
     }
 

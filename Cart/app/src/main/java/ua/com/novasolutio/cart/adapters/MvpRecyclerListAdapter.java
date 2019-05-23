@@ -84,7 +84,6 @@ public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH ext
     }
 
     private void addInternal(M item){
-        Log.i(TAG, "addInternal MODEL: " + item.toString());
         models.add(item);
         presenters.put(getModelId(item), createPresenter(item));
     }
@@ -100,11 +99,9 @@ public abstract class MvpRecyclerListAdapter <M, P extends BasePresenter, VH ext
     }
 
     public void removeItem(M model) {
-        Log.i(TAG, "removeItem: " + model);
         int position = getItemPosition(model);
         models.remove(model);
         removePresenter(model);
-        Log.i(TAG, "removeItem: REMOVE PRESENTER");
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
 

@@ -74,7 +74,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
         // Тут потрібно задати адаптер відображення даних в списку
         mAdapter = new ProductsListRecyclerAdapter();
         rvProductList.setAdapter(mAdapter);
-        Log.i(TAG, "init done");
 
         //
         mSearchView.setOnQueryTextListener(mPresenter);
@@ -103,7 +102,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "onDestroy: ");
         /* Видалення посилань на невикористовувані об'єкти при знищенні фрагменту*/
         if(rvProductList != null){
             rvProductList.setLayoutManager(null);
@@ -115,7 +113,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.i(TAG, "onSaveInstanceState: ");
         super.onSaveInstanceState(outState);
         PresenterManager.getInstance().savePresenter(mPresenter, outState);
     }
@@ -157,7 +154,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
             case ProductListFragment.REQUEST_CODE_GET_VOICE_SPEECH :
                 if(resultCode == Activity.RESULT_OK && data != null){
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    Log.i(TAG, "onActivityResult: SPEECH VOICE RESULT - " + result);
                     String textResult = result.get(0);
                     setVoiceSpeechResult(textResult);
                 }
@@ -166,7 +162,6 @@ public class ProductListFragment extends Fragment implements ProductsListView {
     }
 
     public void setVoiceSpeechResult(String result){
-        Log.i(TAG, "setVoiceSpeechResult: " + result);
         mSearchView.setIconified(false);
         mSearchView.setQuery(result, true);
     }

@@ -74,7 +74,6 @@ public class ProductListManager {
                         } else {
                             mProducts.add(product);
                             observeModelAddProduct(product);
-                            Log.i(TAG, "addProduct: " + product);
                         }
                     });
             return true;
@@ -106,7 +105,6 @@ public class ProductListManager {
     public boolean removeProduct(Product product){
         boolean b = mProducts.remove(product);
         if (b) observeModelProductRemove(product);
-        Log.i(TAG, "removeProduct: " + product + " " + b);
         return b;
     }
 
@@ -129,7 +127,6 @@ public class ProductListManager {
         for (DataChangeListener d: mListeners){
            if(d != null) {
                d.onProductListChange();
-               Log.i(TAG, "observeProductListChange");
            }
         }
     }
@@ -138,7 +135,6 @@ public class ProductListManager {
         for (DataChangeListener d: mListeners){
             if(d != null) {
                 d.onModelAddProduct(product);
-                Log.i(TAG, "observeModelAddProduct");
             }
         }
     }
@@ -147,7 +143,6 @@ public class ProductListManager {
         for (DataChangeListener d: mListeners){
             if(d != null) {
                 d.onModelProductRemove(product);
-                Log.i(TAG, "observeModelProductRemove");
             }
         }
     }
@@ -156,7 +151,6 @@ public class ProductListManager {
         for (DataChangeListener d: mListeners){
             if(d != null) {
                 d.onModelProductChange(product);
-                Log.i(TAG, "observeModelProductChange: ");
             }
         }
     }

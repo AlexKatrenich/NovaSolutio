@@ -32,7 +32,6 @@ public class CartRecyclerAdapter extends MvpRecyclerListAdapter<Product, CartIte
     @NonNull
     @Override
     public CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        Log.i(TAG, "onCreateViewHolder:");
         return new CartItemViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cart_recycler_view, parent, false));
     }

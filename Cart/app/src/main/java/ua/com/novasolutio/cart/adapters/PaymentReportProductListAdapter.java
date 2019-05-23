@@ -32,7 +32,6 @@ public class PaymentReportProductListAdapter extends BaseAdapter {
 
     public void setData(List<Product> data) {
         this.data = data;
-        Log.i(TAG, "setData: " + data);
         notifyDataSetChanged();
     }
 

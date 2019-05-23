@@ -40,7 +40,6 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
     }
 
     public void onProductListFragmentClicked() {
-        Log.i(TAG, "onProductListFragmentClicked: VIEW = " + String.valueOf(view() != null));
         view().bindFragment(new ProductListFragment());
         view().invalidateOptionsMenu();
         if(ProductListManager.getInstance().getTotalPriceSelectedProducts() > 0) {
@@ -51,7 +50,6 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
     }
 
     public void onCartFragmentClicked() {
-        Log.i(TAG, "onCartFragmentClicked: VIEW = " + String.valueOf(view() != null));
         view().bindFragment(new CartFragment());
         view().invalidateOptionsMenu();
 
@@ -76,7 +74,6 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
     public void onProductListChange() {
         // реагування на зміну даних в корзині - зміна вигляду кнопки для відкриття оплати
         view().changeSizePaymentButton(cartHaveAnyGoods());
-        Log.i(TAG, "onProductListChange: ");
     }
 
     @Override
@@ -88,14 +85,12 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
     public void onModelProductRemove(Product product) {
         // реагування на зміну даних в корзині - зміна вигляду кнопки для відкриття оплати
         view().changeSizePaymentButton(cartHaveAnyGoods());
-        Log.i(TAG, "onModelProductRemove: ");
     }
 
     @Override
     public void onModelProductChange(Product product) {
         // реагування на зміну даних в корзині - зміна вигляду кнопки для відкриття оплати
         view().changeSizePaymentButton(cartHaveAnyGoods());
-        Log.i(TAG, "onModelProductChange: ");
     }
 
     // метод для перевірки наявності продуктів в корзині
@@ -112,7 +107,6 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
     public void onPaymentClicked() {
         onCartFragmentClicked();
         view().showPaymentDialog();
-        Log.i(TAG, "onPaymentClicked: ");
     }
 
     /* Опрацювання статусу сортування списку (кнопка сортування на тулбарі)*/
@@ -146,7 +140,6 @@ public class ProductListPaymentActivityPresenter extends BasePresenter<Void , Pr
     // опрацювання логіки при натисненні на відповідну кнопку сортування
     public void onSortItemClicked(SortingState sortingState) {
         ArrayList<Product> list = new ArrayList<>(ProductListManager.getInstance().getProductsList());
-        Log.i(TAG, "onSortItemClicked: LIST: " + list);
         switch (sortingState){
 
             case CAPTION_ASCENDING:

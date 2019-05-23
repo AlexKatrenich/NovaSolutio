@@ -24,7 +24,6 @@ public class PaymentReportActivityPresenter extends BasePresenter<Payment, Payme
 
     @Override
     protected void updateView() {
-        Log.i(TAG, "updateView: " + model);
         if (setupDone()) view().showPayment(model);
     }
 
@@ -36,7 +35,6 @@ public class PaymentReportActivityPresenter extends BasePresenter<Payment, Payme
 
     @Override
     public void setModel(Payment model) {
-        Log.i(TAG, "setModel: " + model);
         super.setModel(model);
     }
 

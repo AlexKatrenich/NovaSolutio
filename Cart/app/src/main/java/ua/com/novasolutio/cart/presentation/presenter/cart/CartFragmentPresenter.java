@@ -34,10 +34,8 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
         if(view != null){
             if (model.size() == 0){
                 view.showEmpty();
-                Log.i(TAG, "updateView: MODEL EMPTY");
             } else {
                 view.showProducts(model);
-                Log.i(TAG, "updateView: SHOW PRODUCTS" + model);
             }
             Long totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
             view.setTotalPrice(formatPriceOnText(totalPrice));
@@ -65,13 +63,11 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
 
     @Override
     public void onProductListChange() {
-        Log.i(TAG, "onProductListChange: ON PRODUCT LIST CHANGE");
         this.setModel(ProductListManager.getInstance().getProductsList());
     }
 
     @Override
     public void onModelAddProduct(Product product) {
-        Log.i(TAG, "onModelAddProduct: " + product);
         this.setModel(ProductListManager.getInstance().getProductsList());
     }
 
@@ -85,7 +81,6 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
 
     @Override
     public void onModelProductChange(Product product) {
-        Log.i(TAG, "onModelProductChange:");
         if(product.getCount() == 0) onModelProductRemove(product);
     }
 
@@ -98,21 +93,18 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
                 iter.remove();
             }
         }
-        Log.i(TAG, "setModel: " + list);
         super.setModel(list);
     }
 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void loadModel(){
-        Log.i(TAG, "loadModel: ");
         sortingStateChanged(mSortingState);
     }
 
     @Override
     public void sortingStateChanged(ProductListPaymentActivityPresenter.SortingState state) {
         ArrayList<Product> list = new ArrayList<>(ProductListManager.getInstance().getProductsList());
-        Log.i(TAG, "onSortItemClicked: LIST: " + list);
         switch (state){
 
             case CAPTION_ASCENDING:

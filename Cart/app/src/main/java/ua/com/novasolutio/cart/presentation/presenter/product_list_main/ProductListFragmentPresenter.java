@@ -36,12 +36,10 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         if (view != null) {
             if (model.size() == 0) {
                 view.showEmpty();
-                Log.i(TAG, "updateView: view().showEmpty();");
             } else {
                 view.showProducts(model);
                 Long totalCost = ProductListManager.getInstance().getTotalPriceSelectedProducts();
                 view.setTotalProductsPrice(formatPriceOnText(totalCost));
-                Log.i(TAG, "updateView: view().showProducts(model)");
             }
         }
     }
@@ -52,7 +50,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         ProductListManager.getInstance().addDataChangeListener(this);
         // не потрібно повторно завантажувати дані, якщо вони вже завантажені
         List<Product> list = ProductListManager.getInstance().getProductsList();
-        Log.i(TAG, "bindView: list = " + list);
         if(model == null && !isLoadingData && list.isEmpty()){
             loadData();
         } else {
@@ -76,7 +73,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         @Override
         protected ArrayList doInBackground(Void... voids) {
             List<Product> list = CartApplication.getInstance().getDatabase().mProductDao().getAllActive();
-            Log.i(TAG, "doInBackground LIST ACTIVE PRODUCTS: " + list);
             return new ArrayList<Product>(list);
         }
 
@@ -91,7 +87,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public boolean onQueryTextSubmit(String s) {
-        Log.i(TAG, "onQueryTextSubmit: text - " + s);
         String userInput = s.toLowerCase();
         List<Product> newProductList = new ArrayList<>();
 
@@ -103,7 +98,6 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
         if (view() != null){
             view().showProducts(newProductList);
-            Log.i(TAG, "onQueryTextSubmit: SHOW NEW LIST");
         }
         return false;
     }
@@ -149,16 +143,13 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
 
     @Override
     public void onProductListChange() {
-        Log.i(TAG, "onProductListChange: ON PRODUCT LIST CHANGE");
         setModel(ProductListManager.getInstance().getProductsList());
     }
 
     @Override
     public void onModelAddProduct(Product product) {
-        Log.i(TAG, "onModelAddProduct: " + product);
         if (setupDone()){
             ((ProductListFragment) view()).showProductAdd(product);
-            Log.i(TAG, "onModelAddProduct: SHOW PRODUCT ADD");
         }
     }
 

@@ -60,7 +60,6 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
 
         view().updateUiChange(currentChange >= 0L ? formatPriceOnText(currentChange) : "0.00");
         view().updateUiCash(formatPriceOnText(currentCash));
-        Log.i(TAG, "updateView Cash: " + currentCash + " CHANGE: " + currentChange);
     }
 
     @Override
@@ -68,7 +67,6 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         totalPrice = ProductListManager.getInstance().getTotalPriceSelectedProducts();
         currentCash = totalPrice;
         super.bindView(view);
-        Log.i(TAG, "bindView: TOTAL PRICE: " + String.valueOf(totalPrice));
         updateView();
     }
 
@@ -126,7 +124,6 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         }
 
         updateView();
-        Log.i(TAG, "onButtonBillClicked: ");
     }
 
     // очищення поля введення суми
@@ -196,7 +193,6 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
         long currentChange = currentCash - totalPrice;
         view().updateUiChange(currentChange >= 0L ? formatPriceOnText(currentChange) : "0.00");
 
-        Log.i(TAG, "addNumberToCash CASH: " + currentCash + " CURRENT_CHANGE: " + currentChange);
     }
 
     public void onPaymentButtonClicked(String cash) {
@@ -230,8 +226,6 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
 
 
             new WriteDataTask().execute(payment);
-            Log.i(TAG, "onPaymentButtonClicked: SELECTED PRODUCTS " + selectedProducts);
-            Log.i(TAG, "onPaymentButtonClicked: " + payment);
             view().dismiss();
         } else {
             String message = view().getResources().getString(R.string.incorrect_cash_value);
@@ -249,12 +243,10 @@ public class PaymentSheetFragmentPresenter extends BasePresenter<Payment, Paymen
             // TODO write to DB
             int id = (int)db.mPaymentDao().insert(payment); // запис платежу до БД
             payment.setId(id); // оновлення ІД платежу
-            Log.i(TAG, "doInBackground: PAYMENT ID:" + id);
             ArrayList<Product> soldProducts = new ArrayList<>(payment.getProducts());
             // Запис таблиці проданих продуктів(ІД продукту, ІД платежу, кількість проданого продукту)
             for (Product p : soldProducts){
                 ProductPaymentJoin productPaymentJoin = new ProductPaymentJoin(p.getID(), payment.getId(), p.getCount());
-                Log.i(TAG, "doInBackground: Write SoldProduct " + productPaymentJoin);
                 db.mProductPaymentDao().insert(productPaymentJoin);
             }
             return null;
