@@ -17,6 +17,7 @@
     <!--Текстове значення валюти для відображення на екрані-->
     <string name="default_price_for_items">0.00</string>
     <string name="name_currency">Валюта</string>
+    <string name="text_input_currency_setting_dialog">Введите название валюты</string>
 
     <!--Заголовки меню-->
     <string name="item_settings_product_activity_menu">Настройки</string>

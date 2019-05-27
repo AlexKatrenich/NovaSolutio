@@ -39,7 +39,7 @@
     <string name="item_sort_descending_price">Ціна</string>
     <string name="item_sorting_product_activity_menu">Сортування</string>
     <string name="mic_voice_search">Пошук</string>
-    <string name="name_currency">ГРН</string>
+    <string name="name_currency">Валюта</string>
     <string name="pay_button_product_payment_activity">Платіж</string>
     <string name="payment_main_button_caption">Сплатити</string>
     <string name="payment_report_activity_check_date_caption">Дата чека:</string>
@@ -64,4 +64,5 @@
     <string name="speech_voice_search_unable_support">Ваш пристрій не підтримує голосовий пошук!</string>
     <string name="summary_price_every_type_of_product_on_cart">Сума</string>
     <string name="total_price_to_pay">До сплати:</string>
+    <string name="text_input_currency_setting_dialog">Введіть назву валюти</string>
 </resources>

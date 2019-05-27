@@ -1,10 +1,12 @@
 package ua.com.novasolutio.cart.ui.activity.product_list;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.button.MaterialButton;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -15,8 +17,7 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,32 +96,27 @@ public class ProductListPaymentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(
                         R.string.product_list_activity_caption));
 
-        preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE);
-        if(preferences.contains(APP_PREFERENCE)){
-            String currencyName = preferences.getString(CURRENCY_PREFERENCE_NAME, "UAH");
-            CurrencyManager.getInstance().setCurrencyName(currencyName);
-        }
+        preferences = getPreferences(MODE_PRIVATE);
+        String currencyName = preferences.getString(CURRENCY_PREFERENCE_NAME, "UAH");
+        CurrencyManager.getInstance().setCurrencyName(currencyName);
 
         /*Ініціація нижнього меню навігації між фрагментами*/
-        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.item_list :
-                        // передача презентеру обробки натистення на елемент ItemList
-                        mPresenter.onProductListFragmentClicked();
-                        return true;
+        mNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()){
+                case R.id.item_list :
+                    // передача презентеру обробки натистення на елемент ItemList
+                    mPresenter.onProductListFragmentClicked();
+                    return true;
 
-                    case R.id.item_cart :
-                        // передача презентеру обробки натистення на елемент ItemCart
-                        mPresenter.onCartFragmentClicked();
-                        return true;
-                    case R.id.item_report :
-                        mPresenter.onReportFragmentClicked();
-                        return true;
-                }
-                return false;
+                case R.id.item_cart :
+                    // передача презентеру обробки натистення на елемент ItemCart
+                    mPresenter.onCartFragmentClicked();
+                    return true;
+                case R.id.item_report :
+                    mPresenter.onReportFragmentClicked();
+                    return true;
             }
+            return false;
         });
     }
 
@@ -163,42 +159,63 @@ public class ProductListPaymentActivity extends AppCompatActivity {
 
     private MenuItem sortMenuItem;
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.item_settings_menu :
+            case R.id.item_settings_menu: {
                 Log.i(TAG, "onOptionsItemSelected: Settings");
                 return true;
-            case R.id.item_sorting_menu :
+            }
+            case R.id.item_sorting_menu: {
                 sortMenuItem = item;
                 Log.i(TAG, "onOptionsItemSelected: Sorting");
                 return true;
-            case R.id.item_add_new_product_menu:
+            }
+            case R.id.item_add_new_product_menu: {
                 /*Презентер оброблює подію згідно логіки додатку*/
                 mPresenter.addNewProductMenuClicked();
                 Log.i(TAG, "onOptionsItemSelected: Add new product");
                 return true;
-
-            case R.id.item_sort_ascending_caption :
+            }
+            case R.id.item_sort_ascending_caption: {
                 mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.CAPTION_ASCENDING);
                 Log.i(TAG, "onOptionsItemSelected SORTING BY ASCENDING CAPTION");
                 return true;
-
-            case R.id.item_sort_descending_caption :
+            }
+            case R.id.item_sort_descending_caption: {
                 mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.CAPTION_DESCENDING);
                 Log.i(TAG, "onOptionsItemSelected: SORTING BY DESCENDING CAPTION");
                 return true;
-
-            case R.id.item_sort_ascending_price :
+            }
+            case R.id.item_sort_ascending_price:{
                 mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.PRICE_ASCENDING);
                 Log.i(TAG, "onOptionsItemSelected: SORTING BY ASCENDING PRICE");
                 return true;
-
-            case R.id.item_sort_descending_price :
+            }
+            case R.id.item_sort_descending_price : {
                 mPresenter.onSortItemClicked(ProductListPaymentActivityPresenter.SortingState.PRICE_DESCENDING);
                 Log.i(TAG, "onOptionsItemSelected: SORTING BY DESCENDING PRICE");
                 return true;
+            }
+            case R.id.item_currency_choose : {
+                Log.i(TAG, "onOptionsItemSelected: CURRENCY CHOSE");
+                final Dialog currencyNameSetDialog = new Dialog(this);
+                currencyNameSetDialog.setContentView(R.layout.dialog_setting_currency_name);
+                EditText etCurrncyName = currencyNameSetDialog.findViewById(R.id.et_currency_name_dialog);
+                MaterialButton btnOk = currencyNameSetDialog.findViewById(R.id.btn_ok_currency_dialog);
+                btnOk.setOnClickListener(v -> {
+                    String currencyName = etCurrncyName.getText().toString();
+                    if(currencyName != null && currencyName != "") CurrencyManager.getInstance().setCurrencyName(currencyName);
+                    currencyNameSetDialog.dismiss();
+                });
+
+                MaterialButton btnCancel = currencyNameSetDialog.findViewById(R.id.btn_cancel_currency_dialog);
+                btnCancel.setOnClickListener(v -> currencyNameSetDialog.dismiss());
+                currencyNameSetDialog.show();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }

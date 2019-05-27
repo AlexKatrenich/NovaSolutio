@@ -1,7 +1,6 @@
 package ua.com.novasolutio.cart.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,10 @@ import ua.com.novasolutio.cart.model.data.Product;
 
 public class PaymentReportProductListAdapter extends BaseAdapter {
     public static final String TAG = "PaymentListAdapter";
-    Context mContext;
-    List<Product> data;
+    private List<Product> data;
     private static LayoutInflater sInflater = null;
 
     public PaymentReportProductListAdapter(Context context, List<Product> data) {
-        mContext = context;
         this.data = data;
         sInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

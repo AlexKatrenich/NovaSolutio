@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <android.support.design.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/colorAccent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_currency_name_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_input_currency_setting_dialog"
+                    android:textAlignment="center"
+                    android:inputType="text"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btn_ok_currency_dialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:layout_margin="8dp"
+                        android:text="@android:string/ok"
+                        android:layout_weight="1"
+                        />
+
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btn_cancel_currency_dialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:layout_margin="8dp"
+                        android:text="@android:string/cancel"
+                        android:layout_weight="1"
+                        />
+
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.design.card.MaterialCardView>

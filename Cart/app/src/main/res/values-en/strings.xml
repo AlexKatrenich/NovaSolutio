@@ -21,7 +21,7 @@
     <string name="item_sort_descending_price">Price</string>
     <string name="item_sorting_product_activity_menu">Sorting</string>
     <string name="mic_voice_search">Search</string>
-    <string name="name_currency">UAH</string>
+    <string name="name_currency">Currency</string>
     <string name="pay_button_product_payment_activity">Pay</string>
     <string name="payment_button_fifth_bill">+200</string>
     <string name="payment_button_first_bill">+10</string>
@@ -64,4 +64,5 @@
     <string name="speech_voice_search_unable_support">Your device don`t support speech search!</string>
     <string name="summary_price_every_type_of_product_on_cart">Total</string>
     <string name="total_price_to_pay">To pay:</string>
+    <string name="text_input_currency_setting_dialog">Enter currency name</string>
 </resources>
