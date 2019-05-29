@@ -2,16 +2,15 @@ package ua.com.novasolutio.cart.ui.activity.product_list;
 
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.InflateException;
@@ -131,10 +130,6 @@ public class ProductListPaymentActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         mPresenter.unbindView();
-        preferences
-                .edit()
-                .putString(CURRENCY_PREFERENCE_NAME, CurrencyManager.getInstance().getCurrencyName())
-                .apply();
         super.onStop();
     }
 
@@ -203,11 +198,17 @@ public class ProductListPaymentActivity extends AppCompatActivity {
                 Log.i(TAG, "onOptionsItemSelected: CURRENCY CHOSE");
                 final Dialog currencyNameSetDialog = new Dialog(this);
                 currencyNameSetDialog.setContentView(R.layout.dialog_setting_currency_name);
-                EditText etCurrncyName = currencyNameSetDialog.findViewById(R.id.et_currency_name_dialog);
+                AppCompatEditText etCurrencyName = currencyNameSetDialog.findViewById(R.id.et_currency_name_dialog);
                 MaterialButton btnOk = currencyNameSetDialog.findViewById(R.id.btn_ok_currency_dialog);
                 btnOk.setOnClickListener(v -> {
-                    String currencyName = etCurrncyName.getText().toString();
-                    if(currencyName != null && currencyName != "") CurrencyManager.getInstance().setCurrencyName(currencyName);
+                    String currencyName = etCurrencyName.getText().toString();
+                    if(currencyName != null && currencyName != ""){
+                        CurrencyManager.getInstance().setCurrencyName(currencyName);
+                        preferences
+                                .edit()
+                                .putString(CURRENCY_PREFERENCE_NAME, CurrencyManager.getInstance().getCurrencyName())
+                                .apply();
+                    }
                     currencyNameSetDialog.dismiss();
                 });
 

@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.R;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.model.data.Product;
 import ua.com.novasolutio.cart.model.data.ProductListManager;
 import ua.com.novasolutio.cart.presentation.presenter.BasePresenter;
@@ -23,7 +24,10 @@ import ua.com.novasolutio.cart.ui.fragment.ProductListFragment;
 
 /* Презентер для роботи з активністю ProductListPaymentActivity*/
 public class ProductListFragmentPresenter extends BasePresenter<List<Product>, ProductsListView> /*<Model, View>*/
-        implements SearchView.OnQueryTextListener, ProductListManager.DataChangeListener {
+        implements SearchView.OnQueryTextListener,
+                    ProductListManager.DataChangeListener,
+                    CurrencyManager.CurrencyChangeListener {
+
     /** флажок для відображення завантаження даних
      * @value true - виконується процес завантаження даних, в паралельному потоці
      * @value false - процес завантаження даних не виконується */
@@ -55,17 +59,25 @@ public class ProductListFragmentPresenter extends BasePresenter<List<Product>, P
         } else {
             setModel(list);
         }
+
+        CurrencyManager.getInstance().addCurrencyChangeListener(this);
     }
 
     @Override
     public void unbindView() {
         ProductListManager.getInstance().removeDataChangeListener(this);
+        CurrencyManager.getInstance().removeCurrencyChangeListener(this);
         super.unbindView();
     }
 
     private void loadData() {
         isLoadingData = true;
         new LoadDataTask().execute();
+    }
+
+    @Override
+    public void currencyNameChanged() {
+        updateView();
     }
 
     // внутрішній клас для асинхронного завантаження даних з БД

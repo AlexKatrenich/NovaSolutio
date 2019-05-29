@@ -3,30 +3,37 @@
     <android.support.design.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:strokeWidth="2dp"
         app:strokeColor="@color/colorAccent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
-                <EditText
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/et_currency_name_dialog"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/text_input_currency_setting_dialog"
-                    android:textAlignment="center"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textAlignment="center" />
+            </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:gravity="center">
 
                     <android.support.design.button.MaterialButton
                         android:id="@+id/btn_ok_currency_dialog"
@@ -38,7 +45,6 @@
                         android:paddingEnd="16dp"
                         android:layout_margin="8dp"
                         android:text="@android:string/ok"
-                        android:layout_weight="1"
                         />
 
                     <android.support.design.button.MaterialButton
@@ -51,7 +57,6 @@
                         android:paddingEnd="16dp"
                         android:layout_margin="8dp"
                         android:text="@android:string/cancel"
-                        android:layout_weight="1"
                         />
 
 

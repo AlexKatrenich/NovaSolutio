@@ -12,6 +12,7 @@ import java.util.List;
 import ua.com.novasolutio.cart.CartApplication;
 import ua.com.novasolutio.cart.R;
 import ua.com.novasolutio.cart.model.dao.CartDatabase;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.model.data.Payment;
 import ua.com.novasolutio.cart.model.data.Product;
 import ua.com.novasolutio.cart.model.data.ProductListManager;

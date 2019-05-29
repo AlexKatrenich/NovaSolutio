@@ -4,7 +4,6 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +11,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.model.data.Product;
 import ua.com.novasolutio.cart.model.data.ProductListManager;
 import ua.com.novasolutio.cart.presentation.presenter.BasePresenter;
@@ -22,7 +22,8 @@ import ua.com.novasolutio.cart.ui.fragment.CartFragment;
 public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFragment>
         implements ProductListManager.DataChangeListener,
                         LifecycleObserver,
-                        ProductListPaymentActivityPresenter.ChangeSortingStateListener {
+                        ProductListPaymentActivityPresenter.ChangeSortingStateListener,
+        CurrencyManager.CurrencyChangeListener {
     public static final String TAG = "CartFragmentPresenter";
 
     // статус сортування по замовчуванню
@@ -51,6 +52,8 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
             ((ProductListPaymentActivity)view().getActivity()).getPresenter().setChangeSortingStateListener(this);
             mSortingState = ((ProductListPaymentActivity)view().getActivity()).getPresenter().getSortingState();
         }
+
+        CurrencyManager.getInstance().addCurrencyChangeListener(this);
     }
 
     @Override
@@ -59,6 +62,7 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
         if(view().getActivity() != null) ((ProductListPaymentActivity)view().getActivity()).getPresenter().setChangeSortingStateListener(null);
         super.unbindView();
         ProductListManager.getInstance().removeDataChangeListener(this);
+        CurrencyManager.getInstance().removeCurrencyChangeListener(this);
     }
 
     @Override
@@ -154,5 +158,10 @@ public class CartFragmentPresenter extends BasePresenter<List<Product>, CartFrag
 
         mSortingState = state; //змінюємо поточне значення сортування
         setModel(list);
+    }
+
+    @Override
+    public void currencyNameChanged() {
+        updateView();
     }
 }

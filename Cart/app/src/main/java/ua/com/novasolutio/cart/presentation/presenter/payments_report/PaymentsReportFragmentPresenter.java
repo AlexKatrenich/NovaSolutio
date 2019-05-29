@@ -7,11 +7,13 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import ua.com.novasolutio.cart.CartApplication;
+import ua.com.novasolutio.cart.model.data.CurrencyManager;
 import ua.com.novasolutio.cart.model.data.Payment;
 import ua.com.novasolutio.cart.presentation.presenter.BasePresenter;
 import ua.com.novasolutio.cart.presentation.view.PaymentsListReport;
 
-public class PaymentsReportFragmentPresenter extends BasePresenter<List<Payment>, PaymentsListReport> {
+public class PaymentsReportFragmentPresenter extends BasePresenter<List<Payment>, PaymentsListReport>
+        implements CurrencyManager.CurrencyChangeListener {
     public static final String TAG = "PaymentsReportFragmentP";
     @Override
     protected void updateView() {
@@ -22,6 +24,13 @@ public class PaymentsReportFragmentPresenter extends BasePresenter<List<Payment>
     public void bindView(@NonNull PaymentsListReport view) {
         super.bindView(view);
         if (model == null) getPaymantListFromDB();
+        CurrencyManager.getInstance().addCurrencyChangeListener(this);
+    }
+
+    @Override
+    public void unbindView() {
+        CurrencyManager.getInstance().removeCurrencyChangeListener(this);
+        super.unbindView();
     }
 
     // метод для асинхронного отримання з бази даних списку платежів
@@ -37,4 +46,8 @@ public class PaymentsReportFragmentPresenter extends BasePresenter<List<Payment>
     }
 
 
+    @Override
+    public void currencyNameChanged() {
+        updateView();
+    }
 }
